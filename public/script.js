@@ -52,7 +52,7 @@ class Platform {
 class Game {
   constructor() {
     this.ticks = 0;
-    this.platforms = [];  
+    this.platforms = [];
   }
   
   start() {
@@ -67,11 +67,11 @@ class Game {
     // handle user input actions    
   }
   
-  registerArrival() {
+  registerArrival(trainArrivalMessage) {
     // put the train into the arrival queue to shift onto a platform
   }
   
-  registerDeparture() {
+  registerDeparture(trainDepartureMessage) {
     // remove a train from a platform
   }
 }
