@@ -89,17 +89,29 @@ class GameUi {
   getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
   
   draw(g) { // React in 5 lines of code. I know I know, it's slow. It'll do for now.
-    const props = Object.getOwnPropertyNames(g);
-    for(let prop of props) {
+    
+    const viewModel = {
+      "ticks": g.ticks,
+      "total-platforms": g.platforms.length,
+    };
+    
+    const props = Object.getOwnPropertyNames(viewModel);
+    for (let prop of props) {
       const selector = "[data-bind-" + prop + "]";
       const elements = [...document.querySelectorAll(selector)];
       for(let ele of elements) {
-        ele.innerHTML = g[prop];
+        ele.innerHTML = viewModel[prop];
       }      
     }
   }
 }
 
+class AblyConnector {
+  constructor() {
+    
+  }
+  
+}
 
 const ui = new GameUi();
 
