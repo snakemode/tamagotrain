@@ -1,6 +1,5 @@
 class Problem {
-  constructor() {
-    
+  constructor() {    
   }
 }
 
@@ -16,13 +15,18 @@ class Poop extends Problem {
   }
 }
 
+class Traveller {
+  
+}
+
 class Platform {
   constructor() {
     this.capacity = 100;
-    this.occupancy = 0;
-    this.problems = []; 
+    this.occupancy = [];
   }
 }
+
+
 
 class Game {
   constructor() {
