@@ -33,10 +33,18 @@ class Traveller {
 
 class Platform {
   constructor(platformId) {
+    this.ticks = 0;
     this.platformId = platformId;
     this.capacity = 20;
     this.temperature = 15;
     this.occupancy = [];
+  }
+  
+  tick() {
+    this.ticks++;
+    // move any departing trains off platforms
+    // move any arriving trains onto platforms
+    // apply effects of problems
   }
 }
 
@@ -48,14 +56,14 @@ class Game {
   }
   
   start() {
-    
+    // setTimeout
   }
   
   tick() {
-    this.tick++;
-    // move any departing trains off platforms
-    // move any arriving trains onto platforms
-    // apply effects of problems
+    this.ticks++;
+    for (let platform of this.platforms) {
+      platform.tick();
+    }
     // handle user input actions    
   }
   
