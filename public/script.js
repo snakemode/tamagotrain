@@ -68,7 +68,8 @@ class Game {
   }
 }
 
-if (module) {
+// Play nicely with jest.
+if (typeof(module) != 'undefined') {
   module.exports = {
     Problem, 
     Fire, 
