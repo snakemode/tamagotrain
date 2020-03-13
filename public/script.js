@@ -64,14 +64,18 @@ class Game {
   }
   
   start() {
-    setInterval(this.tick, 5 * 1000);
+    setInterval(this.tick(), 5 * 1000);
   }
   
-  tick() {
-    this.ticks++;
-    for (let platform of this.platforms) {
+  tick(g) {
+    g = g || this;
+    console.log(g);
+    
+    g.ticks++;
+    
+    /*for (let platform of g.platforms) {
       platform.tick();
-    }
+    }*/
     // handle user input actions    
   }
   
@@ -84,18 +88,33 @@ class Game {
   }
 }
 
+class GameUi {
+  getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
+  
+  draw(g) { 
+    console.log(g);
+    
+    const props = Object.getOwnPropertyNames(g);
+    for(let prop of props) {
+      const selector = "[data-bind-" + prop + "]";
+      const elements = [...document.querySelectorAll(selector)];
+      for(let ele of elements) {
+        ele.innerHTML = g[prop];
+      }      
+    }
+  }
+}
+
+
+const ui = new GameUi();
 
 let game;
 function startGame() {
   game = new Game();
-  game.start();
-  
-  setInterval(renderLoop, 1000 / 30);
+  game.start();  
+  setInterval(() => ui.draw(game), 1000 / 30);
 }
 
-function renderLoop() {
-  
-}
 
 // Play nicely with jest.
 if (typeof(module) != 'undefined') {
