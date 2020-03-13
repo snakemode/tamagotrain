@@ -57,5 +57,8 @@ describe("Platform", () => {
 
 class SomethingThatDecreasesHygieneByOne extends deps.PlatformOccupier {
   constructor() { super(); }  
-  onTick(platform) { platform.hygiene--; }
+  onTick(platform) { 
+    console.log("ontick");
+    platform.hygiene--; 
+  }
 }
