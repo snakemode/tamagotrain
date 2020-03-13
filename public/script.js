@@ -1,5 +1,5 @@
 class Problem {
-  constructor() {    
+  constructor() {
   }
 }
 
@@ -34,7 +34,7 @@ class Traveller {
 class Platform {
   constructor(platformId) {
     this.platformId = platformId;
-    this.capacity = 100;
+    this.capacity = 20;
     this.temperature = 15;
     this.occupancy = [];
   }
@@ -43,10 +43,16 @@ class Platform {
 
 class Game {
   constructor() {
+    this.ticks = 0;
     this.platforms = [];  
   }
   
+  start() {
+    
+  }
+  
   tick() {
+    this.tick++;
     // move any departing trains off platforms
     // move any arriving trains onto platforms
     // apply effects of problems
@@ -59,5 +65,17 @@ class Game {
   
   registerDeparture() {
     // remove a train from a platform
+  }
+}
+
+if (module) {
+  module.exports = {
+    Problem, 
+    Fire, 
+    Poop, 
+    Vomit, 
+    Traveller, 
+    Platform, 
+    Game
   }
 }
