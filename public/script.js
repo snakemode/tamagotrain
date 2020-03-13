@@ -1,4 +1,9 @@
-class Problem {
+class PlatformOccupier {
+  constructor() {
+  }
+}
+
+class Problem extends PlatformOccupier {
   constructor() {
   }
 }
@@ -35,8 +40,11 @@ class Platform {
   constructor(platformId) {
     this.ticks = 0;
     this.platformId = platformId;
-    this.capacity = 20;
+    
+    this.capacity = 100;
     this.temperature = 15;
+    this.hygiene = 100;
+    
     this.occupancy = [];
   }
   
@@ -79,6 +87,7 @@ class Game {
 // Play nicely with jest.
 if (typeof(module) != 'undefined') {
   module.exports = {
+    PlatformOccupier,
     Problem, 
     Fire, 
     Poop, 

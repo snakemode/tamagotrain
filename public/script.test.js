@@ -43,4 +43,19 @@ describe("Platform", () => {
     expect(platform.ticks).toBe(1);
   });
   
+  it("tick - triggers each occupying element to act", () => {
+    platform.hygiene = 100;
+    platform.occupancy.push(new SomethingThatDecreasesHygieneByOne());
+    
+    platform.tick();    
+    
+    expect(platform.hygiene).toBe(99);
+  });
+  
 });
+
+
+class SomethingThatDecreasesHygieneByOne extends deps.PlatformOccupier {
+  constructor() { super(); }  
+  onTick(platform) { platform.hygiene--; }
+}
