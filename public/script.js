@@ -64,18 +64,15 @@ class Game {
   }
   
   start() {
-    setInterval(this.tick(), 5 * 1000);
+    setInterval(() => this.tick(this), 1 * 1000);
   }
   
-  tick(g) {
-    g = g || this;
-    console.log(g);
+  tick(current) {    
+    current.ticks++;
     
-    g.ticks++;
-    
-    /*for (let platform of g.platforms) {
+    for (let platform of current.platforms) {
       platform.tick();
-    }*/
+    }
     // handle user input actions    
   }
   
@@ -91,9 +88,7 @@ class Game {
 class GameUi {
   getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
   
-  draw(g) { 
-    console.log(g);
-    
+  draw(g) { // React in 5 lines of code. I know I know, it's slow. It'll do for now.
     const props = Object.getOwnPropertyNames(g);
     for(let prop of props) {
       const selector = "[data-bind-" + prop + "]";
