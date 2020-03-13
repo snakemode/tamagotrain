@@ -64,7 +64,7 @@ class Game {
   }
   
   start() {
-    // setTimeout
+    setInterval(this.tick, 5 * 1000);
   }
   
   tick() {
@@ -82,6 +82,19 @@ class Game {
   registerDeparture(trainDepartureMessage) {
     // remove a train from a platform
   }
+}
+
+
+let game;
+function startGame() {
+  game = new Game();
+  game.start();
+  
+  setInterval(renderLoop, 1000 / 30);
+}
+
+function renderLoop() {
+  
 }
 
 // Play nicely with jest.
