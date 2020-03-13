@@ -46,6 +46,8 @@ class Platform {
     this.hygiene = 100;
     
     this.occupancy = [];
+    
+    this.unprocessedMessages = [];
   }
   
   tick() {
@@ -58,7 +60,7 @@ class Platform {
 
 
 class Game {
-  constructor() {
+  constructor(stationName, platformIds) {
     this.ticks = 0;
     this.platforms = [];
   }
@@ -76,12 +78,9 @@ class Game {
     // handle user input actions    
   }
   
-  registerArrival(trainArrivalMessage) {
-    // put the train into the arrival queue to shift onto a platform
-  }
-  
-  registerDeparture(trainDepartureMessage) {
-    // remove a train from a platform
+  registerEvent(ablyMessage) {
+    // put the message into the unprocessedMessages queue of the right platform
+    // message will be processed when the game ticks
   }
 }
 
@@ -106,18 +105,24 @@ class GameUi {
   }
 }
 
-class AblyConnector {
+class StubAblyConnector {
   constructor() {
     
   }
   
+  onArrivalTo(stationName, callback) {
+    // subscribe to that line / station and wire up the callback
+  }
 }
 
 const ui = new GameUi();
 
 let game;
+let ably = new StubAblyConnector();
+
 function startGame() {
-  game = new Game();
+  game = new Game("KINGS CROSS", [ "platformId1", "platformId2" ]);
+  ably.onArrivalTo("KINGS CROSS", game.registerEvent);  
   game.start();  
   setInterval(() => ui.draw(game), 1000 / 30);
 }
