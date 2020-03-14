@@ -37,9 +37,9 @@ class Traveller {
 }
 
 class Platform {
-  constructor(platformId) {
+  constructor(id) {
+    this.id = id;
     this.ticks = 0;
-    this.platformId = platformId;
     
     this.capacity = 100;
     this.temperature = 15;
@@ -52,8 +52,16 @@ class Platform {
   
   tick() {
     this.ticks++;
-    // move any departing trains off platforms
-    // move any arriving trains onto platforms
+    
+    while (this.unprocessedMessages.length > 0) {
+      const msg = this.unprocessedMessages.shift(); // FIFO
+      
+      // Process message
+      // move any departing trains off platforms
+      // move any arriving trains onto platforms
+    }
+    
+
     // apply effects of problems
   }
 }
@@ -63,6 +71,9 @@ class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
     this.platforms = [];
+    for (let id of platformIds) {
+      this.platforms.push(new Platform(id));
+    }
   }
   
   start() {
@@ -78,9 +89,10 @@ class Game {
     // handle user input actions    
   }
   
-  registerEvent(ablyMessage) {
-    // put the message into the unprocessedMessages queue of the right platform
-    // message will be processed when the game ticks
+  registerEvent(current, ablyMessage) {
+    console.log("Register event", ablyMessage);
+    const matchingPlatform = current.platforms.filter(p => p.id === ablyMessage.line)[0];
+    matchingPlatform.unprocessedMessages.push(ablyMessage);
   }
 }
 
@@ -111,16 +123,19 @@ class StubAblyConnector {
   }
   
   onArrivalTo(stationName, callback) {
-    // subscribe to that line / station and wire up the callback
-    if(!Object.getOwnPropertyNames(this.callbacks)) {
+    const stationCallbacks = Object.getOwnPropertyNames(this.callbacks);
+    console.log(stationCallbacks);
+    if(stationCallbacks.indexOf(stationName) == -1) {
       this.callbacks[stationName] = [];
     }
+    
     this.callbacks[stationName].push(callback);
   }
   
   fakeTrainArrival(stationName) {
-    
-    this.onArrivalTo("KINGS CROSS")
+    for (let cb of this.callbacks[stationName]) {
+      cb({ station: stationName, line: "platformId1", arrived: true });
+    }
   }
 }
 
@@ -130,8 +145,8 @@ let game;
 let ably = new StubAblyConnector();
 
 function startGame() {
-  game = new Game("KINGS CROSS", [ "platformId1", "platformId2" ]);
-  ably.onArrivalTo("KINGS CROSS", game.registerEvent);  
+  game = new Game("KINGS CROSS", [ "platformId1" ]);
+  ably.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
   game.start();  
   setInterval(() => ui.draw(game), 1000 / 30);
 }
