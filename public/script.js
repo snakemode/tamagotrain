@@ -46,6 +46,7 @@ class Platform {
     this.hygiene = 100;
     
     this.occupancy = [];
+    this.track = [];
     
     this.unprocessedMessages = [];
   }
