@@ -72,6 +72,7 @@ class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
     this.platforms = [];
+        
     for (let id of platformIds) {
       this.platforms.push(new Platform(id));
     }
