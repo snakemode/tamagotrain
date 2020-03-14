@@ -107,11 +107,20 @@ class GameUi {
 
 class StubAblyConnector {
   constructor() {
-    
+    this.callbacks = {};
   }
   
   onArrivalTo(stationName, callback) {
     // subscribe to that line / station and wire up the callback
+    if(!Object.getOwnPropertyNames(this.callbacks)) {
+      this.callbacks[stationName] = [];
+    }
+    this.callbacks[stationName].push(callback);
+  }
+  
+  fakeTrainArrival(stationName) {
+    
+    this.onArrivalTo("KINGS CROSS")
   }
 }
 
