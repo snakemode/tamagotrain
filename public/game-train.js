@@ -12,7 +12,7 @@ class Train {
     }
     
     // Code that can generate problems on the platform goes here.
-    
+    platform.temperature += 5;
     
     this.hasTicked = true;
   }

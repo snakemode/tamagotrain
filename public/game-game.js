@@ -3,6 +3,7 @@
 class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
+    this.status = "inactive";
     this.platforms = [];
     this.possibleActions = [
       "clean", "vent", "something"
@@ -16,11 +17,13 @@ class Game {
   }
   
   start() {
-    setInterval(() => this.tick(this), 1 * 1000);
+    this.tickInterval = setInterval(() => this.tick(this), 1 * 1000);
+    this.status = "active";
   }
   
   tick(current) {    
     current.ticks++;
+    console.log(current.platforms[0].temperature);
     
     // handle user input actions    
     while (current.queuedActions.length > 0) {
@@ -36,7 +39,22 @@ class Game {
       platform.tick();
     }
     
-    // check for failure state here, whatever that is
+    const failureConditions = [
+      (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
+    ];
+    
+    for (let condition of failureConditions) {
+      if(condition(current)) {
+        current.endGame();
+        break;
+      }
+    }
+    
+  }
+  
+  endGame() {
+    clearInterval(this.tickInterval);
+    this.status = "ended";
   }
   
   queueAction(key, target) {
