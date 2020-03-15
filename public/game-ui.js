@@ -1,5 +1,9 @@
 /* globals Platform */
 
+function renderPlatform(currentGameState, previousGameState) {
+  
+}
+
 class GameUi {
   
   constructor() {
