@@ -4,11 +4,9 @@ class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
     this.platforms = [];
-    this.possibleActions = {
-      "clean": { duration: 2 },
-      "vent": { duration: 2 },
-      "something": { duration: 2 }      
-    };
+    this.possibleActions = [
+      "clean", "vent", "something"
+    ];
     
     this.queuedActions = [];
         
@@ -31,13 +29,17 @@ class Game {
     // handle user input actions    
     while (this.queuedActions.length > 0) {
       const action = this.queuedActions.shift();
-      console.log(action);
+      const handlerName = action.key + "Buff";
+      const target = this.platforms.filter(p=>p.id == action.target);
+      const instance = (Function('return new ' + handlerName))();
+      target.buffs.push(instance);
+      
       
     }    
   }
   
   queueAction(key, target) {
-    this.queuedActions.push({ action: key, platform: target })
+    this.queuedActions.push({ key: key, platform: target })
   }
   
   registerEvent(current, ablyMessage) {
@@ -47,18 +49,39 @@ class Game {
   }
 }
 
-
-function cleanHandler(game) {
+class cleanBuff {
+  constructor() {
+    this.ticks = 0;
+    this.completed = false;
+  }
   
+  execute() {
+    this.completed = true;
+  }
 }
 
-function ventHandler(game) {
+class ventBuff {
+  constructor() {
+    this.ticks = 0;
+    this.completed = false;
+  }
   
+  execute() {
+    this.completed = true;
+  }
 }
 
-function somethingHandler(game) {
+class somethingBuff {
+  constructor() {
+    this.ticks = 0;
+    this.completed = false;
+  }
   
+  execute() {
+    this.completed = true;
+  } 
 }
+
 
 
 if (typeof(module) != 'undefined') {

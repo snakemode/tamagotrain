@@ -10,6 +10,7 @@ class Platform {
     this.hygiene = 100;
     
     this.contents = [];
+    this.buffs = [];
     this.train = null;
     this.hasTrain = false;
     
