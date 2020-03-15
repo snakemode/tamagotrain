@@ -74,12 +74,10 @@ function renderPlatform(currentGameState, previousGameState) {
     const platformAsOfLastTick = previousGameState.platforms.filter(p => p.id == platform.id)[0];
 
     if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
-      console.log("train arrived animation!");
       renderArrivingTrain();
     } 
 
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
-      console.log("train leaving animation!");
       document.getElementById("active-train").remove();
     }      
   }    

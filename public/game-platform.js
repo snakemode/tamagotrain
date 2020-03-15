@@ -26,13 +26,11 @@ class Platform {
       if (msg.arrived) {
         this.hasTrain = true;
         this.train = new Train();
-        console.log(`A train just arrived on ${this.id}`);
       }      
             
       if (msg.departed) {
         this.hasTrain = false;
         this.train = null;
-        console.log(`A train just departed on ${this.id}`);
       }      
     }
     
