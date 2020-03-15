@@ -12,3 +12,5 @@ function startGame() {
   
   setInterval(() => ui.draw(game), 1000 / 30);
 }
+
+startGame();
