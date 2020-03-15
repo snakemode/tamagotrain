@@ -1,31 +1,27 @@
 class GameUi {
   
   constructor(initialState) {
-    this._lastState = JSON.stringify(initialState);
-    
+    this._lastState = JSON.stringify(initialState);    
     this._renderingFunctions = [
+      renderGameStatus,
       renderLabels,
       renderPlatform,
       renderBuffs,
-      renderGameStatus
+      renderTemperature
     ];
   }
   
-  // THIS IS WHERE THE MAGIC HAPPENS  
   draw(g) {
-    
-    // This is called 30 times per second
-    // It's not tied to the update of the game model *at all*
-    // The game ticks at it's own rate
-    // We need to use this loop to render / animate things appropriately.
-    
     if (JSON.stringify(g) === this._lastState) {
       return; // No state has changed, do we need to re-render?
     }
     
     const lastStateSnapshot = JSON.parse(this._lastState);
     for (let renderer of this._renderingFunctions) {
-      renderer(g, lastStateSnapshot)
+      const ret = renderer(g, lastStateSnapshot)
+      if (ret === -1) { // Renderer caused an early exit
+        break;
+      }
     }
     
     this._lastState = JSON.stringify(g);
@@ -71,6 +67,15 @@ function renderBuffs(currentGameState, previousGameState) {
 function renderGameStatus(currentGameState, previousGameState) {
   if (currentGameState.status !== "ended") return;  
   document.getElementById("game-over-message").classList.remove("hide");
+  return -1;
+}
+
+function renderTemperature(currentGameState) {
+  if (!this.temperatureOverlay) {
+      this.temperatureOverlay = document.createElement("div");
+      this.temperatureOverlay.style.color = "red";
+      buffTing.appendChild(ele);
+  }
 }
 
 
