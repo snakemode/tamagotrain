@@ -10,6 +10,8 @@ function startGame() {
   ably.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
   game.start();  
   
+  ably.fakeIncomingData('KINGS CROSS');
+  
   setInterval(() => ui.draw(game), 1000 / 30);
 }
 

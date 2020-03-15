@@ -34,6 +34,23 @@ class StubAblyConnector {
       cb({ station: stationName, line: "platformId1", departed: true });
     }
   }
+  
+  
+  fakeIncomingData(stationName) {
+    // Train arrives and departs every 10 seconds.
+    const interval = 1000 * 10;    
+    
+    for (let cb of this.callbacks[stationName]) {
+      
+      cb({ station: stationName, line: "platformId1", arrived: true });
+      setTimeout(() => {
+        cb({ station: stationName, line: "platformId1", departed: true });
+        setTimeout(() => this.fakeIncomingData(stationName), interval);
+      }, interval);
+      
+    }    
+  }
+  
 }
 
 if (typeof(module) != 'undefined') {
