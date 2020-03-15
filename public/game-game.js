@@ -4,6 +4,11 @@ class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
     this.platforms = [];
+    this.possibleActions = [
+      "clean", "vent", "something"
+    ];
+    
+    this.queuedActions = [];
         
     for (let id of platformIds) {
       this.platforms.push(new Platform(id));
@@ -20,7 +25,16 @@ class Game {
     for (let platform of current.platforms) {
       platform.tick();
     }
+    
     // handle user input actions    
+    while (this.queuedActions.length > 0) {
+      const action = this.queuedActions.shift(); 
+      
+    }    
+  }
+  
+  queueAction(key, target) {
+    this.queuedActions.push({ })
   }
   
   registerEvent(current, ablyMessage) {
@@ -28,6 +42,19 @@ class Game {
     const matchingPlatform = current.platforms.filter(p => p.id === ablyMessage.line)[0];
     matchingPlatform.unprocessedMessages.push(ablyMessage);
   }
+}
+
+
+function cleanHandler(game) {
+  
+}
+
+function ventHandler(game) {
+  
+}
+
+function somethingHandler(game) {
+  
 }
 
 
