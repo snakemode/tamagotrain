@@ -12,6 +12,19 @@ body {
 
 #playfield {
   overflow: hidden;
+  background: grey; 
+  height: 50vh; 
+  width: 50vw; 
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftube.png?v=1584284017645');
+}
+
+#temperature-overlay {  
+  z-index: 10;  
+  position: absolute;
+  height: 50vh; 
+  width: 50vw; 
+  background-color: red;
+  pointer-events: none;
 }
 
 #buffs {
@@ -50,3 +63,4 @@ body {
 .hide {
   display: none;
 }
+

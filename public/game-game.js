@@ -23,7 +23,17 @@ class Game {
   
   tick(current) {    
     current.ticks++;
-    console.log(current.platforms[0].temperature);
+            
+    const failureConditions = [
+      (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
+    ];
+    
+    for (let condition of failureConditions) {
+      if(condition(current)) {
+        current.endGame();
+        break;
+      }
+    }    
     
     // handle user input actions    
     while (current.queuedActions.length > 0) {
@@ -37,19 +47,7 @@ class Game {
      
     for (let platform of current.platforms) {
       platform.tick();
-    }
-    
-    const failureConditions = [
-      (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
-    ];
-    
-    for (let condition of failureConditions) {
-      if(condition(current)) {
-        current.endGame();
-        break;
-      }
-    }
-    
+    }    
   }
   
   endGame() {

@@ -1,6 +1,7 @@
 class GameUi {
   
   constructor(initialState) {
+    this.playfield = document.getElementById("playfield");
     this._lastState = JSON.stringify(initialState);    
     this._renderingFunctions = [
       renderGameStatus,
@@ -70,12 +71,13 @@ function renderGameStatus(currentGameState, previousGameState) {
   return -1;
 }
 
-function renderTemperature(currentGameState) {
+function renderTemperature(currentGameState, previousGameState) {
   if (!this.temperatureOverlay) {
       this.temperatureOverlay = document.createElement("div");
-      this.temperatureOverlay.style.color = "red";
-      buffTing.appendChild(ele);
+      this.temperatureOverlay.setAttribute("id", "temperature-overlay");
+      this.playfield.appendChild(this.temperatureOverlay);
   }
+  this.temperatureOverlay.style.opacity = currentGameState.platforms[0].temperature + "%";
 }
 
 
