@@ -4,9 +4,11 @@ class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
     this.platforms = [];
-    this.possibleActions = [
-      "clean", "vent", "something"
-    ];
+    this.possibleActions = {
+      "clean": { duration: 2 },
+      "vent": { duration: 2 },
+      "something": { duration: 2 }      
+    };
     
     this.queuedActions = [];
         
@@ -28,13 +30,14 @@ class Game {
     
     // handle user input actions    
     while (this.queuedActions.length > 0) {
-      const action = this.queuedActions.shift(); 
+      const action = this.queuedActions.shift();
+      console.log(action);
       
     }    
   }
   
   queueAction(key, target) {
-    this.queuedActions.push({ })
+    this.queuedActions.push({ action: key, platform: target })
   }
   
   registerEvent(current, ablyMessage) {
