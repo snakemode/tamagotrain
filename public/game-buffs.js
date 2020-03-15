@@ -21,6 +21,9 @@ class ventBuff {
   tick(platform) {
     this.ticks--;
     if (this.ticks == 0) {
+      
+      // remove 10% of heat here, rather than resetting.
+      platform.temperature = 15;      
       this.completed = true;
     }
   }

@@ -35,6 +35,8 @@ class Game {
     for (let platform of current.platforms) {
       platform.tick();
     }
+    
+    // check for failure state here, whatever that is
   }
   
   queueAction(key, target) {
@@ -42,7 +44,6 @@ class Game {
   }
   
   registerEvent(current, ablyMessage) {
-    console.log("Register event", ablyMessage);
     const matchingPlatform = current.platforms.filter(p => p.id === ablyMessage.line)[0];
     matchingPlatform.unprocessedMessages.push(ablyMessage);
   }
