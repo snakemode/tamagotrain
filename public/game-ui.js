@@ -72,6 +72,14 @@ function renderGameStatus(currentGameState, previousGameState) {
 }
 
 function renderTemperature(currentGameState, previousGameState) {
+  if (currentGameState.platforms[0].temperature < 35) {
+    if (this.temperatureOverlay) {
+      this.temperatureOverlay.remove(); 
+    }
+    this.temperatureOverlay = null;
+    return;
+  }
+  
   if (!this.temperatureOverlay) {
       this.temperatureOverlay = document.createElement("div");
       this.temperatureOverlay.setAttribute("id", "temperature-overlay");
