@@ -1,8 +1,10 @@
+/* globals Platform */
 
 class GameUi {
   
   constructor() {
     this._lastVm = {
+      "game": {},
       "ticks": 0,
       "total-platforms": 0,
       "platforms": []
@@ -14,6 +16,7 @@ class GameUi {
   draw(g) { // React in 5 lines of code. I know I know, it's slow. It'll do for now.
     
     const viewModel = {
+      "game": g,
       "ticks": g.ticks,
       "total-platforms": g.platforms.length,
       "platforms": g.platforms
@@ -25,14 +28,12 @@ class GameUi {
       const elements = [...document.querySelectorAll(selector)];
       for(let ele of elements) {
         ele.innerHTML = viewModel[prop];
-      }      
+      }
     }
     
     for (let platform of viewModel.platforms) {
       const platformAsOfLastTick = this._lastVm.platforms.filter(p => p.id == platform.id)[0] || new Platform(platform.id);
-      
-      console.log(`previous: ${platformAsOfLastTick.hasTrain} vs now ${platform.hasTrain}`);
-      
+            
       if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
         console.log("train arrived animation!");
         // play train arrival animation
@@ -46,4 +47,10 @@ class GameUi {
     
     this._lastVm = JSON.parse(JSON.stringify(viewModel));
   }
+}
+
+
+
+if (typeof(module) != 'undefined') {
+  module.exports = GameUi;
 }
