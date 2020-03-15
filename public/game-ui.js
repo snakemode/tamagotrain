@@ -9,9 +9,9 @@ class GameUi {
     ];
   }
   
-  getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
-  
+  // THIS IS WHERE THE MAGIC HAPPENS  
   draw(g) {
+    
     // This is called 30 times per second
     // It's not tied to the update of the game model *at all*
     // The game ticks at it's own rate
@@ -19,8 +19,7 @@ class GameUi {
     
     if (JSON.stringify(g) === this._lastState) {
       return; // No state has changed, do we need to re-render?
-    }    
-    
+    }
     
     const lastStateSnapshot = JSON.parse(this._lastState);
     for (let renderer of this._renderingFunctions) {
@@ -72,6 +71,8 @@ function renderArrivingTrain() {
   const playfield = document.getElementById("playfield");
   const trainImage = document.createElement("img");
   trainImage.setAttribute("src", src);
+  trainImage.classList.add("train");
+  trainImage.classList.add("arrival");
   playfield.appendChild(trainImage);
 
   // play css animation to slide train in
