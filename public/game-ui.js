@@ -12,6 +12,10 @@ class GameUi {
   getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
   
   draw(g) {
+    // This is called 30 times per second
+    // It's not tied to the update of the game model *at all*
+    // The game ticks at it's own rate
+    // We need to use this loop to render / animate things appropriately.
     
     for (let renderer of this._renderingFunctions) {
       renderer(g, this._lastState)

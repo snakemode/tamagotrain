@@ -7,7 +7,7 @@ class Platform {
     this.temperature = 15;
     this.hygiene = 100;
     
-    this.occupancy = [];
+    this.contents = [];
     this.hasTrain = false;
     
     this.unprocessedMessages = [];
@@ -22,10 +22,12 @@ class Platform {
       if (msg.arrived) {
         this.hasTrain = true;
         console.log(`A train just arrived on ${this.id}`);
-      }
-      // Process message
-      // move any departing trains off platforms
-      // move any arriving trains onto platforms
+      }      
+            
+      if (msg.departed) {
+        this.hasTrain = false;
+        console.log(`A train just departed on ${this.id}`);
+      }      
     }
     
 
