@@ -9,11 +9,11 @@ class Platform {
     this.temperature = 15;
     this.hygiene = 100;
     
-    this.contents = [];
-    this.buffs = [];
     this.train = null;
     this.hasTrain = false;
-    
+    this.contents = [];
+    this.buffs = [];
+        
     this.unprocessedMessages = [];
   }
   
@@ -36,15 +36,15 @@ class Platform {
       }      
     }
     
-    if (this.train) {
-      this.train.tick(this);
-    }
+    const tickables = [ this.train, ...this.contents, ...this.buffs ];
     
-    // apply effects of problems
-    for (let item in this.contents) {
+    for (let item in tickables) {
+      if (!item) continue;
+      
       if (item["tick"]) {
         item.tick(this);
       }
+      
     }
     
   }

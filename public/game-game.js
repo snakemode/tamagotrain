@@ -22,24 +22,24 @@ class Game {
   tick(current) {    
     current.ticks++;
     
+    // handle user input actions    
+    while (current.queuedActions.length > 0) {
+      const action = current.queuedActions.shift();
+      const handlerName = action.key + "Buff";
+      const target = current.platforms.filter(p => p.id == action.target)[0];
+      
+      const instance = (Function('return new ' + handlerName))();
+      target.buffs.push(instance);
+    }    
+     
+    // tick platforms
     for (let platform of current.platforms) {
       platform.tick();
     }
-    
-    // handle user input actions    
-    while (this.queuedActions.length > 0) {
-      const action = this.queuedActions.shift();
-      const handlerName = action.key + "Buff";
-      const target = this.platforms.filter(p=>p.id == action.target);
-      const instance = (Function('return new ' + handlerName))();
-      target.buffs.push(instance);
-      
-      
-    }    
   }
   
   queueAction(key, target) {
-    this.queuedActions.push({ key: key, platform: target })
+    this.queuedActions.push({ key: key, target: target })
   }
   
   registerEvent(current, ablyMessage) {
@@ -48,41 +48,6 @@ class Game {
     matchingPlatform.unprocessedMessages.push(ablyMessage);
   }
 }
-
-class cleanBuff {
-  constructor() {
-    this.ticks = 0;
-    this.completed = false;
-  }
-  
-  execute() {
-    this.completed = true;
-  }
-}
-
-class ventBuff {
-  constructor() {
-    this.ticks = 0;
-    this.completed = false;
-  }
-  
-  execute() {
-    this.completed = true;
-  }
-}
-
-class somethingBuff {
-  constructor() {
-    this.ticks = 0;
-    this.completed = false;
-  }
-  
-  execute() {
-    this.completed = true;
-  } 
-}
-
-
 
 if (typeof(module) != 'undefined') {
   module.exports = { Game }

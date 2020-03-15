@@ -5,7 +5,8 @@ class GameUi {
     
     this._renderingFunctions = [
       renderLabels,
-      renderPlatform
+      renderPlatform,
+      renderBuffs
     ];
   }
   
@@ -50,6 +51,18 @@ function renderLabels(currentGameState, previousGameState) {
   }
 }
 
+function renderBuffs(currentGameState, previousGameState) {
+  const buffTing = document.getElementById("buffs");
+  buffTing.innerHTML = "";
+  
+  for (let platform of currentGameState.platforms) {
+    for (let buff of platform.buffs) {
+      buffTing.innerHTML += buff.constructor.name + " ";
+    }
+  }  
+}
+
+
 function renderPlatform(currentGameState, previousGameState) {
   
   for (let platform of currentGameState.platforms) {        
@@ -78,7 +91,6 @@ function renderArrivingTrain() {
   // play css animation to slide train in
 
 }
-
 
 if (typeof(module) != 'undefined') {
   module.exports = GameUi;
