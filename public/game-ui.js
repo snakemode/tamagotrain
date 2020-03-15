@@ -58,8 +58,9 @@ function renderBuffs(currentGameState, previousGameState) {
   for (let platform of currentGameState.platforms) {
     for (let buff of platform.buffs) {
       const ele = document.createElement("div");
-      ele.innerHTML = buff.constructor.name + " " + buff.ticks;
+      ele.innerHTML = buff.constructor.name[0].toUpperCase() + " " + buff.ticks;
       ele.classList.add("buff");
+      ele.classList.add(constructor.name);
       buffTing.appendChild(ele);
       
     }
@@ -79,6 +80,7 @@ function renderPlatform(currentGameState, previousGameState) {
 
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
       console.log("train leaving animation!");
+      document.getElementById("active-train").remove();
     }      
   }    
 }
@@ -87,6 +89,7 @@ function renderArrivingTrain() {
   const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.png?v=1584286890941"; // train
   const playfield = document.getElementById("playfield");
   const trainImage = document.createElement("img");
+  trainImage.setAttribute("id", "active-train");
   trainImage.setAttribute("src", src);
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");

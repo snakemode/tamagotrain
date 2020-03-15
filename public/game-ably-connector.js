@@ -25,6 +25,14 @@ class StubAblyConnector {
     for (let cb of this.callbacks[stationName]) {
       cb({ station: stationName, line: "platformId1", arrived: true });
     }
+  }  
+  
+  fakeTrainDeparture(stationName) {
+    if (this.callbacks[stationName])
+    
+    for (let cb of this.callbacks[stationName]) {
+      cb({ station: stationName, line: "platformId1", departed: true });
+    }
   }
 }
 
