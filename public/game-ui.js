@@ -6,9 +6,9 @@ class GameUi {
     this._renderingFunctions = [
       renderGameStatus,
       renderLabels,
+      renderTemperature,
       renderPlatform,
-      renderBuffs,
-      renderTemperature
+      renderBuffs
     ];
   }
   
