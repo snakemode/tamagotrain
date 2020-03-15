@@ -18,10 +18,9 @@ class GameUi {
     // We need to use this loop to render / animate things appropriately.
     
     if (JSON.stringify(g) === this._lastState) {
-      return;
+      return; // No state has changed, do we need to re-render?
     }    
     
-    console.log("Changed");
     
     const lastStateSnapshot = JSON.parse(this._lastState);
     for (let renderer of this._renderingFunctions) {
