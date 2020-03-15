@@ -10,6 +10,10 @@ body {
   line-height: 1.5em;
 }
 
+#playfield {
+  overflow: hidden;
+}
+
 #buffs {
   position: absolute;
   z-index: 100;
