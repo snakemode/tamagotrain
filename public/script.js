@@ -99,6 +99,11 @@ class Game {
 }
 
 class GameUi {
+  
+  constructor() {
+    this._lastVm = null;
+  }
+  
   getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
   
   draw(g) { // React in 5 lines of code. I know I know, it's slow. It'll do for now.
@@ -116,6 +121,8 @@ class GameUi {
         ele.innerHTML = viewModel[prop];
       }      
     }
+    
+    this._lastVm = viewModel;
   }
 }
 
