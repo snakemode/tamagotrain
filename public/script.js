@@ -46,7 +46,7 @@ class Platform {
     this.hygiene = 100;
     
     this.occupancy = [];
-    this.track = [];
+    this.hasTrain = false;
     
     this.unprocessedMessages = [];
   }
@@ -56,7 +56,11 @@ class Platform {
     
     while (this.unprocessedMessages.length > 0) {
       const msg = this.unprocessedMessages.shift(); // FIFO
+      console.log(msg);
       
+      if (msg.arrived) {
+        this.hasTrain = true;
+      }
       // Process message
       // move any departing trains off platforms
       // move any arriving trains onto platforms
@@ -101,7 +105,11 @@ class Game {
 class GameUi {
   
   constructor() {
-    this._lastVm = null;
+    this._lastVm = {
+      "ticks": 0,
+      "total-platforms": 0,
+      "platforms": []
+    };
   }
   
   getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
@@ -111,6 +119,7 @@ class GameUi {
     const viewModel = {
       "ticks": g.ticks,
       "total-platforms": g.platforms.length,
+      "platforms": g.platforms
     };
     
     const props = Object.getOwnPropertyNames(viewModel);
@@ -120,6 +129,20 @@ class GameUi {
       for(let ele of elements) {
         ele.innerHTML = viewModel[prop];
       }      
+    }
+    
+    for (let platform in viewModel.platforms) {
+      const platformAsOfLastTick = this._lastVm.platforms.filter(p => p.id == platform.id)[0] || new Platform("NULL");
+      
+      if (platform.hasTrain && !platformAsOfLastTick.hasTrain) {
+        // play train arrival animation
+        document.getElementById("playfield").innerHTML += "train arrival!";
+      }
+      
+      if (!platform.hasTrain && platformAsOfLastTick.hasTrain) {
+        // play train leaving animation
+      }
+      
     }
     
     this._lastVm = viewModel;
@@ -133,7 +156,7 @@ class StubAblyConnector {
   
   onArrivalTo(stationName, callback) {
     const stationCallbacks = Object.getOwnPropertyNames(this.callbacks);
-    console.log(stationCallbacks);
+    
     if(stationCallbacks.indexOf(stationName) == -1) {
       this.callbacks[stationName] = [];
     }
