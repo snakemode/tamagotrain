@@ -72,7 +72,7 @@ function renderGameStatus(currentGameState, previousGameState) {
 }
 
 function renderTemperature(currentGameState, previousGameState) {
-  if (currentGameState.platforms[0].temperature < 35) {
+  if (currentGameState.platforms[0].temperature < 25) {
     if (this.temperatureOverlay) {
       this.temperatureOverlay.remove(); 
     }
