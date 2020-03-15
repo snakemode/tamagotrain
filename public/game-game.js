@@ -53,8 +53,8 @@ class Game {
   }
   
   endGame() {
-    clearInterval(this.tickInterval);
     this.status = "ended";
+    clearInterval(this.tickInterval);    
   }
   
   queueAction(key, target) {

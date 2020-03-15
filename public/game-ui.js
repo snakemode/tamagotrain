@@ -6,7 +6,8 @@ class GameUi {
     this._renderingFunctions = [
       renderLabels,
       renderPlatform,
-      renderBuffs
+      renderBuffs,
+      renderGameStatus
     ];
   }
   
@@ -65,6 +66,11 @@ function renderBuffs(currentGameState, previousGameState) {
       
     }
   }  
+}
+
+function renderGameStatus(currentGameState, previousGameState) {
+  if (currentGameState.status !== "ended") return;  
+  document.getElementById("game-over-message").classList.remove("hide");
 }
 
 
