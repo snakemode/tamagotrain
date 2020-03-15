@@ -37,16 +37,15 @@ class Platform {
     }
     
     const tickables = [ this.train, ...this.contents, ...this.buffs ];
-    
-    for (let item in tickables) {
-      if (!item) continue;
-      
+
+    for (let item of tickables) {
+      if (!item) continue;      
       if (item["tick"]) {
         item.tick(this);
-      }
-      
+      }      
     }
     
+    this.buffs = this.buffs.filter(b => !b.completed);
   }
 }
 

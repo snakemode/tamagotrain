@@ -57,7 +57,7 @@ function renderBuffs(currentGameState, previousGameState) {
   
   for (let platform of currentGameState.platforms) {
     for (let buff of platform.buffs) {
-      buffTing.innerHTML += buff.constructor.name + " ";
+      buffTing.innerHTML += buff.constructor.name + "(" + buff.ticks + ") ";
     }
   }  
 }

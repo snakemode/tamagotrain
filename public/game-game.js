@@ -32,7 +32,6 @@ class Game {
       target.buffs.push(instance);
     }    
      
-    // tick platforms
     for (let platform of current.platforms) {
       platform.tick();
     }
