@@ -1,6 +1,5 @@
 /* globals GameUi, Game, StubAblyConnector */
 
-
 let game, ui;
 let ably = new StubAblyConnector();
 

@@ -1,4 +1,3 @@
-
 class StubAblyConnector {
   constructor() {
     this.callbacks = {};

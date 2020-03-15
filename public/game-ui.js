@@ -1,4 +1,45 @@
-/* globals Platform */
+class GameUi {
+  
+  constructor(initialState) {
+    this._lastState = initialState;
+    
+    this._renderingFunctions = [
+      renderLabels,
+      renderPlatform
+    ];
+  }
+  
+  getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
+  
+  draw(g) {
+    
+    for (let renderer of this._renderingFunctions) {
+      renderer(g, this._lastState)
+    }
+    
+    this._lastState = JSON.parse(JSON.stringify(g));
+  }
+}
+
+
+function renderLabels(currentGameState, previousGameState) {
+  
+  const viewModel = {
+    "game": currentGameState,
+    "ticks": currentGameState.ticks,
+    "total-platforms": currentGameState.platforms.length,
+    "platforms": currentGameState.platforms
+  };
+
+  const props = Object.getOwnPropertyNames(viewModel);
+  for (let prop of props) {
+    const selector = "[data-bind-" + prop + "]";
+    const elements = [...document.querySelectorAll(selector)];
+    for(let ele of elements) {
+      ele.innerHTML = viewModel[prop];
+    }
+  }
+}
 
 function renderPlatform(currentGameState, previousGameState) {
   
@@ -7,6 +48,7 @@ function renderPlatform(currentGameState, previousGameState) {
 
     if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
       console.log("train arrived animation!");
+      renderArrivingTrain();
     } 
 
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
@@ -15,44 +57,16 @@ function renderPlatform(currentGameState, previousGameState) {
   }    
 }
 
+function renderArrivingTrain() {
+  const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.png?v=1584286890941"; // train
+  const playfield = document.getElementById("playfield");
+  const trainImage = document.createElement("img");
+  trainImage.setAttribute("src", src);
+  playfield.appendChild(trainImage);
 
-class GameUi {
-  
-  constructor(initialState) {
-    this._lastState = initialState;
-    this._renderingFunctions = [
-      renderPlatform
-    ];
-  }
-  
-  getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
-  
-  draw(g) { // React in 5 lines of code. I know I know, it's slow. It'll do for now.
-    
-    const viewModel = {
-      "game": g,
-      "ticks": g.ticks,
-      "total-platforms": g.platforms.length,
-      "platforms": g.platforms
-    };
-    
-    const props = Object.getOwnPropertyNames(viewModel);
-    for (let prop of props) {
-      const selector = "[data-bind-" + prop + "]";
-      const elements = [...document.querySelectorAll(selector)];
-      for(let ele of elements) {
-        ele.innerHTML = viewModel[prop];
-      }
-    }
-    
-    for (let renderer of this._renderingFunctions) {
-      renderer(g, this._lastState)
-    }    
-    
-    this._lastState = JSON.parse(JSON.stringify(g));
-  }
+  // play css animation to slide train in
+
 }
-
 
 
 if (typeof(module) != 'undefined') {
