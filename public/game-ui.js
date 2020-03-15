@@ -1,7 +1,7 @@
 class GameUi {
   
   constructor(initialState) {
-    this._lastState = initialState;
+    this._lastState = JSON.stringify(initialState);
     
     this._renderingFunctions = [
       renderLabels,
@@ -17,11 +17,18 @@ class GameUi {
     // The game ticks at it's own rate
     // We need to use this loop to render / animate things appropriately.
     
+    if (JSON.stringify(g) === this._lastState) {
+      return;
+    }    
+    
+    console.log("Changed");
+    
+    const lastStateSnapshot = JSON.parse(this._lastState);
     for (let renderer of this._renderingFunctions) {
-      renderer(g, this._lastState)
+      renderer(g, lastStateSnapshot)
     }
     
-    this._lastState = JSON.parse(JSON.stringify(g));
+    this._lastState = JSON.stringify(g);
   }
 }
 
