@@ -2,17 +2,27 @@
 
 function renderPlatform(currentGameState, previousGameState) {
   
+  for (let platform of currentGameState.platforms) {        
+    const platformAsOfLastTick = previousGameState.platforms.filter(p => p.id == platform.id)[0];
+
+    if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
+      console.log("train arrived animation!");
+    } 
+
+    if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
+      console.log("train leaving animation!");
+    }      
+  }    
 }
+
 
 class GameUi {
   
-  constructor() {
-    this._lastVm = {
-      "game": {},
-      "ticks": 0,
-      "total-platforms": 0,
-      "platforms": []
-    };
+  constructor(initialState) {
+    this._lastState = initialState;
+    this._renderingFunctions = [
+      renderPlatform
+    ];
   }
   
   getTicks() { return [...document.querySelectorAll(`[data-current-ticks]`)]; }
@@ -35,21 +45,11 @@ class GameUi {
       }
     }
     
-    for (let platform of viewModel.platforms) {
-      const platformAsOfLastTick = this._lastVm.platforms.filter(p => p.id == platform.id)[0] || new Platform(platform.id);
-            
-      if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
-        console.log("train arrived animation!");
-        // play train arrival animation
-        document.getElementById("playfield").innerHTML += "train arrival!";
-      } 
-      
-      if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
-        console.log("train leaving animation!");
-      }      
-    }
+    for (let renderer of this._renderingFunctions) {
+      renderer(g, this._lastState)
+    }    
     
-    this._lastVm = JSON.parse(JSON.stringify(viewModel));
+    this._lastState = JSON.parse(JSON.stringify(g));
   }
 }
 

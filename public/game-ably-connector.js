@@ -4,10 +4,16 @@ class StubAblyConnector {
     this.callbacks = {};
   }
   
-  onArrivalTo(stationName, callback) {
-    const stationCallbacks = Object.getOwnPropertyNames(this.callbacks);
-    
-    if(stationCallbacks.indexOf(stationName) == -1) {
+  hasCallbacksFor(stationName) {
+    const stationCallbacks = Object.getOwnPropertyNames(this.callbacks);    
+    if (stationCallbacks.indexOf(stationName) == -1) {
+      return false;
+    }
+    return true;
+  }
+  
+  onArrivalTo(stationName, callback) {    
+    if(!this.hasCallbacksFor(stationName)) {
       this.callbacks[stationName] = [];
     }
     
@@ -15,6 +21,8 @@ class StubAblyConnector {
   }
   
   fakeTrainArrival(stationName) {
+    if (this.callbacks[stationName])
+    
     for (let cb of this.callbacks[stationName]) {
       cb({ station: stationName, line: "platformId1", arrived: true });
     }
