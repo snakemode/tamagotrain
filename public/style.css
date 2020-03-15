@@ -54,11 +54,3 @@ footer {
   padding-top: 1.5em;
   border-top: 1px solid lightgrey;
 }
-
-
-.train .arrival {
-  transition-timing-function: ease-in;
-  transition: 0.2s;
-  transform: translateX(130%);
-
-}
