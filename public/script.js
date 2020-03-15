@@ -131,16 +131,17 @@ class GameUi {
       }      
     }
     
-    for (let platform in viewModel.platforms) {
-      const platformAsOfLastTick = this._lastVm.platforms.filter(p => p.id == platform.id)[0] || new Platform("NULL");
+    for (let platform of viewModel.platforms) {
+      const platformAsOfLastTick = this._lastVm.platforms.filter(p => p.id == platform.id)[0] || new Platform(platform.id);
       
-      if (platform.hasTrain && !platformAsOfLastTick.hasTrain) {
+      if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
+        console.log("train arrived animation!");
         // play train arrival animation
         document.getElementById("playfield").innerHTML += "train arrival!";
-      }
+      } 
       
-      if (!platform.hasTrain && platformAsOfLastTick.hasTrain) {
-        // play train leaving animation
+      if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
+        console.log("train leaving animation!");
       }
       
     }
