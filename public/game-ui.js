@@ -2,6 +2,9 @@ class GameUi {
   
   constructor(initialState) {
     this.playfield = document.getElementById("playfield");
+    this.track = document.getElementById("track");
+    this.platform = document.getElementById("platform");
+    
     this._lastState = JSON.stringify(initialState);    
     this._renderingFunctions = [
       renderGameStatus,
@@ -122,35 +125,30 @@ function renderPlatform(currentGameState, previousGameState) {
 }
 
 function renderTravellers(currentGameState, previousGameState) {
+  this.platform.innerHTML = "";
   
   for (let platform of currentGameState.platforms) {        
     const travellers = platform.contents.filter(c => c.constructor.name === "Traveller");
     
-    for (let traveller of travellers) {
-        
-        const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftraveller.gif?v=1584358875511"; // traveller
-        
-        const trainImage = document.createElement("img");
-        trainImage.setAttribute("id", "active-train");
-        trainImage.setAttribute("src", src);
-        trainImage.classList.add("train");
-        trainImage.classList.add("arrival");
-        playfield.appendChild(trainImage);
-      
-    }
-    
+    for (let traveller of travellers) {        
+        const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftraveller.gif?v=1584358875511"; // traveller        
+        const image = document.createElement("img");
+        image.setAttribute("src", src);
+        image.setAttribute("data-traveller", "");
+        image.classList.add("traveller");
+        this.platform.appendChild(image);      
+    }    
   }    
 }
 
 function renderArrivingTrain() {
-  const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.png?v=1584286890941"; // train
-  const playfield = document.getElementById("playfield");
+  const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.png?v=1584286890941"; // train  
   const trainImage = document.createElement("img");
   trainImage.setAttribute("id", "active-train");
   trainImage.setAttribute("src", src);
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");
-  playfield.appendChild(trainImage);
+  this.track.appendChild(trainImage);
 
   // play css animation to slide train in
 

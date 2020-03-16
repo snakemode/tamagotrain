@@ -8,16 +8,15 @@ class Train {
   
   tick(platform) {
     this.ticks++;
+    
     platform.temperature += 0.5;
+    platform.contents.push(new Traveller());
 
     if(this.hasTicked) {
       return; // Only run the next bit once
     }
     
     // Code that can generate problems on the platform goes here.
-    
-    const passenger = new Traveller();
-    platform.contents.push(passenger);
     
     this.hasTicked = true;
   }

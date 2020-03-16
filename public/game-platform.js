@@ -31,10 +31,12 @@ class Platform {
       if (msg.departed) {
         this.hasTrain = false;
         this.train = null;
+        console.log("departed");
+        console.log(this.train);
       }      
     }
     
-    const tickables = [ this.train, ...this.contents, ...this.buffs ];
+    let tickables = [ this.train, ...this.contents, ...this.buffs ];
 
     for (let item of tickables) {
       if (!item) continue;      
