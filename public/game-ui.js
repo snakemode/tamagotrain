@@ -8,6 +8,7 @@ class GameUi {
       renderLabels,
       renderTemperature,
       renderPlatform,
+      renderTravellers,
       renderBuffs
     ];
   }
@@ -117,6 +118,27 @@ function renderPlatform(currentGameState, previousGameState) {
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
       document.getElementById("active-train").remove();
     }      
+  }    
+}
+
+function renderTravellers(currentGameState, previousGameState) {
+  
+  for (let platform of currentGameState.platforms) {        
+    const travellers = platform.contents.filter(c => c.constructor.name === "Traveller");
+    
+    for (let traveller of travellers) {
+        
+        const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftraveller.gif?v=1584358875511"; // traveller
+        
+        const trainImage = document.createElement("img");
+        trainImage.setAttribute("id", "active-train");
+        trainImage.setAttribute("src", src);
+        trainImage.classList.add("train");
+        trainImage.classList.add("arrival");
+        playfield.appendChild(trainImage);
+      
+    }
+    
   }    
 }
 
