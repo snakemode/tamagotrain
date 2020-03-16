@@ -90,22 +90,14 @@ function renderGameStatus(currentGameState, previousGameState) {
 
 function renderTemperature(currentGameState, previousGameState) {
   
-  const anyPlatformTooHot = currentGameState.platforms.filter(p => p.temperature < 25).length > 0;
-  
+  const anyPlatformTooHot = currentGameState.platforms.filter(p => p.temperature > 25).length > 0;
+  const overlay = document.getElementById("temperatureOverlay");
   if (anyPlatformTooHot) {
-    if (this.temperatureOverlay) {
-      this.temperatureOverlay.remove(); 
-    }
-    this.temperatureOverlay = null;
-    return;
-  }
-  
-  if (!this.temperatureOverlay) {
-      this.temperatureOverlay = document.createElement("div");
-      this.temperatureOverlay.setAttribute("id", "temperature-overlay");
-      this.playfield.appendChild(this.temperatureOverlay);
-  }
-  this.temperatureOverlay.style.opacity = currentGameState.platforms[0].temperature + "%";
+    overlay.classList.remove("hide");
+    overlay.style.opacity = currentGameState.platforms[0].temperature + "%";
+  } else {    
+    overlay.classList.add("hide");
+  }  
 }
 
 

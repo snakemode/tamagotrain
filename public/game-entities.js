@@ -10,11 +10,13 @@ class Traveller {
   
   tick(platform) {
     if (this.distanceFromExit == 0) {
+      platform.temperature -= 1;
       this.completed = true;
     }
     
     this.ticks++;
     this.distanceFromExit--;
+    platform.temperature += 0.1;
   } 
 }
 

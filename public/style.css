@@ -28,6 +28,14 @@ body {
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftube.png?v=1584284017645');
 }
 
+#track {
+  height: 360px;
+}
+
+#platform {
+  display: flex;
+}
+
 #actions {
   height: 50vh;
   width: 25vw;
@@ -35,9 +43,10 @@ body {
   background: green;
 }
 
-#temperature-overlay {  
+#temperatureOverlay {  
   position: absolute;
   z-index: 10;
+  left: 25vw;
   height: 50vh; 
   width: 50vw; 
   
