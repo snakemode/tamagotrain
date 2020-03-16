@@ -6,23 +6,41 @@
 
 body {
   font-family: sans-serif;
-  margin: 2em 1em;
-  line-height: 1.5em;
+  padding: 0 0 0 0;
+  border: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+#timetable {
+  height: 50vh;
+  width: 25vw;
+  
+  background: red;
+
 }
 
 #playfield {
   overflow: hidden;
-  background: grey; 
   height: 50vh; 
-  width: 50vw; 
+  width: 50vw;
+  
+  background: grey; 
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftube.png?v=1584284017645');
 }
 
+#actions {
+  height: 50vh;
+  width: 25vw;
+  
+  background: green;
+}
+
 #temperature-overlay {  
-  z-index: 10;  
   position: absolute;
+  z-index: 10;
   height: 50vh; 
   width: 50vw; 
+  
   background-color: red;
   pointer-events: none;
 }
@@ -43,9 +61,16 @@ body {
   margin-right: 5px;
   width: 50px;
   height: 50px;
+  
   background-color: azure;
 }
 
+
+
+#train {
+  position: absolute;
+  z-index: 2;
+}
 
 #game-over-message  {
   z-index: 10000;
@@ -56,6 +81,7 @@ body {
   font-size: 80pt;
   align-content: center;
   text-align: center;
+  
   background-color: red;
   color: white;
 }

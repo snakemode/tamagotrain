@@ -40,3 +40,12 @@ class somethingBuff {
     }
   } 
 }
+
+
+if (typeof(module) != 'undefined') {
+  module.exports = {
+    cleanBuff,
+    ventBuff,
+    somethingBuff
+  };
+}
