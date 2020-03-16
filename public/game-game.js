@@ -25,13 +25,19 @@ class Game {
     current.ticks++;
             
     const failureConditions = [
-      (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
-      (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0),
+      {
+        condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
+        message: "It's too hot!"
+      },
+      {
+        condition: (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0),
+        message: "Your platforms are too full!"
+      }
     ];
     
-    for (let condition of failureConditions) {
-      if(condition(current)) {
-        current.endGame();
+    for (let c of failureConditions) {
+      if(c.condition(current)) {
+        current.endGame(c.message);
         break;
       }
     }    
@@ -48,11 +54,34 @@ class Game {
      
     for (let platform of current.platforms) {
       platform.tick();
-    }    
+    }
   }
   
-  endGame() {
+  isGameOver(current) {
+    const failureConditions = [
+      {
+        condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
+        message: "It's too hot!"
+      },
+      {
+        condition: (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0),
+        message: "Your platforms are too full!"
+      }
+    ];
+    
+    for (let c of failureConditions) {
+      if(c.condition(current)) {
+        current.endGame(c.message);
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
+  endGame(message) {
     this.status = "ended";
+    this["game-over-message"] = message;
     clearInterval(this.tickInterval);    
   }
   

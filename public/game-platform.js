@@ -45,6 +45,8 @@ class Platform {
     
     this.buffs = this.buffs.filter(b => !b.completed);
     this.contents = this.contents.filter(b => !b.completed);
+    this.capacity = this.capacity <= 0 ? 0 : this.capacity;
+    this.hygiene = this.hygiene <= 0 ? 0 : this.hygiene;
   }
 }
 

@@ -2,6 +2,7 @@ class cleanBuff {
   constructor() {
     this.ticks = 5;
     this.completed = false;
+    this.hasTicked = false;
   }
   
   tick(platform) {
@@ -9,13 +10,15 @@ class cleanBuff {
     
     platform.hygiene += 0.5;
     
-    if (this.ticks == 5) {
+    if (!this.hasTicked) {
       this.removeOneVom(platform); // Only on first tick
     }
     
     if (this.ticks == 0) {
       this.completed = true;
     }
+    
+    this.hasTicked = true;
   }
   
   removeOneVom(platform) {
