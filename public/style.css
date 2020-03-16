@@ -65,7 +65,13 @@ body {
   background-color: azure;
 }
 
+.ventBuff {
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fbuff-vent.png?v=1584357454303');
+}
 
+.cleanBuff {
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fbuff-clean.png?v=1584357682802');
+}
 
 #train {
   position: absolute;

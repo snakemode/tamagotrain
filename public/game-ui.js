@@ -71,7 +71,7 @@ function renderBuffs(currentGameState, previousGameState) {
       const ele = document.createElement("div");
       ele.innerHTML = buff.constructor.name[0].toUpperCase() + " " + buff.ticks;
       ele.classList.add("buff");
-      ele.classList.add(constructor.name);
+      ele.classList.add(buff.constructor.name);
       buffTing.appendChild(ele);
       
     }
