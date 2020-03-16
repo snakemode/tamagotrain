@@ -5,7 +5,7 @@ class Platform {
     this.id = id;
     this.ticks = 0;
     
-    this.capacity = 100;
+    this.capacity = 40;
     this.temperature = 15;
     this.hygiene = 100;
     

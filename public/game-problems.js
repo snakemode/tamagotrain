@@ -1,9 +1,4 @@
-class PlatformOccupier {
-  constructor() {
-  }
-}
-
-class Problem extends PlatformOccupier {
+class Problem {
   constructor() {
   }
 }
@@ -23,7 +18,15 @@ class Poop extends Problem {
 class Vomit extends Problem {
   constructor() {
     super();
+    this.ticks = 0;
+    console.log("Barf!");
   }
+  
+  tick(platform) {
+    this.ticks++;
+    this.hygiene -= 0.5;
+  }  
+  
 }
 
 class PassedOutTraveller extends Problem {

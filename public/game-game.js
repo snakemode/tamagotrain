@@ -26,6 +26,7 @@ class Game {
             
     const failureConditions = [
       (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
+      (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0),
     ];
     
     for (let condition of failureConditions) {
