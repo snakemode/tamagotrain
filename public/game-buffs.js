@@ -7,10 +7,13 @@ class cleanBuff {
   tick(platform) {
     this.ticks--;
     
-    platform.hygiene += 0.3;   
-    this.removeOneVom(platform);
+    platform.hygiene += 0.5;
     
-    if (this.ticks <= 0) {
+    if (this.ticks == 5) {
+      this.removeOneVom(platform); // Only on first tick
+    }
+    
+    if (this.ticks == 0) {
       this.completed = true;
     }
   }
