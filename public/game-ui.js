@@ -90,7 +90,7 @@ function renderGameStatus(currentGameState, previousGameState) {
 
 function renderTemperature(currentGameState, previousGameState) {
   
-  const anyPlatformTooHot = currentGameState.platforms.filter(p => p.temperature > 25).length > 0;
+  const anyPlatformTooHot = currentGameState.platforms.filter(p => p.temperature > 30).length > 0;
   const overlay = document.getElementById("temperatureOverlay");
   if (anyPlatformTooHot) {
     overlay.classList.remove("hide");

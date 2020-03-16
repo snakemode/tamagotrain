@@ -7,16 +7,22 @@ class cleanBuff {
   tick(platform) {
     this.ticks--;
     
-    for (let index in platform.contents) {
-      const entity = platform.content[index];
-      if (entity.constructor.name === "Vomit") {
-        platform.contents = platform.contents.filter(item => item !== valueToRemove)
-      }
-    }
+    platform.hygiene += 0.3;   
+    this.removeOneVom(platform);
     
-    if (this.ticks == 0) {
+    if (this.ticks <= 0) {
       this.completed = true;
     }
+  }
+  
+  removeOneVom(platform) {
+    for (let index in platform.contents) {
+      const entity = platform.contents[index];
+      if (entity.constructor.name === "Vomit") {
+        platform.contents = platform.contents.filter(item => item !== entity);
+        return;
+      }
+    }    
   }
 }
 
