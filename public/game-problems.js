@@ -1,5 +1,8 @@
+/* globals uuidv4 */
+
 class Problem {
   constructor() {
+    this.id = uuidv4();
   }
 }
 
@@ -23,7 +26,6 @@ class Vomit extends Problem {
   }
   
   tick(platform) {
-    console.log("Barf ticked");
     this.ticks++;
     platform.hygiene -= 0.5;
   }  
@@ -38,5 +40,5 @@ class PassedOutTraveller extends Problem {
 
 
 if (typeof(module) != 'undefined') {
-  module.exports = { PlatformOccupier, Problem, Fire, Poop, Vomit }
+  module.exports = { Problem, Fire, Poop, Vomit }
 }

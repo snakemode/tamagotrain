@@ -6,6 +6,14 @@ class cleanBuff {
   
   tick(platform) {
     this.ticks--;
+    
+    for (let index in platform.contents) {
+      const entity = platform.content[index];
+      if (entity.constructor.name === "Vomit") {
+        platform.contents = platform.contents.filter(item => item !== valueToRemove)
+      }
+    }
+    
     if (this.ticks == 0) {
       this.completed = true;
     }

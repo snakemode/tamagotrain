@@ -7,6 +7,7 @@ class Traveller {
     this.completed = false;
     this.distanceFromExit = 14;
     this.isVommy = false;
+    this.isPassedOut = false;
   }
   
   tick(platform) {
@@ -16,7 +17,10 @@ class Traveller {
     }
     
     this.ticks++;
-    this.distanceFromExit--;
+    
+    if (!this.isPassedOut) {
+      this.distanceFromExit--; 
+    }
     
     platform.temperature += 0.1;
     
@@ -24,6 +28,13 @@ class Traveller {
     if (!this.isVommy && platform.temperature >= 30 && Math.random() >= 0.9) { 
       platform.contents.push(new Vomit());
       this.isVommy = true;
+      return;
+    }
+    
+    // Maybe I'm going to pass out? 10% chance if the platform is rancid.
+    if (!this.isPassedOut && platform.hygiene <= 30 && Math.random() >= 0.9) {      
+      this.isPassedOut = true;
+      return;
     }
     
   } 
