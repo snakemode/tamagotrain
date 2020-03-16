@@ -42,16 +42,16 @@
       <div id="playfield">
         <div id="buffs">
         </div>
-        
-        <div id="platform-stats">
-          
-        </div>
       </div>
 
       <div id="actions" style="background: green; height: 50vh; width: 25vw;">
         <button onclick="game.queueAction('clean', 'platformId1');">Clean</button>
         <button onclick="game.queueAction('vent', 'platformId1');">Vent</button>
         <button onclick="game.queueAction('something', 'platformId1');">Something</button>
+        
+        <div id="platform-stats">
+          Platform Temperature: <span data-bind-platform-0-temperature></span>
+        </div>
       </div>
 
     </div>

@@ -39,12 +39,25 @@ function renderLabels(currentGameState, previousGameState) {
     "platforms": currentGameState.platforms
   };
 
-  const props = Object.getOwnPropertyNames(viewModel);
+  let props = Object.getOwnPropertyNames(viewModel);
   for (let prop of props) {
     const selector = "[data-bind-" + prop + "]";
     const elements = [...document.querySelectorAll(selector)];
     for(let ele of elements) {
       ele.innerHTML = viewModel[prop];
+    }
+  }
+    
+  for (let index in currentGameState.platforms) {
+    const platform = currentGameState.platforms[index];
+    
+    props = Object.getOwnPropertyNames(platform);
+    for (let prop of props) {
+      const selector = "[data-bind-platform-" + index + "-" + prop + "]";
+      const elements = [...document.querySelectorAll(selector)];
+      for(let ele of elements) {
+        ele.innerHTML = platform[prop];
+      }
     }
   }
 }
@@ -72,7 +85,10 @@ function renderGameStatus(currentGameState, previousGameState) {
 }
 
 function renderTemperature(currentGameState, previousGameState) {
-  if (currentGameState.platforms[0].temperature < 25) {
+  
+  const anyPlatformTooHot = currentGameState.platforms.filter(p => p.temperature < 25).length > 0;
+  
+  if (anyPlatformTooHot) {
     if (this.temperatureOverlay) {
       this.temperatureOverlay.remove(); 
     }
