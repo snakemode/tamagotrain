@@ -6,13 +6,14 @@ class Train {
   
   tick(platform) {
     this.ticks++;
-    
+    platform.temperature += 0.5;
+
     if(this.hasTicked) {
-      return; // Only run logic once.
+      return; // Only run the next bit once
     }
     
     // Code that can generate problems on the platform goes here.
-    platform.temperature += 5;
+    
     
     this.hasTicked = true;
   }
