@@ -23,8 +23,9 @@ class Vomit extends Problem {
   }
   
   tick(platform) {
+    console.log("Barf ticked");
     this.ticks++;
-    this.hygiene -= 0.5;
+    platform.hygiene -= 0.5;
   }  
   
 }
