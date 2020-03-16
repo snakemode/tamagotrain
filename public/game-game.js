@@ -23,24 +23,12 @@ class Game {
   
   tick(current) {    
     current.ticks++;
-            
-    const failureConditions = [
-      {
-        condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
-        message: "It's too hot!"
-      },
-      {
-        condition: (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0),
-        message: "Your platforms are too full!"
-      }
-    ];
-    
-    for (let c of failureConditions) {
-      if(c.condition(current)) {
-        current.endGame(c.message);
-        break;
-      }
-    }    
+         
+    const gameOverCheck = this.isGameOver(current);
+    if (gameOverCheck.gameover) {
+      current.endGame(gameOverCheck.message);
+      return;
+    }   
     
     // handle user input actions    
     while (current.queuedActions.length > 0) {
@@ -59,33 +47,29 @@ class Game {
   
   isGameOver(current) {
     const failureConditions = [
-      {
-        condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0),
-        message: "It's too hot!"
-      },
-      {
-        condition: (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0),
-        message: "Your platforms are too full!"
-      }
+      { condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0), message: "It's too hot!" },
+      { condition: (g) => (g.platforms.filter(p => p.temperature <= -20).length > 0), message: "It's too cold!" },
+      { condition: (g) => (g.platforms.filter(p => p.hygiene <= 0).length > 0), message: "It's too disgusting!" },
+      { condition: (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0), message: "Your platforms are too full!" }
     ];
     
     for (let c of failureConditions) {
-      if(c.condition(current)) {
-        current.endGame(c.message);
-        return true;
+      if (c.condition(current)) {
+        return { gameover: true, message: c.message };
       }
     }
     
-    return false;
+    return { gameover: false };
   }
   
   endGame(message) {
     this.status = "ended";
-    this["game-over-message"] = message;
+    this.gameovermsg = message;
     clearInterval(this.tickInterval);    
   }
   
   queueAction(key, target) {
+    if (this.queuedActions.length >= 3) return; // Rate limit actions to 3 per tick.  
     this.queuedActions.push({ key: key, target: target })
   }
   

@@ -7,8 +7,8 @@ class GameUi {
     
     this._lastState = JSON.stringify(initialState);    
     this._renderingFunctions = [
-      renderGameStatus,
       renderLabels,
+      renderGameStatus,
       renderTemperature,
       renderPlatform,
       renderContents,
@@ -40,7 +40,8 @@ function renderLabels(currentGameState, previousGameState) {
     "game": currentGameState,
     "ticks": currentGameState.ticks,
     "total-platforms": currentGameState.platforms.length,
-    "platforms": currentGameState.platforms
+    "platforms": currentGameState.platforms,
+    "gameovermsg": currentGameState.gameovermsg
   };
 
   let props = Object.getOwnPropertyNames(viewModel);
@@ -85,6 +86,7 @@ function renderBuffs(currentGameState, previousGameState) {
 function renderGameStatus(currentGameState, previousGameState) {
   if (currentGameState.status !== "ended") return;  
   document.getElementById("game-over-message").classList.remove("hide");
+  
   return -1;
 }
 
