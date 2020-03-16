@@ -130,13 +130,11 @@ function renderTravellers(currentGameState, previousGameState) {
   for (let platform of currentGameState.platforms) {        
     const travellers = platform.contents.filter(c => c.constructor.name === "Traveller");
     
-    for (let traveller of travellers) {        
-        const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftraveller.gif?v=1584358875511"; // traveller        
-        const image = document.createElement("img");
-        image.setAttribute("src", src);
-        image.setAttribute("data-traveller", "");
-        image.classList.add("traveller");
-        this.platform.appendChild(image);      
+    for (let traveller of travellers) {       
+        const travellerIcon = document.createElement("div");
+        travellerIcon.classList.add("traveller");
+        travellerIcon.setAttribute("data-traveller-id", traveller.id);
+        this.platform.appendChild(travellerIcon);      
     }    
   }    
 }

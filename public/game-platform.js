@@ -31,8 +31,6 @@ class Platform {
       if (msg.departed) {
         this.hasTrain = false;
         this.train = null;
-        console.log("departed");
-        console.log(this.train);
       }      
     }
     
@@ -46,6 +44,7 @@ class Platform {
     }
     
     this.buffs = this.buffs.filter(b => !b.completed);
+    this.contents = this.contents.filter(b => !b.completed);
   }
 }
 

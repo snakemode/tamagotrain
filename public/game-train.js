@@ -1,7 +1,8 @@
-/* globals Traveller */
+/* globals Traveller, uuidv4 */
 
 class Train {
   constructor() {
+    this.id = uuidv4();
     this.ticks = 0;
     this.hasTicked = false;
   }
