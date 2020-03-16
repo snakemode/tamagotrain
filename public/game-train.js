@@ -1,3 +1,5 @@
+/* globals Traveller */
+
 class Train {
   constructor() {
     this.ticks = 0;
@@ -14,6 +16,8 @@ class Train {
     
     // Code that can generate problems on the platform goes here.
     
+    const passenger = new Traveller();
+    platform.contents.push(passenger);
     
     this.hasTicked = true;
   }
