@@ -11,7 +11,7 @@ class GameUi {
       renderLabels,
       renderTemperature,
       renderPlatform,
-      renderTravellers,
+      renderContents,
       renderBuffs
     ];
   }
@@ -116,18 +116,20 @@ function renderPlatform(currentGameState, previousGameState) {
   }    
 }
 
-function renderTravellers(currentGameState, previousGameState) {
+function renderContents(currentGameState, previousGameState) {
   this.platform.innerHTML = "";
   
-  for (let platform of currentGameState.platforms) {        
-    const travellers = platform.contents.filter(c => c.constructor.name === "Traveller");
+  for (let platform of currentGameState.platforms) {
     
-    for (let traveller of travellers) {       
-        const travellerIcon = document.createElement("div");
-        travellerIcon.classList.add("traveller");
-        travellerIcon.setAttribute("data-traveller-id", traveller.id);
-        this.platform.appendChild(travellerIcon);      
+    for (let entity of platform.contents) {
+          
+      const entityIcon = document.createElement("div");
+      entityIcon.classList.add("entity");
+      entityIcon.classList.add(entity.constructor.name.toLowerCase());
+      entityIcon.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
+      this.platform.appendChild(entityIcon);      
     }    
+   
   }    
 }
 
