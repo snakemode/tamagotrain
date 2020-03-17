@@ -1,7 +1,7 @@
 /* globals uuidv4, Vomit */
 if (typeof(module) != 'undefined') {  
-  var uuidv4 = require("./game-_utils").uuidv4;
-  var vomit = require("./game-problems").Vomit;
+  uuidv4 = require("./game-_utils").uuidv4;
+  Vomit = require("./game-problems").Vomit;
 }
 
 class Traveller {

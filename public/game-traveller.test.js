@@ -17,13 +17,16 @@ describe("Traveller", () => {
   });
   
   it("tick - increments tick counter", () => {
-    traveller.tick(platform);    
+    traveller.tick(platform);  
+
     expect(traveller.ticks).toBe(1);
   });
 
   it("tick - reduces distance from exit by one", () => {
     traveller.distanceFromExit = 100;
+
     traveller.tick(platform);    
+
     expect(traveller.distanceFromExit).toBe(99);
   });
 
@@ -32,6 +35,7 @@ describe("Traveller", () => {
     traveller.isPassedOut = true;
 
     traveller.tick(platform);    
+
     expect(traveller.distanceFromExit).toBe(100);
   });
 
@@ -43,6 +47,44 @@ describe("Traveller", () => {
     traveller.tick(platform); 
 
     expect(platform.contents[0].constructor.name).toBe("Vomit");
+    expect(traveller.isVommy).toBe(true);
+  });
+
+  it("tick - doesn't vomit 90% of the time", () => {
+    platform.temperature = 30;
+    traveller.random = () => 0.5;
+
+    traveller.tick(platform); 
+
+    expect(traveller.isVommy).toBe(false);
+  });
+
+  it("tick - doesn't vomit if they already have", () => {
+    platform.temperature = 30;
+    traveller.random = () => 1.0;
+
+    traveller.tick(platform);  // voms
+    traveller.tick(platform);  // doesn't vom
+
+    expect(platform.contents.length).toBe(1); // only one vom
+  });
+
+  it("tick - passes out 10 percent of the time when hygiene is poor", () => {
+    platform.hygiene = 30;
+    traveller.random = () => 1.0;
+
+    traveller.tick(platform); 
+
+    expect(traveller.isPassedOut).toBe(true);
+  });
+
+  it("tick - doesn't pass out 90% of the time when hygiene is poor", () => {
+    platform.hygiene = 30;
+    traveller.random = () => 0.5;
+
+    traveller.tick(platform); 
+
+    expect(traveller.isPassedOut).toBe(false);
   });
 
 });
