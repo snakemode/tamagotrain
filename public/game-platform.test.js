@@ -18,9 +18,9 @@ describe("Platform", () => {
   
   it("tick - triggers each occupying element to act", () => {
     platform.hygiene = 100;
-    platform.occupancy.push(new SomethingThatDecreasesHygieneByOne());
+    platform.contents.push(new SomethingThatDecreasesHygieneByOne());
     
-    platform.tick();    
+    platform.tick(); 
     
     expect(platform.hygiene).toBe(99);
   });
@@ -29,7 +29,7 @@ describe("Platform", () => {
 
 
 class SomethingThatDecreasesHygieneByOne {
-  onTick(platform) { 
+  tick(platform) { 
     console.log("ontick");
     platform.hygiene--; 
   }
