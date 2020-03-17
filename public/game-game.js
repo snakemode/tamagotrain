@@ -80,5 +80,5 @@ class Game {
 }
 
 if (typeof(module) != 'undefined') {
-  module.exports = { Game }
+  module.exports = Game;
 }

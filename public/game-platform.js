@@ -52,5 +52,5 @@ class Platform {
 
 
 if (typeof(module) != 'undefined') {
-  module.exports = { Platform }
+  module.exports = Platform;
 }
