@@ -43,7 +43,7 @@ class Platform {
       if (!item) continue;      
       if (item["tick"]) {
         item.tick(this);
-      }      
+      }
     }
     
     this.buffs = this.buffs.filter(b => !b.completed);
