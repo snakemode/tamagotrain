@@ -1,6 +1,6 @@
 /* globals Platform */
 if (typeof(module) != 'undefined') {
-  var Platform = require("./game-platform");
+  Platform = require("./game-platform");
 }
 
 class Game {

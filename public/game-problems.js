@@ -1,4 +1,7 @@
 /* globals uuidv4 */
+if (typeof(module) != 'undefined') {  
+  var uuidv4 = require("./game-_utils").uuidv4;
+}
 
 class Problem {
   constructor() {

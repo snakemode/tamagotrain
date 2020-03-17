@@ -4,7 +4,7 @@ describe("Platform", () => {
     
   let platform;
   beforeEach(() => {
-    platform = new Platform();
+    platform = new Platform("platformId1");
   });
   
   it("can be constructed", () => {

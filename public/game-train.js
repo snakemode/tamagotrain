@@ -1,7 +1,7 @@
-/* globals Traveller, uuidv4 */
+/* globals uuidv4, Traveller */
 if (typeof(module) != 'undefined') {
-  var uuidv4 = require("./game-_utils").uuidv4;
-  var Traveller = require("./game-traveller");
+  uuidv4 = require("./game-_utils").uuidv4;
+  Traveller = require("./game-traveller");
 }
 
 class Train {

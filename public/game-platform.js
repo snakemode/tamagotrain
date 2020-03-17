@@ -1,6 +1,6 @@
 /* globals Train */
 if (typeof(module) != 'undefined') {
-  var Train = require("./game-train");
+  Train = require("./game-train");
 }
 
 class Platform {
