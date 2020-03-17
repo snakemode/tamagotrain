@@ -20,36 +20,37 @@ class Game {
   }
   
   start() {
-    this.tickInterval = setInterval(() => this.tick(this), 1 * 1000);
+    this.tickInterval = setInterval(() => {
+      this.tick();
+    }, 1 * 1000);
     this.status = "active";
   }
   
-  tick(current) {    
-    current = current || this.constructor.name === "Game" ? this : null;
-    current.ticks++;
+  tick() {
+    this.ticks++;
          
-    const gameOverCheck = this.isGameOver(current);
+    const gameOverCheck = this.isGameOver(this);
     if (gameOverCheck.gameover) {
-      current.endGame(gameOverCheck.message);
+      this.endGame(gameOverCheck.message);
       return;
     }   
     
     // handle user input actions    
-    while (current.queuedActions.length > 0) {
-      const action = current.queuedActions.shift();
+    while (this.queuedActions.length > 0) {
+      const action = this.queuedActions.shift();
       const handlerName = action.key + "Buff";
-      const target = current.platforms.filter(p => p.id == action.target)[0];
+      const target = this.platforms.filter(p => p.id == action.target)[0];
       
       const instance = (Function('return new ' + handlerName))();
       target.buffs.push(instance);
     }    
      
-    for (let platform of current.platforms) {
+    for (let platform of this.platforms) {
       platform.tick();
     }
   }
   
-  isGameOver(current) {
+  isGameOver() {    
     const failureConditions = [
       { condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0), message: "It's too hot!" },
       { condition: (g) => (g.platforms.filter(p => p.temperature <= -20).length > 0), message: "It's too cold!" },
@@ -58,7 +59,7 @@ class Game {
     ];
     
     for (let c of failureConditions) {
-      if (c.condition(current)) {
+      if (c.condition(this)) {
         return { gameover: true, message: c.message };
       }
     }
