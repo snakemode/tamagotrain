@@ -1,4 +1,4 @@
-class GameUi {
+ class GameUi {
   
   constructor(initialState) {
     this.playfield = document.getElementById("playfield");
