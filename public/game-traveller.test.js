@@ -21,4 +21,10 @@ describe("Traveller", () => {
     expect(traveller.ticks).toBe(1);
   });
 
+  it("tick - reduces distance from exit by one", () => {
+    traveller.distanceFromExit = 100;
+    traveller.tick(platform);    
+    expect(traveller.distanceFromExit).toBe(99);
+  });
+
 });
