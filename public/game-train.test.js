@@ -1,10 +1,11 @@
-const Train = require("./game-train.js");
+const Train = require("./game-train");
+const Platform = require("./game-platform");
 
 describe("Train", () => {
     
   let train, platform;
   beforeEach(() => {
-    platform = new platform("platformId1");
+    platform = new Platform("platformId1");
     train = new Train();
   });
   
@@ -15,5 +16,11 @@ describe("Train", () => {
   it("tick - increments tick counter", () => {
     train.tick(platform);    
     expect(train.ticks).toBe(1);
+  });  
+
+  it("tick - increase temperature by 0.5", () => {
+    platform.temperature = 10;    
+    train.tick(platform);    
+    expect(train.ticks).toBe(10.5);
   });  
 });

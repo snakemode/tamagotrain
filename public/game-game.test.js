@@ -1,5 +1,5 @@
-const Game = require("./game-game.js");
-const Platform = require("./game-platform.js");
+const Game = require("./game-game");
+const Platform = require("./game-platform");
 
 describe("Game", () => {
   
