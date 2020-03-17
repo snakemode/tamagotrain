@@ -1,6 +1,7 @@
 /* globals uuidv4, Vomit */
 if (typeof(module) != 'undefined') {  
   var uuidv4 = require("./game-_utils").uuidv4;
+  var vomit = require("./game-problems").Vomit;
 }
 
 class Traveller {
@@ -28,19 +29,20 @@ class Traveller {
     platform.temperature += 0.1;
     
     // Am I gonna vom? 10% chance when too hot
-    if (!this.isVommy && platform.temperature >= 30 && Math.random() >= 0.9) { 
+    if (!this.isVommy && platform.temperature >= 30 && this.random() >= 0.9) { 
       platform.contents.push(new Vomit());
       this.isVommy = true;
       return;
     }
     
     // Maybe I'm going to pass out? 10% chance if the platform is rancid.
-    if (!this.isPassedOut && platform.hygiene <= 30 && Math.random() >= 0.9) {      
+    if (!this.isPassedOut && platform.hygiene <= 30 && this.random() >= 0.9) {      
       this.isPassedOut = true;
       return;
-    }
-    
-  } 
+    }    
+  }
+
+  random() { return Math.random(); }
 }
 
 if (typeof(module) != 'undefined') {

@@ -35,4 +35,14 @@ describe("Traveller", () => {
     expect(traveller.distanceFromExit).toBe(100);
   });
 
+  it("tick - vomits 10 percent of the time when temp >= 30 and hasn't already vommed", () => {
+    platform.temperature = 30;
+    traveller.isVommy = false;
+    traveller.random = () => 1.0;
+
+    traveller.tick(platform); 
+
+    expect(platform.contents[0].constructor.name).toBe("Vomit");
+  });
+
 });
