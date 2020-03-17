@@ -27,4 +27,12 @@ describe("Traveller", () => {
     expect(traveller.distanceFromExit).toBe(99);
   });
 
+  it("tick - doesn't get closer to the exit when passed out", () => {
+    traveller.distanceFromExit = 100;
+    traveller.isPassedOut = true;
+
+    traveller.tick(platform);    
+    expect(traveller.distanceFromExit).toBe(100);
+  });
+
 });
