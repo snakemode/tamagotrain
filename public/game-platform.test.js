@@ -77,6 +77,15 @@ describe("Platform", () => {
     expect(platformOccpier.ticks).toBe(1);
   });
 
+  it("tick - doesn't crash if a platform occupier isn't tickable", () => {
+    const platformOccpier = { ticks: 0 };
+    platform.contents.push(platformOccpier);
+    
+    platform.tick(); 
+    
+    expect(platformOccpier.ticks).toBe(0);
+  });
+
   it("tick - removes any completed buff", () => {
     platform.buffs.push({ completed: true });
     
@@ -91,6 +100,16 @@ describe("Platform", () => {
     platform.tick(); 
     
     expect(platform.contents.length).toBe(0);
+  });
+
+  it("tick - prevents key stats from becoming invalid", () => {
+    platform.hygiene = -100
+    platform.capacity = -100;
+
+    platform.tick(); 
+
+    expect(platform.hygiene).toBe(0);
+    expect(platform.capacity).toBe(0);
   });
   
 });
