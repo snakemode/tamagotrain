@@ -1,4 +1,8 @@
 /* globals Traveller, uuidv4 */
+if (typeof(module) != 'undefined') {
+  var uuidv4 = require("./game-_utils").uuidv4;
+  var Traveller = require("./game-traveller");
+}
 
 class Train {
   constructor() {
@@ -24,5 +28,5 @@ class Train {
 }
 
 if (typeof(module) != 'undefined') {
-  module.exports = { Train }
+  module.exports = Train;
 }

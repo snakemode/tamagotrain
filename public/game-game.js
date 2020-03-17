@@ -1,4 +1,7 @@
 /* globals Platform */
+if (typeof(module) != 'undefined') {
+  var Platform = require("./game-platform");
+}
 
 class Game {
   constructor(stationName, platformIds) {
@@ -22,6 +25,7 @@ class Game {
   }
   
   tick(current) {    
+    current = current || this.constructor.name === "Game" ? this : null;
     current.ticks++;
          
     const gameOverCheck = this.isGameOver(current);

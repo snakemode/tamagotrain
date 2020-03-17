@@ -4,3 +4,7 @@ function uuidv4() {
     return v.toString(16);
   });
 }
+
+if (typeof(module) != 'undefined') {
+  module.exports = { uuidv4 };
+}
