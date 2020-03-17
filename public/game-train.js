@@ -13,7 +13,7 @@ class Train {
     platform.temperature += 0.5;
     platform.contents.push(new Traveller());
 
-    if(this.hasTicked) {
+    if (this.hasTicked) {
       return; // Only run the next bit once
     }
     
