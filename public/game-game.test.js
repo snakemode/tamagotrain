@@ -25,5 +25,32 @@ describe("Game", () => {
     
     expect(platform.ticks).toBe(1);
   });
+
+  it("tick - triggers game over when temperature too hot", () => {
+    game.platforms[0].temperature = 50;
+    game.tick();
+    expect(game.status).toBe("ended");
+  });
+
+  it("tick - triggers game over when temperature too cold", () => {
+    game.platforms[0].temperature = -50;
+    game.tick();
+    expect(game.status).toBe("ended");
+  });
+
+  it("tick - triggers game over when unhygienic", () => {
+    game.platforms[0].hygiene = 0;
+    game.tick();
+    expect(game.status).toBe("ended");
+  });
+
+  it("tick - triggers game over when platform is full", () => {
+    game.platforms[0].contents.push({});
+    game.platforms[0].contents.push({});
+    game.platforms[0].capacity = 1;
+    game.tick();
+    expect(game.status).toBe("ended");
+  });
+  
   
 });
