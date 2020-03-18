@@ -52,5 +52,14 @@ describe("Game", () => {
     expect(game.status).toBe("ended");
   });
   
+  it("queueAction queues appropriate buff up", () => {
+    game.queueAction({ key: "clean", target: "platformId1" });
+    
+    game.tick();
+
+    expect(game.buffs.length).toBe(1);
+    expect(game.buffs[0].constructor.name).toBe("cleanBuff");
+  });
+  
   
 });

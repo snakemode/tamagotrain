@@ -1,3 +1,9 @@
+/* globals */
+if (typeof(module) != 'undefined') {
+  Buff = require("./game-buffs");
+}
+
+
 class cleanBuff {
   constructor() {
     this.ticks = 5;
