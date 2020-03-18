@@ -64,7 +64,7 @@ describe("Game", () => {
   it("queueAction unknown buff, raises error", () => {
     game.queueAction("not_a_real_buff", "platformId1");
     
-    game.tick();
+    expect(() => game.tick()).toThrow("foo");
   });
   
   
