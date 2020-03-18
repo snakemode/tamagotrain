@@ -53,12 +53,18 @@ describe("Game", () => {
   });
   
   it("queueAction queues appropriate buff up", () => {
-    game.queueAction({ key: "clean", target: "platformId1" });
+    game.queueAction("clean", "platformId1");
     
     game.tick();
 
-    expect(game.buffs.length).toBe(1);
-    expect(game.buffs[0].constructor.name).toBe("cleanBuff");
+    expect(game.platforms[0].buffs.length).toBe(1);
+    expect(game.platforms[0].buffs[0].constructor.name).toBe("cleanBuff");
+  });
+  
+  it("queueAction unknown buff, raises error", () => {
+    game.queueAction("not_a_real_buff", "platformId1");
+    
+    game.tick();
   });
   
   

@@ -44,10 +44,7 @@ class Game {
       
       let instance;
       if (Buffs !== "undefined") {
-        const propNames = Object.getOwnPropertyNames(Buffs);
-        const propName = propNames.filter(p => p.startsWith(action.key))[0];
-        console.log(Buffs);
-        instance = Buffs[propName]();
+        instance = new Buffs[handlerName]();
       } else {
         instance = (Function('return new ' + handlerName))();
       }
