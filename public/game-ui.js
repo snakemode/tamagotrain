@@ -136,10 +136,8 @@ function renderContents(currentGameState, previousGameState) {
 }
 
 function renderArrivingTrain() {
-  const src = "https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.png?v=1584286890941"; // train  
-  const trainImage = document.createElement("img");
+  const trainImage = document.createElement("div");
   trainImage.setAttribute("id", "active-train");
-  trainImage.setAttribute("src", src);
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");
   this.track.appendChild(trainImage);
