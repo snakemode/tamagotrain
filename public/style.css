@@ -1,31 +1,32 @@
 /* this file is loaded by index.html and styles the page */
 
-* {
+html {
   box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {
   font-family: sans-serif;
-  padding: 0 0 0 0;
-  border: 0 0 0 0;
-  margin: 0 0 0 0;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+main {
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 #timetable {
-  height: 50vh;
-  width: 25vw;
-  
   background: red;
-
 }
 
 #playfield {
-  overflow: hidden;
-  height: 50vh; 
-  width: 50vw;
-  
-  background: grey; 
-  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftube.png?v=1584284017645');
+  overflow: hidden;  
+  background-color: #d3cc7e;
 }
 
 #track {
@@ -33,16 +34,25 @@ body {
 }
 
 #platform {
+  position: relative;
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: #a7a5b3;
+  border-top: 10px solid white;
+}
+
+#platform:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 8px; 
+  top: 10px;
+  background-color: #faea38;
 }
 
 #actions {
-  height: 50vh;
-  width: 25vw;
-  
   background: green;
 }
 
@@ -87,7 +97,6 @@ body {
 
 #train {
   position: absolute;
-  z-index: 2;
 }
 
 #game-over-message  {

@@ -30,30 +30,18 @@
     
     Ticks: <span data-bind-ticks></span><br>
     Total Platforms: <span data-bind-total-platforms></span><br>
-    
-    <div id="game-over-message" class="hide">
-      GAME OVER
-      <span data-bind-gameovermsg></span>
-    </div>
-
-    <div id="temperatureOverlay" class="hide">        
-    </div>
-    
-    <div style="display: flex;">
-      
-      <div id="timetable">
-        timetable
+    <main>
+      <div id="game-over-message" class="hide">
+        GAME OVER
+        <span data-bind-gameovermsg></span>
       </div>
-      
+      <div id="temperatureOverlay" class="hide"></div>      
+      <div id="timetable">timetable</div>
       <div id="playfield">
-        <div id="buffs">
-        </div>
-        <div id="track">
-        </div>
-        <div id="platform">
-        </div>
+        <div id="buffs"></div>
+        <div id="track"></div>
+        <div id="platform"></div>
       </div>
-
       <div id="actions">
         <button onclick="game.queueAction('clean', 'platformId1');">Clean</button>
         <button onclick="game.queueAction('vent', 'platformId1');">Vent</button>
@@ -64,11 +52,9 @@
           Platform Hygiene    : <span data-bind-platform-0-hygiene></span><br>
         </div>
       </div>
-
-    </div>
-    
-    
-    <button onclick="ably.fakeTrainArrival('KINGS CROSS')">Fake Train Arrival</button><button onclick="ably.fakeTrainDeparture('KINGS CROSS')">Fake Train Departure</button>
+    </main>
+    <button onclick="ably.fakeTrainArrival('KINGS CROSS')">Fake Train Arrival</button>
+    <button onclick="ably.fakeTrainDeparture('KINGS CROSS')">Fake Train Departure</button>
     
   </body>
 </html>
