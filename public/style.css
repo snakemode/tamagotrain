@@ -42,13 +42,12 @@ main {
   background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.svg?v=1584553484134) no-repeat left bottom;
   background-size: 700px;
   transform: translate(100%, -90px);
-  animation: slide 0.5s forwards;
+  animation: slide 2s forwards;
 }
 
 @keyframes slide {
-  0% {transform: translate(100%, -90px); },
-  10% { transform: translate(10px, -90px); },
-  90% {transform: translate(10%, -90px); }
+  30% { transform: translate(10px, -90px); }
+  70% {transform: translate(10px, -90px); }
   100% { transform: translate(-100%, -90px); }
 }
 
