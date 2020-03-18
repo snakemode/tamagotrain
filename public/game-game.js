@@ -1,6 +1,7 @@
-/* globals Platform */
+/* globals Platform, Buffs */
 if (typeof(module) != 'undefined') {
   Platform = require("./game-platform");
+  Buffs = require("./game-buffs");
 }
 
 class Game {
@@ -41,7 +42,16 @@ class Game {
       const handlerName = action.key + "Buff";
       const target = this.platforms.filter(p => p.id == action.target)[0];
       
-      const instance = (Function('return new ' + handlerName))();
+      let instance;
+      if (Buffs !== "undefined") {
+        const propNames = Object.getOwnPropertyNames(Buffs);
+        const propName = propNames.filter(p => p.startsWith(action.key))[0];
+        console.log(Buffs);
+        instance = Buffs[propName]();
+      } else {
+        instance = (Function('return new ' + handlerName))();
+      }
+
       target.buffs.push(instance);
     }    
      
