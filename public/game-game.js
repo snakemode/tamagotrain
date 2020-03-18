@@ -55,7 +55,7 @@ class Game {
       { condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0), message: "It's too hot!" },
       { condition: (g) => (g.platforms.filter(p => p.temperature <= -20).length > 0), message: "It's too cold!" },
       { condition: (g) => (g.platforms.filter(p => p.hygiene <= 0).length > 0), message: "It's too disgusting!" },
-      { condition: (g) => (g.platforms.filter(p => p.contents >= p.capacity).length > 0), message: "Your platforms are too full!" }
+      { condition: (g) => (g.platforms.filter(p => p.contents.length >= p.capacity).length > 0), message: "Your platforms are too full!" }
     ];
     
     for (let c of failureConditions) {
