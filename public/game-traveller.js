@@ -32,14 +32,13 @@ class Traveller {
     if (!this.isVommy && platform.temperature >= 30 && this.random() >= 0.9) { 
       platform.contents.push(new Vomit());
       this.isVommy = true;
-      return;
     }
     
     // Maybe I'm going to pass out? 10% chance if the platform is rancid.
     if (!this.isPassedOut && platform.hygiene <= 30 && this.random() >= 0.9) {      
       this.isPassedOut = true;
       return;
-    }    
+    }
   }
 
   random() { return Math.random(); }
