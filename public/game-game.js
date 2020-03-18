@@ -40,20 +40,24 @@ class Game {
     while (this.queuedActions.length > 0) {
       const action = this.queuedActions.shift();
       const handlerName = action.key + "Buff";
-      const target = this.platforms.filter(p => p.id == action.target)[0];
-      
-      let instance;
-      if (Buffs !== "undefined") {
-        instance = new Buffs[handlerName]();
-      } else {
-        instance = (Function('return new ' + handlerName))();
-      }
-
-      target.buffs.push(instance);
+      const target = this.platforms.filter(p => p.id == action.target)[0];      
+      target.buffs.push(this.createBuff(handlerName));
     }    
      
     for (let platform of this.platforms) {
       platform.tick();
+    }
+  }
+
+  createBuff(name) {   
+    try { 
+      if (Buffs !== "undefined") {
+        return new Buffs[name]();
+      } else {
+        return (Function('return new ' + name))();
+      }
+    } catch (ex) {
+      throw "Could not find handler called " + name;
     }
   }
   
