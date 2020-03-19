@@ -48,6 +48,21 @@ main {
   animation: slide 2s forwards;
 }
 
+.slideOut {  
+  animation: slideout 2s forwards;
+}
+
+@keyframes slide {
+  30%  { transform: translate(10px, -90px);  }
+  100%  { transform: translate(10px, -90px);  }
+}
+
+@keyframes slideout {
+  0%   { transform: translate(10px, -90px);  }
+  100% { transform: translate(-110%, -90px); }
+}
+
+
 .tunnel {
   position: absolute;
   height: 70%;
@@ -56,11 +71,6 @@ main {
   background-size: contain;
 }
 
-@keyframes slide {
-  30%  { transform: translate(10px, -90px);  }
-  70%  { transform: translate(10px, -90px);  }
-  #100% { transform: translate(-110%, -90px); }
-}
 
 #platform {
   position: relative;

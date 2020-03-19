@@ -109,11 +109,15 @@ function renderPlatform(currentGameState, previousGameState) {
     const platformAsOfLastTick = previousGameState.platforms.filter(p => p.id == platform.id)[0];
 
     if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
+      const existing = document.getElementById("active-train");
+      if(existing) {
+        existing.remove();
+      }
       renderArrivingTrain();
     } 
 
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
-      document.getElementById("active-train").remove();
+      document.getElementById("active-train").classList.add("slideOut");
     }      
   }    
 }
