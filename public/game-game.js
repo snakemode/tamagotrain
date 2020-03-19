@@ -57,7 +57,6 @@ class Game {
         return (Function('return new ' + name))();
       }
     } catch (ex) {
-      console.log(ex);
       throw "Could not find handler called " + name;
     }
   }

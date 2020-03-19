@@ -59,7 +59,7 @@ main {
 @keyframes slide {
   30%  { transform: translate(10px, -90px);  }
   70%  { transform: translate(10px, -90px);  }
-  100% { transform: translate(-110%, -90px); }
+  #100% { transform: translate(-110%, -90px); }
 }
 
 #platform {
