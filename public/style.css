@@ -31,11 +31,11 @@ main {
 }
 
 #track {
-  width: calc(100% - 20px);
+  width: calc(100% - 15px);
   height: 160px;
-  margin-left: 20px;
+  margin-left: 15px;
   background-color: #d3cc7e;
-
+  overflow: hidden;
 }
 
 .train {
@@ -52,6 +52,7 @@ main {
   position: absolute;
   height: 100%;
   width: 40px;
+  margin-left: 15px;
   background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftunnel.svg?v=1584635762721);
   background-size: contain;
 }
@@ -59,7 +60,7 @@ main {
 @keyframes slide {
   30%  { transform: translate(10px, -90px);  }
   70%  { transform: translate(10px, -90px);  }
-  100% { transform: translate(-100%, -90px); }
+  100% { transform: translate(-110%, -90px); }
 }
 
 #platform {
