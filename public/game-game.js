@@ -51,12 +51,13 @@ class Game {
 
   createBuff(name) {   
     try { 
-      if (Buffs !== "undefined") {
+      if (typeof(Buffs) !== "undefined") {
         return new Buffs[name]();
       } else {
         return (Function('return new ' + name))();
       }
     } catch (ex) {
+      console.log(ex);
       throw "Could not find handler called " + name;
     }
   }
