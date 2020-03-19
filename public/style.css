@@ -83,6 +83,13 @@ main {
   background-color: #faea38;
 }
 
+.turnstyle {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  height: 80px;
+}
+
 #actions {
   background: green;
 }
