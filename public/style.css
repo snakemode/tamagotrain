@@ -35,7 +35,8 @@ main {
   width: calc(100% - 15px);
   height: 160px;
   margin-left: 15px;
-  background-color: #d3cc7e;
+  background: rgb(211,204,126);
+  background: linear-gradient(180deg, rgba(211,204,126,1) 70%, rgba(24,44,42,1) 30%);
   overflow: hidden;
 }
 
@@ -51,9 +52,8 @@ main {
 
 .tunnel {
   position: absolute;
-  height: 100%;
+  height: 70%;
   width: 40px;
-  margin-left: 15px;
   background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftunnel.svg?v=1584637517924) no-repeat;
   background-size: contain;
 }
