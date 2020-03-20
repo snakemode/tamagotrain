@@ -574,16 +574,17 @@ function renderPlatform(currentGameState, previousGameState) {
 
 function renderContents(currentGameState, previousGameState) {
 
-    
-
-  if (entity.completed) {
-    gfxTarget.remove();
-    console.log("Remove me!");
-    continue;
-  } 
-
   for (let platform of currentGameState.platforms) {
     
+    const previousPlatform = previousGameState.platforms.filter(p => p.id == platform.id)[0];
+    const previousContentIds = previousPlatform.contents.map(state => state.id);
+    const currentContentIds = platform.contents.map(state => state.id);
+    const removedItems = previousContentIds.filter(cid => currentContentIds.indexOf(cid) == -1);
+
+    for (let removedEntity of removedItems) {      
+      document.getElementById(removedEntity.id).remove();
+    }
+
     for (let entity of platform.contents) {
      
       let gfxTarget = document.getElementById(entity.id);
@@ -598,8 +599,8 @@ function renderContents(currentGameState, previousGameState) {
         
         const spawnPoint = rand(0, platform.spawnPoints.length);
         const spawnPointLocation = platform.spawnPoints[spawnPoint];
-        const spawnX = spawnPointLocation.x; //rand(spawnPointLocation.x - spawnPointLocation.give, spawnPointLocation.x + spawnPointLocation.give);
-               
+        const spawnX = spawnPointLocation.x;
+
         gfxTarget.style.position = "absolute";
         
         if (!entity.x) {
