@@ -181,3 +181,19 @@ main {
   background-size: contain;
   z-index: 1;
 }
+
+.traveller0 {
+    background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrainagotchi.gif?v=1584659771420');
+}
+
+.traveller1 {
+    background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fblobi.gif?v=1584714913877');
+}
+
+.traveller2 {
+    background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fkitty.gif?v=1584717567046');
+}
+
+.traveller3 {
+    background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpika2.gif?v=1584717580600');
+}

@@ -145,6 +145,8 @@ function renderContents(currentGameState, previousGameState) {
         gfxTarget.setAttribute('id', entity.id + "-gfx");
         gfxTarget.classList.add("entity");
         gfxTarget.classList.add(entity.constructor.name.toLowerCase());
+        gfxTarget.classList.add(entity.constructor.name.toLowerCase() + Math.floor(Math.random() * 4));
+        console.log(Math.floor(Math.random() * 4));
         gfxTarget.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
         
         const spawnPoint = rand(0, platform.spawnPoints.length);
