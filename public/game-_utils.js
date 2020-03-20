@@ -6,5 +6,7 @@ function uuidv4() {
 }
 
 if (typeof(module) != 'undefined') {
-  module.exports = { uuidv4 };
+  module.exports = {
+    uuidv4
+  };
 }

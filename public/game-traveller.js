@@ -24,7 +24,7 @@ class Traveller {
     this.ticks++;
     
     if (!this.isPassedOut) {
-      this.distanceFromExit--; 
+      this.walkTowards(null);
     }
     
     platform.temperature += 0.1;
@@ -50,6 +50,7 @@ class Traveller {
     
     if (this.isDisplayed) { // Has been rendered
       this.y += unitSize;
+      console.log("walking");
       
     }
     
