@@ -395,7 +395,6 @@ class Traveller {
     if (!this.isVommy && platform.temperature >= 35 && random >= 0.9) { 
       platform.contents.push(new Vomit(this.x, this.y));
       this.isVommy = true;
-      console.log("Vommed");
       return;
     }
     
