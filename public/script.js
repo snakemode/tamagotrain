@@ -249,13 +249,13 @@ class Platform {
         
     this.unprocessedMessages = [];  
     this.spawnPoints = [
-      { x: 120,  y: -25, give: 10 },
-      { x: 350,  y: -25, give: 10 }  
+      { x: 120, y: -25, give: 5 },
+      { x: 350, y: -25, give: 5 }  
     ];
     
     this.exits = [
-      { x: 0,  y: 200 },
-      { x: 450,  y: 200 }
+      { x: -100,    y: 400 },
+      { x: 800,  y: 400 }
     ];    
   }
   
@@ -404,6 +404,7 @@ class Traveller {
     // Maybe I'm going to pass out? 10% chance if the platform is rancid.
     if (!this.isPassedOut && platform.hygiene <= 30 && this.random() >= 0.9) {      
       this.isPassedOut = true;
+      console.log("oh no ill");
       return;
     }
   }
@@ -574,15 +575,13 @@ function renderPlatform(currentGameState, previousGameState) {
 
 function renderContents(currentGameState, previousGameState) {
 
-  //this.platform.innerHTML = "";
-  
   for (let platform of currentGameState.platforms) {
     
     for (let entity of platform.contents) {
      
       let gfxTarget = document.getElementById(entity.id + "-gfx");
       
-      if(!gfxTarget) {        
+      if (!gfxTarget) {        
         gfxTarget = document.createElement("div");
         
         gfxTarget.setAttribute('id', entity.id + "-gfx");
@@ -592,11 +591,12 @@ function renderContents(currentGameState, previousGameState) {
         
         const spawnPoint = rand(0, platform.spawnPoints.length);
         const spawnPointLocation = platform.spawnPoints[spawnPoint];
+        const spawnX = spawnPointLocation.x; //rand(spawnPointLocation.x - spawnPointLocation.give, spawnPointLocation.x + spawnPointLocation.give);
                
         gfxTarget.style.position = "absolute";
         
         if (!entity.x) {
-        entity.x = spawnPointLocation.x;
+          entity.x = spawnX;
         }
 
         if (!entity.y) {
@@ -612,10 +612,8 @@ function renderContents(currentGameState, previousGameState) {
       gfxTarget.setAttribute("data-y", entity.y);
 
       gfxTarget.style.left = entity.x + "px";
-      gfxTarget.style.top = entity.y + "px";
-      
-    }    
-   
+      gfxTarget.style.top = entity.y + "px";      
+    }
   }    
 }
 
