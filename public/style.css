@@ -104,7 +104,7 @@ main {
 
 #temperatureOverlay {  
   position: absolute;
-  z-index: 10;
+  z-index: 1000;
   left: 25vw;
   height: 50vh; 
   width: 50vw; 
@@ -165,11 +165,11 @@ main {
 }
 
 .vomit {
-  position: relative;
   width: 50px;
   height: 50px;
+  border: 15px solid red;
   background: none;
-  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fbarf-text-vector-art_k19235660.jpg?v=1584364646367');
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fvom.gif?v=1584721956405');
 }
 
 div[data-ispassedout="true"] {
@@ -177,7 +177,6 @@ div[data-ispassedout="true"] {
 }
 
 .traveller {
-  position: relative;
   width: 50px;
   height: 50px;
   background: none;

@@ -395,6 +395,7 @@ class Traveller {
     if (!this.isVommy && platform.temperature >= 35 && random >= 0.9) { 
       platform.contents.push(new Vomit(this.x, this.y));
       this.isVommy = true;
+      console.log("Vommed");
       return;
     }
     
@@ -600,8 +601,6 @@ function renderContents(currentGameState, previousGameState) {
         const spawnX = spawnPointLocation.x;
 
         gfxTarget.style.position = "absolute";
-        gfxTarget.style.zIndex = 99 - index;
-
         
         if (!entity.x) {
           entity.x = spawnX;
@@ -625,7 +624,9 @@ function renderContents(currentGameState, previousGameState) {
       gfxTarget.setAttribute("data-y", entity.y);
 
       gfxTarget.style.left = entity.x + "px";
-      gfxTarget.style.top = entity.y + "px";      
+      gfxTarget.style.top = entity.y + "px";
+      gfxTarget.style.zIndex = entity.y;
+      
     }
   }    
 }
