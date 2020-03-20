@@ -12,6 +12,7 @@ class Traveller {
     this.distanceFromExit = 14;
     this.isVommy = false;
     this.isPassedOut = false;
+    this.isDisplayed = false;
   }
   
   tick(platform) {
@@ -39,6 +40,43 @@ class Traveller {
       this.isPassedOut = true;
       return;
     }
+  }
+  
+  walkTowards(location) {
+    
+    this.distanceFromExit--;
+    
+    const unitSize = 5;
+    
+    if (this.isDisplayed) { // Has been rendered
+      this.y += unitSize;
+      
+    }
+    
+    /*
+      const stepSize = rand(1, 5);
+          
+      const possibleSteps = [
+        { x: entity.x - stepSize, y: entity.y - stepSize },
+        { x: entity.x - stepSize, y: entity.y },
+        { x: entity.x - stepSize, y: entity.y + stepSize },
+        { x: entity.x, y: entity.y - stepSize },
+        { x: entity.x, y: entity.y + stepSize },            
+        { x: entity.x + stepSize, y: entity.y - stepSize },
+        { x: entity.x + stepSize, y: entity.y },
+        { x: entity.x + stepSize, y: entity.y + stepSize },
+      ];
+
+      const currentManhattenDistance = manhattenDistance({x: entity.x, y: entity.y}, target);
+      const closerSteps = possibleSteps.filter(s => manhattenDistance(s, target) < currentManhattenDistance);
+
+      if (closerSteps.length > 0) {          
+        const stepChoice = rand(0, closerSteps.length);          
+        const selectedStep = closerSteps[stepChoice];
+        entity.x = selectedStep.x;
+        entity.y = selectedStep.y;
+      }    
+    */
   }
 
   random() { return Math.random(); }

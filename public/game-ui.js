@@ -138,18 +138,31 @@ function renderContents(currentGameState, previousGameState) {
     for (let entity of platform.contents) {
      
       let gfxTarget = document.getElementById(entity.id + "-gfx");
-      if(!gfxTarget) {            
-        gfxTarget = document.createElement("div");    
-        entityIcon.setAttribute('id', entity.id + "-gfx");
-        entityIcon.classList.add("entity");
-        entityIcon.classList.add(entity.constructor.name.toLowerCase());
-        entityIcon.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
-        this.platform.appendChild(entityIcon);
+      
+      if(!gfxTarget) {        
+        gfxTarget = document.createElement("div");
+        
+        gfxTarget.setAttribute('id', entity.id + "-gfx");
+        gfxTarget.classList.add("entity");
+        gfxTarget.classList.add(entity.constructor.name.toLowerCase());
+        gfxTarget.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
+        
+        const spawnPoint = rand(0, platform.spawnPoints.length);
+        const spawnPointLocation = platform.spawnPoints[spawnPoint];
+               
+        gfxTarget.style.position = "absolute";
+        entity.x = spawnPointLocation.x;
+        entity.y = spawnPointLocation.y;
+        entity.isDisplayed = true;
+        
+        this.platform.appendChild(gfxTarget);
       }
       
-      
-      entityIcon.setAttribute("data-x", entity.x);          
-      entityIcon.setAttribute("data-y", entity.y);
+      gfxTarget.setAttribute("data-x", entity.x);          
+      gfxTarget.setAttribute("data-y", entity.y);
+
+      gfxTarget.style.left = entity.x + "px";
+      gfxTarget.style.top = entity.y + "px";
       
     }    
    

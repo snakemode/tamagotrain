@@ -17,7 +17,15 @@ class Platform {
     this.contents = [];
     this.buffs = [];
         
-    this.unprocessedMessages = [];
+    this.unprocessedMessages = [];  
+    this.spawnPoints = [
+      { x: 120,  y: -25 },
+      { x: 350, y: -25 }  
+    ];
+    
+    this.exits = [
+      { x: 500,  y: 400 }
+    ];    
   }
   
   tick() {
