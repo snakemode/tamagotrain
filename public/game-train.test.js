@@ -1,5 +1,5 @@
-const Train = require("./game-train");
-const Platform = require("./game-platform");
+const Train = require("./game-train").Train;
+const Platform = require("./game-platform").Platform;
 
 describe("Train", () => {
     

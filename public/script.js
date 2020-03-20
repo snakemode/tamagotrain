@@ -315,22 +315,17 @@ class Poop extends Problem {
 }
 
 class Vomit extends Problem {
-  constructor() {
+  constructor(x, y) {
     super();
     this.ticks = 0;
+    this.x = x;
+    this.y = y;
   }
   
   tick(platform) {
     this.ticks++;
     platform.hygiene -= 0.5;
   }  
-  
-}
-
-class PassedOutTraveller extends Problem {
-  constructor() {
-    super();
-  }
 }
 
 // train.js
@@ -396,7 +391,7 @@ class Traveller {
     
     // Am I gonna vom? 10% chance when too hot
     if (!this.isVommy && platform.temperature >= 30 && this.random() >= 0.9) { 
-      platform.contents.push(new Vomit());
+      platform.contents.push(new Vomit(this.x, this.y));
       this.isVommy = true;
     }
     
@@ -595,6 +590,7 @@ function renderContents(currentGameState, previousGameState) {
         gfxTarget.setAttribute('id', entity.id);
         gfxTarget.classList.add("entity");
         gfxTarget.classList.add(entity.constructor.name.toLowerCase());
+        gfxTarget.classList.add(entity.constructor.name.toLowerCase() + Math.floor(Math.random() * 4));
         gfxTarget.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
         
         const spawnPoint = rand(0, platform.spawnPoints.length);
@@ -602,6 +598,8 @@ function renderContents(currentGameState, previousGameState) {
         const spawnX = spawnPointLocation.x;
 
         gfxTarget.style.position = "absolute";
+        gfxTarget.style.z-index = "absolute";
+
         
         if (!entity.x) {
           entity.x = spawnX;
@@ -656,6 +654,18 @@ function startGame() {
   setInterval(() => ui.draw(game), 1000 / 30);
 }
 
-startGame();
-
-
+// Jest
+if (typeof(module) != 'undefined') {
+  module.exports = {
+    cleanBuff,
+    ventBuff,
+    somethingBuff,
+    Game,
+    GameUI,
+    Traveller,
+    Platform,
+    Train
+  };
+} else {
+  startGame();
+}

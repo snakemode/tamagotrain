@@ -1,5 +1,5 @@
-const Traveller = require("./game-traveller");
-const Platform = require("./game-platform");
+const Traveller = require("./game-traveller").Traveller;
+const Platform = require("./game-platform").Platform;
 
 describe("Traveller", () => {
     
