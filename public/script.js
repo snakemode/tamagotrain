@@ -1,3 +1,7 @@
+// ALL THE CODE IS IN HERE NOT THE INDIVIDUAL FILES
+// GLITCH WAS RATE LIMITING
+// INDIVIDUAL FILES NEED UPDATING LATER
+
 // game-_utils.js
 
 function uuidv4() {
@@ -5,6 +9,10 @@ function uuidv4() {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
+}
+
+function rand(start, end) {
+  return Math.floor(Math.random() * end) + start;
 }
 
 // ably-connector.js
@@ -246,7 +254,8 @@ class Platform {
     ];
     
     this.exits = [
-      { x: 500,  y: 400 }
+      { x: 0,  y: 200 },
+      { x: 450,  y: 200 }
     ];    
   }
   
@@ -357,15 +366,23 @@ class Traveller {
    constructor() {
     this.id = uuidv4();
     this.ticks = 0;
+    this.ticksFromExit = 14;
+
     this.completed = false;
-    this.distanceFromExit = 14;
     this.isVommy = false;
     this.isPassedOut = false;
     this.isDisplayed = false;
+    this.hasPickedExit = false;
   }
   
   tick(platform) {
-    if (this.distanceFromExit == 0) {
+
+    if (!this.hasPickedExit) {
+      const exitIndex = rand(0, platform.exits.length);
+      this.selectedExit = platform.exits[exitIndex];
+    }
+
+    if (this.ticksFromExit == 0) {
       platform.temperature -= 1;
       this.completed = true;
     }
@@ -373,7 +390,8 @@ class Traveller {
     this.ticks++;
     
     if (!this.isPassedOut) {
-      this.walkTowards(null);
+      this.ticksFromExit--;
+      this.walkTowards(this.selectedExit);
     }
     
     platform.temperature += 0.1;
@@ -391,40 +409,36 @@ class Traveller {
     }
   }
   
-  walkTowards(location) {
+  walkTowards(target) {
     
-    this.distanceFromExit--;
-    
-    const unitSize = 5;
+    const unitSize = 15;
+    const manhattenDistance = (p1, p2) => Math.abs(p2.x - p1.x) + Math.abs(p2.y - p1.y);
     
     if (this.isDisplayed) { // Has been rendered
-      this.y += unitSize;      
-    }
-    
-    /*
-      const stepSize = rand(1, 5);
+
+      const stepSize = 1 * unitSize;
           
       const possibleSteps = [
-        { x: entity.x - stepSize, y: entity.y - stepSize },
-        { x: entity.x - stepSize, y: entity.y },
-        { x: entity.x - stepSize, y: entity.y + stepSize },
-        { x: entity.x, y: entity.y - stepSize },
-        { x: entity.x, y: entity.y + stepSize },            
-        { x: entity.x + stepSize, y: entity.y - stepSize },
-        { x: entity.x + stepSize, y: entity.y },
-        { x: entity.x + stepSize, y: entity.y + stepSize },
+        { x: this.x - stepSize, y: this.y - stepSize },
+        { x: this.x - stepSize, y: this.y },
+        { x: this.x - stepSize, y: this.y + stepSize },
+        { x: this.x, y: this.y - stepSize },
+        { x: this.x, y: this.y + stepSize },            
+        { x: this.x + stepSize, y: this.y - stepSize },
+        { x: this.x + stepSize, y: this.y },
+        { x: this.x + stepSize, y: this.y + stepSize },
       ];
 
-      const currentManhattenDistance = manhattenDistance({x: entity.x, y: entity.y}, target);
+      const currentManhattenDistance = manhattenDistance({x: this.x, y: this.y}, target);
       const closerSteps = possibleSteps.filter(s => manhattenDistance(s, target) < currentManhattenDistance);
 
       if (closerSteps.length > 0) {          
         const stepChoice = rand(0, closerSteps.length);          
         const selectedStep = closerSteps[stepChoice];
-        entity.x = selectedStep.x;
-        entity.y = selectedStep.y;
-      }    
-    */
+        this.x = selectedStep.x;
+        this.y = selectedStep.y;
+      }
+    }
   }
 
   random() { return Math.random(); }
@@ -589,7 +603,7 @@ function renderContents(currentGameState, previousGameState) {
         if (!entity.y) {
           entity.y = spawnPointLocation.y;
         }
-        
+
         entity.isDisplayed = true;
         
         this.platform.appendChild(gfxTarget);
