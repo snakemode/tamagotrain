@@ -254,8 +254,8 @@ class Platform {
     ];
     
     this.exits = [
-      { x: -100,    y: 400 },
-      { x: 800,  y: 400 }
+      { x: 0,  y: 200 },
+      { x: 500,  y: 200 }
     ];    
   }
   
@@ -371,12 +371,11 @@ class Traveller {
     this.isVommy = false;
     this.isPassedOut = false;
     this.isDisplayed = false;
-    this.hasPickedExit = false;
   }
   
   tick(platform) {
 
-    if (!this.hasPickedExit) {
+    if (!this.selectedExit) {
       const exitIndex = rand(0, platform.exits.length);
       this.selectedExit = platform.exits[exitIndex];
     }
@@ -575,16 +574,24 @@ function renderPlatform(currentGameState, previousGameState) {
 
 function renderContents(currentGameState, previousGameState) {
 
+    
+
+  if (entity.completed) {
+    gfxTarget.remove();
+    console.log("Remove me!");
+    continue;
+  } 
+
   for (let platform of currentGameState.platforms) {
     
     for (let entity of platform.contents) {
      
-      let gfxTarget = document.getElementById(entity.id + "-gfx");
+      let gfxTarget = document.getElementById(entity.id);
       
       if (!gfxTarget) {        
         gfxTarget = document.createElement("div");
         
-        gfxTarget.setAttribute('id', entity.id + "-gfx");
+        gfxTarget.setAttribute('id', entity.id);
         gfxTarget.classList.add("entity");
         gfxTarget.classList.add(entity.constructor.name.toLowerCase());
         gfxTarget.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
@@ -606,6 +613,11 @@ function renderContents(currentGameState, previousGameState) {
         entity.isDisplayed = true;
         
         this.platform.appendChild(gfxTarget);
+      }    
+
+      const props = Object.getOwnPropertyNames(entity);
+      for (let prop of props) {        
+        gfxTarget.setAttribute("data-" + prop, entity[prop]); 
       }
       
       gfxTarget.setAttribute("data-x", entity.x);          

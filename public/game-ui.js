@@ -138,8 +138,8 @@ function renderContents(currentGameState, previousGameState) {
     for (let entity of platform.contents) {
      
       let gfxTarget = document.getElementById(entity.id + "-gfx");
-      
-      if(!gfxTarget) {        
+
+      if (!gfxTarget) {        
         gfxTarget = document.createElement("div");
         
         gfxTarget.setAttribute('id', entity.id + "-gfx");
@@ -157,15 +157,19 @@ function renderContents(currentGameState, previousGameState) {
         
         this.platform.appendChild(gfxTarget);
       }
+
+      if (this.completed) {
+        gfxTarget.remove();
+        console.log("Remove me!");
+        continue;
+      }
       
       gfxTarget.setAttribute("data-x", entity.x);          
       gfxTarget.setAttribute("data-y", entity.y);
 
       gfxTarget.style.left = entity.x + "px";
-      gfxTarget.style.top = entity.y + "px";
-      
-    }    
-   
+      gfxTarget.style.top = entity.y + "px";      
+    }   
   }    
 }
 
