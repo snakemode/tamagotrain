@@ -82,13 +82,12 @@ class cleanBuff {
   }
   
   tick(platform) {
-    this.ticks--;
-    
+    this.ticks--;    
     platform.hygiene += 0.5;
     
-    if (!this.hasTicked) {
+    // if (!this.hasTicked) {
       this.removeOneVom(platform); // Only on first tick
-    }
+    // }
     
     if (this.ticks == 0) {
       this.completed = true;
