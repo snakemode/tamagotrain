@@ -581,8 +581,8 @@ function renderContents(currentGameState, previousGameState) {
     const currentContentIds = platform.contents.map(state => state.id);
     const removedItems = previousContentIds.filter(cid => currentContentIds.indexOf(cid) == -1);
 
-    for (let removedEntity of removedItems) {      
-      document.getElementById(removedEntity.id).remove();
+    for (const removedEntityId of removedItems) {    
+      document.getElementById(removedEntityId).remove();
     }
 
     for (let entity of platform.contents) {
@@ -636,9 +636,6 @@ function renderArrivingTrain() {
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");
   this.track.appendChild(trainImage);
-
-  // play css animation to slide train in
-
 }
 
 
@@ -660,3 +657,5 @@ function startGame() {
 }
 
 startGame();
+
+
