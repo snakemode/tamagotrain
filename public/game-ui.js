@@ -33,6 +33,9 @@
   }
 }
 
+function rand(start, end) {
+  return Math.floor(Math.random() * end) + start;
+}
 
 function renderLabels(currentGameState, previousGameState) {
   
@@ -123,17 +126,31 @@ function renderPlatform(currentGameState, previousGameState) {
 }
 
 function renderContents(currentGameState, previousGameState) {
+  const spawnPoints = [
+    { x: 20, y: 0 },
+    { x: 120, y: 0 }  
+  ];
+  
   this.platform.innerHTML = "";
   
   for (let platform of currentGameState.platforms) {
     
     for (let entity of platform.contents) {
-          
-      const entityIcon = document.createElement("div");
-      entityIcon.classList.add("entity");
-      entityIcon.classList.add(entity.constructor.name.toLowerCase());
-      entityIcon.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
-      this.platform.appendChild(entityIcon);      
+     
+      let gfxTarget = document.getElementById(entity.id + "-gfx");
+      if(!gfxTarget) {            
+        gfxTarget = document.createElement("div");    
+        entityIcon.setAttribute('id', entity.id + "-gfx");
+        entityIcon.classList.add("entity");
+        entityIcon.classList.add(entity.constructor.name.toLowerCase());
+        entityIcon.setAttribute(`data-${entity.constructor.name.toLowerCase()}-id`, entity.id);
+        this.platform.appendChild(entityIcon);
+      }
+      
+      
+      entityIcon.setAttribute("data-x", entity.x);          
+      entityIcon.setAttribute("data-y", entity.y);
+      
     }    
    
   }    

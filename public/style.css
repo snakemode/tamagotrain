@@ -74,8 +74,8 @@ main {
 
 #platform {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
+  left: 0px;
+  right: 0px;
   width: 100%;
   height: 200px;
   background-color: #a7a5b3;
@@ -159,6 +159,8 @@ main {
 }
 
 .entity {
+  width: 10px;
+  height: 10px;
   background: red;
 }
 
