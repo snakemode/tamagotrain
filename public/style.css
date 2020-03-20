@@ -172,6 +172,10 @@ main {
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fbarf-text-vector-art_k19235660.jpg?v=1584364646367');
 }
 
+div[data-ispassedout="true"] {
+  border: 10px solid red;
+}
+
 .traveller {
   position: relative;
   width: 50px;

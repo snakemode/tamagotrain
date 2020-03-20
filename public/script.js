@@ -580,7 +580,7 @@ function renderContents(currentGameState, previousGameState) {
       document.getElementById(removedEntityId).remove();
     }
 
-    for (let entity of platform.contents) {
+    for (let [index, entity] of platform.contents.entries()) {
      
       let gfxTarget = document.getElementById(entity.id);
       
@@ -598,7 +598,7 @@ function renderContents(currentGameState, previousGameState) {
         const spawnX = spawnPointLocation.x;
 
         gfxTarget.style.position = "absolute";
-        gfxTarget.style.z-index = "absolute";
+        gfxTarget.style.zIndex = 99 - index;
 
         
         if (!entity.x) {
@@ -616,7 +616,7 @@ function renderContents(currentGameState, previousGameState) {
 
       const props = Object.getOwnPropertyNames(entity);
       for (let prop of props) {        
-        gfxTarget.setAttribute("data-" + prop, entity[prop]); 
+        gfxTarget.setAttribute("data-" + prop.toLowerCase(), entity[prop]); 
       }
       
       gfxTarget.setAttribute("data-x", entity.x);          
