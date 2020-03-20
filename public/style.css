@@ -96,6 +96,7 @@ main {
   bottom: 0px;
   left: 0;
   height: 120px;
+  z-index: 5999;
 }
 
 #actions {
@@ -104,7 +105,7 @@ main {
 
 #temperatureOverlay {  
   position: absolute;
-  z-index: 1000;
+  z-index: 9000;
   left: 25vw;
   height: 50vh; 
   width: 50vw; 
@@ -167,9 +168,8 @@ main {
 .vomit {
   width: 50px;
   height: 50px;
-  border: 15px solid red;
   background: none;
-  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fvom.gif?v=1584721956405');
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fvom.gif?v=1584722365457');
 }
 
 div[data-ispassedout="true"] {
@@ -177,8 +177,8 @@ div[data-ispassedout="true"] {
 }
 
 .traveller {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background: none;
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrainagotchi.gif?v=1584659771420');
   background-size: contain;

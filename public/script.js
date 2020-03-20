@@ -625,7 +625,11 @@ function renderContents(currentGameState, previousGameState) {
 
       gfxTarget.style.left = entity.x + "px";
       gfxTarget.style.top = entity.y + "px";
-      gfxTarget.style.zIndex = entity.y;
+      gfxTarget.style.zIndex = 1000 + entity.y;
+
+      if (entity.constructor.name == "Vomit") {        
+        gfxTarget.style.zIndex = 20;
+      }
       
     }
   }    
