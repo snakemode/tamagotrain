@@ -249,8 +249,8 @@ class Platform {
         
     this.unprocessedMessages = [];  
     this.spawnPoints = [
-      { x: 120,  y: -25 },
-      { x: 350, y: -25 }  
+      { x: 120,  y: -25, give: 10 },
+      { x: 350,  y: -25, give: 10 }  
     ];
     
     this.exits = [
@@ -318,7 +318,6 @@ class Vomit extends Problem {
   constructor() {
     super();
     this.ticks = 0;
-    console.log("Barf!");
   }
   
   tick(platform) {
