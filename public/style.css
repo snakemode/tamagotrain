@@ -107,8 +107,8 @@ main {
   position: absolute;
   z-index: 9000;
   left: 25vw;
-  height: 50vh; 
-  width: 50vw; 
+  height: 600px; 
+  width: 100%; 
   
   background-color: red;
   pointer-events: none;
