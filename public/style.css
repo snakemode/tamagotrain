@@ -105,7 +105,6 @@ main {
 }
 
 #temperatureOverlay {
-  display:block!important;
   position: absolute;
   z-index: 9000;
   width: 100%;
@@ -117,9 +116,9 @@ main {
 #temperatureOverlay span {
   display: block;
   width: 100%;
-  height: 5px;
+  height: 3px;
   margin-bottom: 5px;
-  backdrop-filter: blur(4px) grayscale(20%);
+  backdrop-filter: blur(1px) grayscale(10%);
 }
 
 #buffs {
