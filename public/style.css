@@ -16,6 +16,7 @@ body {
 main {
   max-width: 500px;
   margin: 0 auto;
+  position: relative;
 }
 
 #timetable {
@@ -103,12 +104,12 @@ main {
   background: green;
 }
 
-#temperatureOverlay {  
+#temperatureOverlay {
+  display:block!important;
   position: absolute;
   z-index: 9000;
-  left: 25vw;
-  height: 600px; 
-  width: 100%; 
+  width: 100%;
+  height: 100%;
   backdrop-filter: blur(4px) grayscale(20%);
   pointer-events: none;
 }
