@@ -575,11 +575,14 @@ function renderPlatform(currentGameState, previousGameState) {
     }
     
     if (platform.train && platform.train.doorState == "opening") {      
-      const svg = document.querySelectorAll("[data-train-image]")[0];
-      const leftDoors = svg.querySelectorAll(`[data-left-door]`);
+      const svgs = document.querySelectorAll("[data-train-image]");
 
-      for (let door of leftDoors) {
-        door.classList.add("doorsOpenLeft")
+      for (const svg of svgs) {
+        const leftDoors = svg.querySelectorAll(`[data-left-door]`);
+
+        for (let door of leftDoors) {
+          door.classList.add("doorsOpenLeft")
+        }
       }
     }
 
