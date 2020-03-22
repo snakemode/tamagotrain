@@ -581,7 +581,7 @@ function renderPlatform(currentGameState, previousGameState) {
     }
     
     if (platform.train && platform.train.doorState == "opening") {      
-      const svg = document.getElementById("trainSvg");
+      const svg = document.querySelectorAll(`[data-train-image]`)[0];
       const leftDoors = svg.querySelectorAll(`[data-left-door]`);
 
       for (let door of leftDoors) {
@@ -591,7 +591,7 @@ function renderPlatform(currentGameState, previousGameState) {
     }
 
     if (platform.train && platform.train.doorState == "closing") {      
-      const svg = document.getElementById("trainSvg");
+      const svg = document.querySelectorAll(`[data-train-image]`)[0];
       const leftDoors = svg.querySelectorAll(`[data-left-door]`);
 
       for (let door of leftDoors) {
@@ -669,12 +669,14 @@ function renderContents(currentGameState, previousGameState) {
 }
 
 function renderArrivingTrain() {
-  const svg = document.getElementById("trainSvg");
+  const svg = document.querySelectorAll(`[data-train-image]`)[0];
   const trainImage = document.createElement("div");
   trainImage.setAttribute("id", "active-train");
-  trainImage.style.background = "url('data:image/svg+xml;utf8,<svg>"+ svg.innerHTML +"</svg>')";
+  trainImage.setAttribute("background-image", "data:image/svg+xml;utf8," + svg.outerHTML);
+
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");
+  console.log(trainImage);
   this.track.appendChild(trainImage);
 }
 
