@@ -49,14 +49,14 @@ main {
   animation: slide 2s forwards;
 }
 
-.doorsOpen {
+.doorsOpenLeft {
   animation: openDoorLeft 2s 1 forwards;
 }
 
 @keyframes openDoorLeft {
   0%   { transform: scaleX(1);  }
   50%  { transform: scaleX(0.9);  }
-  100% { transform: scaleX(0.8); }
+  100% { transform: scaleX(0.7); }
 }
 
 
