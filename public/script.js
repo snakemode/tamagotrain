@@ -273,9 +273,10 @@ class Platform {
       if (msg.arrived) {
         this.hasTrain = true;
         this.train = new Train();
-      }      
+      }
             
       if (msg.departed) {
+        this.train.onDeparture();
         this.hasTrain = false;
         this.train = null;
       }      
@@ -350,13 +351,19 @@ class Train {
     if (this.ticks ==  0) {
       this.doorState = "opening";
     }
+    if (this.ticks >  10) {
+      this.doorState = "closing";
+    }
 
-    if (this.ticks > 1) {
+    if (this.ticks > 1 && this.ticks <= 10) {
       platform.contents.push(new Traveller());
     }
 
     this.ticks++;
     this.hasTicked = true;    
+  }
+
+  onDeparture() {
   }
 }
 
@@ -581,20 +588,24 @@ function renderPlatform(currentGameState, previousGameState) {
         const leftDoors = svg.querySelectorAll(`[data-left-door]`);
 
         for (let door of leftDoors) {
-          door.classList.add("hide")
+          door.classList.add("doorsOpenLeft")
         }
       }
     }
 
-    if (platform.train && platform.train.doorState == "closing") {       
-      const svg = document.querySelectorAll("[data-train-image]")[0];
-      const leftDoors = svg.querySelectorAll(`[data-left-door]`);
+    
+    if (platform.train && platform.train.doorState == "closing") {      
+      const svgs = document.querySelectorAll("[data-train-image]");
 
-      for (let door of leftDoors) {
-        door.classList.remove("doorsOpenLeft");
-        door.classList.add("doorsClosingLeft")
+      for (const svg of svgs) {
+        const leftDoors = svg.querySelectorAll(`[data-left-door]`);
+
+        for (let door of leftDoors) {
+          door.classList.remove("doorsOpenLeft")
+        }
       }
     }
+
   }    
 }
 
