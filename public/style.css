@@ -49,6 +49,18 @@ main {
   animation: slide 2s forwards;
 }
 
+.doorsOpen {
+  animation: openDoorLeft 1s;
+  transform: translate(0, -10px);
+}
+
+@keyframes openDoorLeft {
+  0%   { transform: translate(0, 0);  }
+  50%  { transform: translate(5, 0);  }
+  100% { transform: translate(10, 0); }
+}
+
+
 .slideOut {  
   animation: slideout 2s forwards;
 }

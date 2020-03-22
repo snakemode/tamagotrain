@@ -340,16 +340,22 @@ class Train {
     this.id = uuidv4();
     this.ticks = 0;
     this.hasTicked = false;
+    this.openDoors = false;
   }
   
   tick(platform) {
-    this.ticks++;
     
     platform.temperature += 0.5;
 
+    if (this.ticks ==  0) {
+      this.openDoors = true;
+    }
     
+    if (this.ticks ==  11) {
+      this.openDoors = false;
+    }
 
-    if (this.ticks > 2) {
+    if (this.ticks > 1) {
       platform.contents.push(new Traveller());
     }
 
@@ -360,6 +366,7 @@ class Train {
     // Code that can generate problems on the platform goes here.
     
     this.hasTicked = true;
+    this.ticks++;
   }
 }
 
@@ -575,7 +582,12 @@ function renderPlatform(currentGameState, previousGameState) {
 
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
       document.getElementById("active-train").classList.add("slideOut");
-    }      
+    }
+    
+    if (platform.train && platform.train.openDoors) {
+      const door = document.getElementById("door_0_0");
+      console.log(door);
+    }
   }    
 }
 
