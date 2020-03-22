@@ -550,7 +550,7 @@ function renderTemperature(currentGameState, previousGameState) {
     overlay.classList.remove("hide");
     overlay.style.opacity = currentGameState.platforms[0].temperature;
   } else {    
-    overlay.classList.add("hide");
+    //overlay.classList.add("hide");
   }  
 }
 
