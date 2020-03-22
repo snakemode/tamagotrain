@@ -580,29 +580,25 @@ function renderPlatform(currentGameState, previousGameState) {
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
       document.getElementById("active-train").classList.add("slideOut");
     }
-    
-    if (platform.train && platform.train.doorState == "opening") {      
-      const svgs = document.querySelectorAll("[data-train-image]");
 
-      for (const svg of svgs) {
-        const leftDoors = svg.querySelectorAll(`[data-left-door]`);
-
-        for (let door of leftDoors) {
-          door.classList.add("hide")
-        }
-      }
+    const allDoors = [];
+    const svgs = document.querySelectorAll("[data-train-image]");
+    for (const svg of svgs) {
+      const leftDoors = svg.querySelectorAll(`[data-door-left]`);
+      const rightDoors =  svg.querySelectorAll(`[data-door-right]`);
+      allDoors.push(...leftDoors);
+      allDoors.push(...rightDoors);
     }
 
-    
-    if (platform.train && platform.train.doorState == "closing") {      
-      const svgs = document.querySelectorAll("[data-train-image]");
-
-      for (const svg of svgs) {
-        const leftDoors = svg.querySelectorAll(`[data-left-door]`);
-
-        for (let door of leftDoors) {
-          door.classList.remove("hide")
+    if (platform.train && platform.train.doorState == "opening") {   
+        for (let door of allDoors) {
+          door.classList.add("hide");
         }
+    }
+
+    if (platform.train && platform.train.doorState == "closing") {   
+      for (let door of allDoors) {
+        door.classList.remove("hide");
       }
     }
 
