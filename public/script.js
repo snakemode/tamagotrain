@@ -355,14 +355,8 @@ class Train {
       platform.contents.push(new Traveller());
     }
 
-    if (this.hasTicked) {
-      return; // Only run the next bit once
-    }
-    
-    // Code that can generate problems on the platform goes here.
-    
-    this.hasTicked = true;
     this.ticks++;
+    this.hasTicked = true;    
   }
 }
 
@@ -581,21 +575,19 @@ function renderPlatform(currentGameState, previousGameState) {
     }
     
     if (platform.train && platform.train.doorState == "opening") {      
-      const svg = document.querySelectorAll(`[data-train-image]`)[0];
+      const svg = document.querySelectorAll("[data-train-image]")[0];
       const leftDoors = svg.querySelectorAll(`[data-left-door]`);
 
       for (let door of leftDoors) {
-        console.log(door);
         door.classList.add("doorsOpenLeft")
       }
     }
 
-    if (platform.train && platform.train.doorState == "closing") {      
-      const svg = document.querySelectorAll(`[data-train-image]`)[0];
+    if (platform.train && platform.train.doorState == "closing") {       
+      const svg = document.querySelectorAll("[data-train-image]")[0];
       const leftDoors = svg.querySelectorAll(`[data-left-door]`);
 
       for (let door of leftDoors) {
-        console.log(door);
         door.classList.remove("doorsOpenLeft");
         door.classList.add("doorsClosingLeft")
       }
@@ -669,14 +661,10 @@ function renderContents(currentGameState, previousGameState) {
 }
 
 function renderArrivingTrain() {
-  const svg = document.querySelectorAll(`[data-train-image]`)[0];
   const trainImage = document.createElement("div");
   trainImage.setAttribute("id", "active-train");
-  trainImage.setAttribute("background-image", "data:image/svg+xml;utf8," + svg.outerHTML);
-
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");
-  console.log(trainImage);
   this.track.appendChild(trainImage);
 }
 
