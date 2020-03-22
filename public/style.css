@@ -118,6 +118,8 @@ main {
   width: 100%;
   height: 5px;
   margin-bottom: 5px;
+  background-color: #FF0015;
+  opacity: 10%;
   backdrop-filter: blur(2px) grayscale(10%);
   animation: haze 20s infinite linear;
   transform: translate(0, -7px);
