@@ -581,7 +581,7 @@ function renderPlatform(currentGameState, previousGameState) {
         const leftDoors = svg.querySelectorAll(`[data-left-door]`);
 
         for (let door of leftDoors) {
-          door.classList.add("doorsOpenLeft")
+          door.classList.add("hide")
         }
       }
     }
