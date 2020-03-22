@@ -349,10 +349,6 @@ class Train {
 
     if (this.ticks ==  0) {
       this.doorState = "opening";
-    } else if (this.ticks === 9) {
-      this.doorState = "closing";
-    } else {
-      this.doorState = "closed";
     }
 
     if (this.ticks > 1) {
@@ -673,8 +669,10 @@ function renderContents(currentGameState, previousGameState) {
 }
 
 function renderArrivingTrain() {
+  const svg = document.getElementById("trainSvg");
   const trainImage = document.createElement("div");
   trainImage.setAttribute("id", "active-train");
+  trainImage.style.background = "url('data:image/svg+xml;utf8,<svg>"+ svg.innerHTML +"</svg>')";
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");
   this.track.appendChild(trainImage);

@@ -43,7 +43,7 @@ main {
   position: relative;
   width: 700px;
   height: 240px;
-  background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.svg?v=1584553484134) no-repeat left bottom;
+  --x-no-background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.svg?v=1584553484134) no-repeat left bottom;
   background-size: 700px;
   transform: translate(100%, -90px);
   animation: slide 2s forwards;
