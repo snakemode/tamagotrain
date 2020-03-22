@@ -15,6 +15,12 @@ function rand(start, end) {
   return Math.floor(Math.random() * end) + start;
 }
 
+// consts
+
+const hot = 35;
+const fps = 30;
+const tickRate = 1;
+
 // ably-connector.js
 
 class StubAblyConnector {
@@ -391,7 +397,7 @@ class Traveller {
     // Am I gonna vom? 10% chance when too hot
     const random = this.random();
 
-    if (!this.isVommy && platform.temperature >= 35 && random >= 0.9) { 
+    if (!this.isVommy && platform.temperature >= hot && random >= 0.9) { 
       platform.contents.push(new Vomit(this.x, this.y));
       this.isVommy = true;
       return;
@@ -538,7 +544,7 @@ function renderGameStatus(currentGameState, previousGameState) {
 
 function renderTemperature(currentGameState, previousGameState) {
   
-  const anyPlatformTooHot = currentGameState.platforms.filter(p => p.temperature > 30).length > 0;
+  const anyPlatformTooHot = currentGameState.platforms.filter(p => p.temperature > hot).length > 0;
   const overlay = document.getElementById("temperatureOverlay");
   if (anyPlatformTooHot) {
     overlay.classList.remove("hide");
