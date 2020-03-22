@@ -62,8 +62,8 @@ class StubAblyConnector {
   
   
   fakeIncomingData(stationName) {
-    // Train arrives and departs every 10 seconds.
-    const interval = 1000 * 10;    
+    // Train arrives and departs every 2 seconds.
+    const interval = 1000 * 12;    
     
     for (let cb of this.callbacks[stationName]) {
       
@@ -346,7 +346,10 @@ class Train {
     this.ticks++;
     
     platform.temperature += 0.5;
-    platform.contents.push(new Traveller());
+
+    if (this.ticks > 2) {
+      platform.contents.push(new Traveller());
+    }
 
     if (this.hasTicked) {
       return; // Only run the next bit once
