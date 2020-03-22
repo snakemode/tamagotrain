@@ -347,6 +347,8 @@ class Train {
     
     platform.temperature += 0.5;
 
+    
+
     if (this.ticks > 2) {
       platform.contents.push(new Traveller());
     }
