@@ -584,9 +584,11 @@ function renderPlatform(currentGameState, previousGameState) {
       document.getElementById("active-train").classList.add("slideOut");
     }
     
-    if (platform.train && platform.train.openDoors) {
-      const door = document.getElementById("door_0_0");
-      console.log(door);
+    if (platform.train && platform.train.openDoors) {      
+      const svg = document.getElementById("traintest");
+      console.log(svg);
+      //const door = svg.getElementById("door_0_0");
+      //console.log(door);
     }
   }    
 }
