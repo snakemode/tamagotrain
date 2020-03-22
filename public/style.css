@@ -119,6 +119,14 @@ main {
   height: 3px;
   margin-bottom: 5px;
   backdrop-filter: blur(1px) grayscale(10%);
+  animation: arrows 2s infinite linear;
+  transform: translate(-7px, 0)
+}
+
+@keyframes arrows {
+  0%{transform: translate(7ex, 0);}
+  50%{transform: translate(-4ex, 0);}
+  100%{transform: translate(-1ex, 0);}
 }
 
 #buffs {
