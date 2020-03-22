@@ -548,9 +548,9 @@ function renderTemperature(currentGameState, previousGameState) {
   const overlay = document.getElementById("temperatureOverlay");
   if (anyPlatformTooHot) {
     overlay.classList.remove("hide");
-    overlay.style.opacity = currentGameState.platforms[0].temperature;
+    overlay.style.opacity = currentGameState.platforms[0].temperature - 10;
   } else {    
-    //overlay.classList.add("hide");
+    overlay.classList.add("hide");
   }  
 }
 
