@@ -50,14 +50,14 @@ main {
 }
 
 .doorsOpen {
-  animation: openDoorLeft 1s;
-  transform: translate(0, -10px);
+  animation: openDoorLeft 5s;
+  transform: translateX(-100);
 }
 
 @keyframes openDoorLeft {
-  0%   { transform: translate(0, 0);  }
-  50%  { transform: translate(5, 0);  }
-  100% { transform: translate(10, 0); }
+  0%   { transform: translateX(0, 0);  }
+  50%  { transform: translateX(-50, 0);  }
+  100% { transform: translateX(-100, 0); }
 }
 
 

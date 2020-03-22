@@ -585,10 +585,9 @@ function renderPlatform(currentGameState, previousGameState) {
     }
     
     if (platform.train && platform.train.openDoors) {      
-      const svg = document.getElementById("traintest");
-      console.log(svg);
-      //const door = svg.getElementById("door_0_0");
-      //console.log(door);
+      const svg = document.getElementById("trainSvg");
+      const door = svg.getElementById("door_0_0");
+      door.classList.add("doorsOpen");
     }
   }    
 }
