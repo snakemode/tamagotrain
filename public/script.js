@@ -19,7 +19,7 @@ function rand(start, end) {
 
 const hot = 35;
 const fps = 30;
-const tickRate = 1;
+const ticksPerSecond = 1;
 
 // ably-connector.js
 
@@ -164,7 +164,7 @@ class Game {
   start() {
     this.tickInterval = setInterval(() => {
       this.tick();
-    }, 1 * 1000);
+    }, 1000 / ticksPerSecond);
     this.status = "active";
   }
   
@@ -662,7 +662,7 @@ function startGame() {
   
   ably.fakeIncomingData('KINGS CROSS');
   
-  setInterval(() => ui.draw(game), 1000 / 30);
+  setInterval(() => ui.draw(game), 1000 / fps);
 }
 
 // Jest
