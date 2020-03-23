@@ -78,7 +78,7 @@ class StubAblyConnector {
 
 // game-buffs.js
 
-class cleanBuff {
+class CleanBuff {
   constructor() {
     this.ticks = 5;
     this.completed = false;
@@ -109,7 +109,7 @@ class cleanBuff {
   }
 }
 
-class ventBuff {
+class VentBuff {
   constructor() {
     this.ticks = 5;
     this.completed = false;
@@ -124,7 +124,7 @@ class ventBuff {
   }
 }
 
-class somethingBuff {
+class SomethingBuff {
   constructor() {
     this.ticks = 5;
     this.completed = false;
@@ -176,7 +176,7 @@ class Game {
     // handle user input actions    
     while (this.queuedActions.length > 0) {
       const action = this.queuedActions.shift();
-      const handlerName = action.key + "Buff";
+      const handlerName = action.key.charAt(0).toUpperCase() + action.key.slice(1) + "Buff";
       const target = this.platforms.filter(p => p.id == action.target)[0];      
       target.buffs.push(this.createBuff(handlerName));
     }    
