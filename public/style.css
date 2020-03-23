@@ -295,7 +295,7 @@ div[data-ispassedout="true"] {
 
 .label {
   text-align: center;
-  font-family: comic-sans;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 .label:nth-of-type(1) {
   grid-area: label1;

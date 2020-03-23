@@ -125,7 +125,7 @@ class CleanBuff {
   
   tick(platform) {
     this.ticks--;    
-    platform.hygiene += 0.5;
+    platform.hygiene += 1;
     
     this.removeOneTrash(platform);
     
@@ -156,6 +156,7 @@ class VentBuff {
   tick(platform) {
     this.ticks--;
     platform.temperature--;
+    platform.hygiene += 0.2;
     if (this.ticks == 0) {         
       this.completed = true;
     }
