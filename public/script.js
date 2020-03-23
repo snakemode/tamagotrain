@@ -449,9 +449,9 @@ class Traveller {
     }
   }
   
-  walkTowards(target) {
+  walkTowards(target, unitSize) {
     
-    const unitSize = 15;
+    unitSize = unitSize || 15;
     const manhattenDistance = (p1, p2) => Math.abs(p2.x - p1.x) + Math.abs(p2.y - p1.y);
     
     if (this.isDisplayed) { // Has been rendered
