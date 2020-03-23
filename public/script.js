@@ -316,7 +316,7 @@ class Poop extends Problem {
   }
 }
 
-class Vomit extends Problem {
+class Trash extends Problem {
   constructor(x, y) {
     super();
     this.ticks = 0;
@@ -373,7 +373,7 @@ class Traveller {
     this.ticksFromExit = 14;
 
     this.completed = false;
-    this.isVommy = false;
+    this.droppedTrash = false;
     this.isPassedOut = false;
     this.isDisplayed = false;
   }
@@ -399,12 +399,18 @@ class Traveller {
     
     platform.temperature += 0.1;
     
-    // Am I gonna vom? 10% chance when too hot
     const random = this.random();
-
-    if (!this.isVommy && platform.temperature >= hot && random >= 0.9) { 
-      platform.contents.push(new Vomit(this.x, this.y));
-      this.isVommy = true;
+    
+    if (!this.droppedTrash && platform.temperature >= hot && random >= 0.9) { 
+      platform.contents.push(new Trash(this.x, this.y));
+      this.droppedTrash = true;
+      return;
+    }
+    
+    // Am I gonna drop trash? 10% chance when too hot
+    if (!this.droppedTrash && random >= 0.9) { 
+      platform.contents.push(new Trash(this.x, this.y));
+      this.droppedTrash = true;
       return;
     }
     
@@ -634,7 +640,7 @@ function renderContents(currentGameState, previousGameState) {
       gfxTarget.style.top = entity.y + "px";
       gfxTarget.style.zIndex = 1000 + entity.y;
 
-      if (entity.constructor.name == "Vomit") {        
+      if (entity.constructor.name == "Trash") {        
         gfxTarget.style.zIndex = 20;
       }
       

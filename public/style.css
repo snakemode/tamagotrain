@@ -126,15 +126,14 @@ main {
   opacity: 30%;
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fzig2.gif?v=1584886862494');
 
-  filter: blur(1px);  
-  backdrop-filter: saturate(1);
+  filter: blur(1px);
   animation: haze 2s infinite linear;
   transform: translate(0, -10px);
   pointer-events: none;
 }
 
 #temperatureOverlay span {
-  backdrop-filter: blur(25px) grayscale(10%);
+  backdrop-filter: blur(15px) grayscale(10%);
 }
 
 @keyframes haze {
@@ -203,7 +202,7 @@ main {
   background: red;
 }
 
-.vomit {
+.trash {
   width: 100px;
   height: 100px;
   background: none;
