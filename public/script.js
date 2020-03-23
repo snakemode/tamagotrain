@@ -332,6 +332,7 @@ class Trash extends Problem {
     this.ticks = 0;
     this.x = x;
     this.y = y;
+    this.spawnedRat = false;
   }
   
   tick(platform) {    
@@ -339,8 +340,10 @@ class Trash extends Problem {
     
     // Spawn rats if too trashy
     const random = rand(0, 10);
-    if (platform.hygiene <= 80 && random >= 7) { 
+    if (!this.spawnedRat && platform.hygiene <= 80 && random >= 7) {
+      console.log("Spawning rat at " + this.x + "," + this.y);
       platform.contents.push(new Rat(this.x, this.y));
+      this.spawnedRat = true;
     }
     
     this.ticks++;
@@ -420,6 +423,7 @@ class Traveller {
     
     // Am I gonna drop trash? 10% chance when too hot
     if (!this.droppedTrash && random >= 0.95) { 
+      console.log("Spawning trash at "  + this.x + "," + this.y);
       platform.contents.push(new Trash(this.x, this.y));
       this.droppedTrash = true;
       return;
@@ -650,9 +654,14 @@ function renderContents(currentGameState, previousGameState) {
       gfxTarget.style.left = entity.x + "px";
       gfxTarget.style.top = entity.y + "px";
       gfxTarget.style.zIndex = 1000 + entity.y;
+      gfxTarget.style.position = "absolute";
 
       if (entity.constructor.name == "Trash") {        
         gfxTarget.style.zIndex = 20;
+      }
+      
+      if (entity.constructor.name == "Rat") {        
+        gfxTarget.style.zIndex = 25;
       }
       
     }
