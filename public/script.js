@@ -421,7 +421,7 @@ class Trash extends Problem {
     
     // Spawn mouse if too trashy
     const random = rand(0, 10);
-    if (!this.spawnedMouse && platform.hygiene <= 80 && random >= 9.5) {
+    if (!this.spawnedMouse && platform.hygiene <= 80 && random >= 9) {
       platform.contents.push(new Mouse(this.x, this.y));
       this.spawnedMouse = true;
     }
@@ -523,12 +523,10 @@ class Traveller {
       this.completed = true;
     }
     
-    this.ticks++;
+    this.ticks++;    
+    this.dancing = platform.buffs.filter(x => x.constructor.name == "MusicBuff").length > 0;
     
-    const musicPlaying = platform.buffs.filter(x => x.constructor.name == "MusicBuff").length > 0;
-    this.dancing = musicPlaying;
-    
-    if (!this.isPassedOut && !dancing) {
+    if (!this.isPassedOut && !this.dancing) {
       this.ticksFromExit--;
       walkNaturally(this, this.selectedExit, 15);
     }
