@@ -320,28 +320,27 @@ class Rat extends Problem {
   constructor() {
     super();
   }
+    
+  tick(platform) {    
+    this.ticks++;
+  }  
 }
 
 class Trash extends Problem {
   constructor(x, y) {
     super();
     this.ticks = 0;
-    this.spawnedRats = false;
     this.x = x;
     this.y = y;
   }
   
-  tick(platform) {
-    if (this.ticks <= 5) {
-      platform.hygiene -= 0.5;
-    }
+  tick(platform) {    
+    platform.hygiene -= 0.25
     
     // Spawn rats if too trashy
     const random = rand(0, 10);
-    if (!this.spawnedRats && platform.hygiene <= 80 && random >= 7) { 
+    if (platform.hygiene <= 80 && random >= 7) { 
       platform.contents.push(new Rat(this.x, this.y));
-      platform.contents.push(new Rat(this.x + 10, this.y));
-      this.spawnedRats = true;
     }
     
     this.ticks++;
