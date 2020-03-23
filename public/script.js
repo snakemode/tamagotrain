@@ -490,18 +490,20 @@ class Traveller {
     if (this.ticksFromExit == 0) {
       platform.temperature -= 1;
       this.completed = true;
+      return;
     }
     
     this.ticks++;    
     this.dancing = platform.buffs.filter(x => x.constructor.name == "MusicBuff").length > 0;
-    
-    if (!this.isPassedOut && !this.dancing) {
-      this.ticksFromExit--;
-      walkNaturally(this, this.selectedExit, 15);
+    platform.temperature += 0.1;
+
+    if (this.dancing || this.isPassedOut) {
+      return;
     }
     
-    platform.temperature += 0.1;
-    
+    walkNaturally(this, this.selectedExit, 15);
+    this.ticksFromExit--;
+
     const random = this.random();    
     
     // Am I gonna drop trash? 10% chance when too hot
