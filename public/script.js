@@ -239,7 +239,7 @@ class Game {
   
   isGameOver() {    
     const failureConditions = [
-      { condition: (g) => (g.platforms.filter(p => p.temperature >= 50).length > 0), message: "It's too hot!" },
+      { condition: (g) => (g.platforms.filter(p => p.temperature >= 60).length > 0), message: "It's too hot!" },
       { condition: (g) => (g.platforms.filter(p => p.temperature <= -20).length > 0), message: "It's too cold!" },
       { condition: (g) => (g.platforms.filter(p => p.hygiene <= 0).length > 0), message: "It's too disgusting!" },
       { condition: (g) => (g.platforms.filter(p => p.contents.length >= p.capacity).length > 0), message: "Your platforms are too full!" }
@@ -379,8 +379,8 @@ class Mouse extends Problem {
       this.destination = { x: rand(0, platform.width), y: rand(0, platform.height) };
     } 
     
-    if (platform.hygiene >= 80) {
-      // Too clean, going away.
+    if (platform.hygiene >= 80 || platform.temperature <= 0) {
+      // Too clean or too cold! going away.
       this.destination = { x: platform.width + 100, y: platform.height + 100 };
     }
     
@@ -441,7 +441,7 @@ class Train {
   
   tick(platform) {
     
-    platform.temperature += 0.5;
+    platform.temperature += 0.25;
 
     if (this.ticks ==  0) {
       this.doorState = "opening";
