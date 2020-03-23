@@ -671,7 +671,7 @@ function renderContents(currentGameState, previousGameState) {
 }
 
 function renderArrivingTrain() {
-  const trainImage = document.createElement("div");
+  const trainImage = document.getElementById("trainSVG");
   trainImage.setAttribute("id", "active-train");
   trainImage.classList.add("train");
   trainImage.classList.add("arrival");

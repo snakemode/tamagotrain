@@ -43,8 +43,6 @@ main {
   position: relative;
   width: 700px;
   height: 240px;
-  background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrain.svg?v=1584553484134) no-repeat left bottom;
-  background-size: 700px;
   transform: translate(100%, -90px);
   animation: slide 2s forwards;
 }
@@ -226,3 +224,44 @@ div[data-ispassedout="true"] {
 .traveller3 {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpika2.gif?v=1584717580600');
 }
+
+/* train */
+
+.st0{fill:#E8E9E8;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#233688;}
+	.st3{fill:#676770;}
+	.st4{fill:#C4D3EC;}
+	.st5{fill:#C21109;}
+	.st6{fill:#9EB4D7;}
+	.st7{fill:#C3D4EB;}
+	.st8{fill:#8799BE;}
+	.st9{fill:#D4D4D4;}
+	.st10{fill:#9B9B9B;}
+	.st11{fill:#BABABA;}
+	.st12{fill:#DDDDDD;}
+	.st13{fill:#F3E715;}
+	.st14{fill:#333333;}
+	.st15{fill:#E1EEFB;}
+	.st16{fill:#D22724;}
+	.door-left {
+		transform:translate(-0px, 0);
+		animation: open-left 4s ease-out;
+     animation-delay: 2s;
+
+	}
+	.door-right {
+		transform:translate(0px, 0);
+		animation: open-right 4s ease-out;
+    animation-delay: 2s;
+	}
+	@keyframes open-left {
+  	30% {	transform:translate(-220px, 0); }
+		70% {	transform:translate(-220px, 0); }
+		100% {	transform:translate(-0px, 0); }
+	}
+	@keyframes open-right {
+  	30% {	transform:translate(220px, 0); }
+		60% {	transform:translate(220px, 0); }
+		100% {	transform:translate(-0px, 0); }
+	}
