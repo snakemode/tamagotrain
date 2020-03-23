@@ -158,12 +158,12 @@ main {
   height: 100px;
 }
 
-.ventBuff {
+.VentBuff {
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ffan.gif?v=1584729355158');
   background-size: contain;
 }
 
-.cleanBuff {
+.CleanBuff {
   position: absolute;
   top: 15px;
   left: 100%;

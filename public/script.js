@@ -178,7 +178,8 @@ class Game {
       const action = this.queuedActions.shift();
       const handlerName = action.key.charAt(0).toUpperCase() + action.key.slice(1) + "Buff";
       const target = this.platforms.filter(p => p.id == action.target)[0];      
-      target.buffs.push(this.createBuff(handlerName));
+      const handler = this.createBuff(handlerName);
+      target.buffs.push(handler);
     }    
      
     for (let platform of this.platforms) {
