@@ -184,11 +184,7 @@ class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
     this.status = "inactive";
-    this.platforms = [];
-    this.possibleActions = [
-      "clean", "vent", "music"
-    ];
-    
+    this.platforms = [];    
     this.queuedActions = [];
         
     for (let id of platformIds) {
@@ -418,7 +414,7 @@ class Trash extends Problem {
     
     // Spawn mouse if too trashy
     const random = rand(0, 10);
-    if (!this.spawnedMouse && platform.hygiene <= 80 && random >= 7) {
+    if (!this.spawnedMouse && platform.hygiene <= 80 && random >= 9.5) {
       platform.contents.push(new Mouse(this.x, this.y));
       this.spawnedMouse = true;
     }
