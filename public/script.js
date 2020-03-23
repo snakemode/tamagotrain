@@ -14,15 +14,11 @@ function rand(start, end) {
 }
 
 function inTargetZone(location, target, tolerance) {
-  console.log(`Checking if in target for ${location.x},${location.y}`);
-  console.log(`Target ${target.x},${target.y} +- ${tolerance}`);
-  
+  tolerance = tolerance || 0;  
   if (location.x < target.x - tolerance) return false;
   if (location.x > target.x + tolerance) return false;
   if (location.y < target.y - tolerance) return false;
-  if (location.y > target.y + tolerance) return false;  
-  
-  console.log("they were!");
+  if (location.y > target.y + tolerance) return false;    
   return true;
 }
 
@@ -369,20 +365,6 @@ class Problem {
   }
 }
 
-class Fire extends Problem {
-  constructor(x, y) {
-    super(x, y);
-  } 
-  
-  tick(platform) {  
-    platform.temperature += 1;
-    this.ticks++;
-  }
-
-  onCompletion(platform) {
-  } 
-}
-
 class Mouse extends Problem {
   constructor(x, y) {
     super(x, y);
@@ -403,10 +385,10 @@ class Mouse extends Problem {
     
     walkNaturally(this, this.destination, this.stepSize);    
 
-    if (inTargetZone(this, this.offscreen)) {
+    if (inTargetZone(this, this.offscreen, this.stepSize)) {
       console.log("mouse ran offscreen!");
       this.completed = true; // They left!
-    } else if (inTargetZone(this, this.destination)) {
+    } else if (inTargetZone(this, this.destination, this.stepSize)) {
       this.destination = null;
     }
       
@@ -420,6 +402,7 @@ class Mouse extends Problem {
   }
 
   onCompletion(platform) {
+    platform.hygiene += 5;
   }
 }
 
@@ -540,7 +523,7 @@ class Traveller {
 
 // ui.js
 
- class GameUi {
+class GameUi {
   
   constructor(initialState) {
     this.playfield = document.getElementById("playfield");
