@@ -165,7 +165,7 @@ class VentBuff {
 
 class MusicBuff {
   constructor() {
-    this.ticks = 5;
+    this.ticks = 4;
     this.completed = false;
   }
   
@@ -175,9 +175,18 @@ class MusicBuff {
       this.completed = true;
     }
   }  
-
+   
   onCompletion(platform) {
-  }   
+    this.charmMice(platform);
+  }
+  
+  charmMice(platform) {
+    const mice = platform.contents.filter(e => e.constructor.name === "Mouse");
+    for (const mouse of mice) {
+        mouse.leave(platform);
+    }    
+  }
+  
 }
 
 // game.js
@@ -399,7 +408,8 @@ class Mouse extends Problem {
     this.ticks++;
   }
   
-  leave(platform) {
+  leave(platform, speed) {
+    this.stepSize = speed || this.stepSize;
     this.destination = { x: platform.width + 100, y: platform.height + 100 };
   }
 
@@ -467,36 +477,6 @@ class Train {
 }
 
 // traveller.js
-
-function walkNaturally(walker, target, unitSize) {
-  const manhattenDistance = (p1, p2) => Math.abs(p2.x - p1.x) + Math.abs(p2.y - p1.y);
-
-  if (walker.isDisplayed) { // Has been rendered
-
-    const stepSize = 1 * unitSize;
-
-    const possibleSteps = [
-      { x: walker.x - stepSize, y: walker.y - stepSize },
-      { x: walker.x - stepSize, y: walker.y },
-      { x: walker.x - stepSize, y: walker.y + stepSize },
-      { x: walker.x, y: walker.y - stepSize },
-      { x: walker.x, y: walker.y + stepSize },            
-      { x: walker.x + stepSize, y: walker.y - stepSize },
-      { x: walker.x + stepSize, y: walker.y },
-      { x: walker.x + stepSize, y: walker.y + stepSize },
-    ];
-
-    const currentManhattenDistance = manhattenDistance({x: walker.x, y: walker.y}, target);
-    const closerSteps = possibleSteps.filter(s => manhattenDistance(s, target) < currentManhattenDistance);
-    
-    if (closerSteps.length > 0) {
-      const stepChoice = rand(0, closerSteps.length);          
-      const selectedStep = closerSteps[stepChoice];
-      walker.x = selectedStep.x;
-      walker.y = selectedStep.y;
-    }
-  }
-}
 
 class Traveller {
    constructor() {
