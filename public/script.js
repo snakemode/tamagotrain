@@ -358,7 +358,15 @@ class Fire extends Problem {
   } 
 }
 
-class Rat extends Problem {
+function inTargetZone(location, target, tolerance) { 
+  if (location.x < target.x - tolerance) return false;
+  if (location.x > target.x + tolerance) return false;
+  if (location.y < target.y - tolerance) return false;
+  if (location.y > target.y + tolerance) return false;  
+  return true;
+}
+
+class Mouse extends Problem {
   constructor(x, y) {
     super(x, y);
     this.stepSize = 10;
@@ -377,7 +385,7 @@ class Rat extends Problem {
     if (this.destination) {
       walkNaturally(this, this.destination, this.stepSize);    
       
-      if (this.x == this.destination.x && this.y == this.destination.y) {
+      if (inTargetZone(this, this.destination)) {
         this.destination = null;
       }
       
@@ -396,7 +404,7 @@ class Rat extends Problem {
 class Trash extends Problem {
   constructor(x, y) {
     super(x, y);
-    this.spawnedRat = false;
+    this.spawnedMouse = false;
   }
   
   tick(platform) {    
@@ -404,9 +412,9 @@ class Trash extends Problem {
     
     // Spawn rats if too trashy
     const random = rand(0, 10);
-    if (!this.spawnedRat && platform.hygiene <= 80 && random >= 7) {
-      platform.contents.push(new Rat(this.x, this.y));
-      this.spawnedRat = true;
+    if (!this.spawnedMouse && platform.hygiene <= 80 && random >= 7) {
+      platform.contents.push(new Mouse(this.x, this.y));
+      this.spawnedMouse = true;
     }
     
     this.ticks++;

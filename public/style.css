@@ -208,7 +208,7 @@ main {
   background-size: contain;
 }
 
-.rat {
+.mouse {
   width: 50px;
   height: 50px;
   background: none;
@@ -247,25 +247,43 @@ div[data-ispassedout="true"] {
 
 .buttons {
   display: grid;
-  grid-template-areas: 
-    'button button button',
-    'label, label, label'/
-     30% 30% 30%;;
+  grid-template: 
+    "button1 button2 button3"
+    "label1 label2 label3";
   flex-wrap: wrap;
   margin: 0 20px;
 }
 
 .button {
-  gri
+  align-content: center;
   width: 70px;
   height: 70px;
   border: 0;
   border-radius: 50%;
 }
 
+.button:nth-of-type(1) {
+  grid-area: button1;
+}
+.button:nth-of-type(2) {
+  grid-area: button2;
+}
+.button:nth-of-type(3) {
+  grid-area: button3;
+}
+
 .label {
   display: block;
   width: 33.33%;
+}
+.label:nth-of-type(1) {
+  grid-area: label1;
+}
+.label:nth-of-type(2) {
+  grid-area: label2;
+}
+.label:nth-of-type(3) {
+  grid-area: label3;
 }
 
 /* train */
