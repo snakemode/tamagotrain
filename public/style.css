@@ -43,7 +43,7 @@ main {
   position: relative;
   width: 700px;
   height: 240px;
-  transform: translate(100%, -90px);
+  transform: translate(100%, -5px);
   animation: slide 2s forwards;
 }
 
@@ -63,13 +63,13 @@ main {
 }
 
 @keyframes slide {
-  30%  { transform: translate(10px, -90px);  }
-  100%  { transform: translate(10px, -90px);  }
+  30%  { transform: translate(10px, -5px);  }
+  100%  { transform: translate(10px, -5px);  }
 }
 
 @keyframes slideout {
-  0%   { transform: translate(10px, -90px);  }
-  100% { transform: translate(-110%, -90px); }
+  0%   { transform: translate(10px, -5px);  }
+  100% { transform: translate(-110%, -5px); }
 }
 
 
@@ -246,22 +246,22 @@ div[data-ispassedout="true"] {
 	.st16{fill:#D22724;}
 	.door-left {
 		transform:translate(-0px, 0);
-		animation: open-left 4s ease-out;
-     animation-delay: 2s;
+		animation: open-left 6s ease-out;
+     animation-delay: 1.6s;
 
 	}
 	.door-right {
 		transform:translate(0px, 0);
-		animation: open-right 4s ease-out;
-    animation-delay: 2s;
+		animation: open-right 6s ease-out;
+    animation-delay: 1.6s;
 	}
 	@keyframes open-left {
-  	30% {	transform:translate(-220px, 0); }
-		70% {	transform:translate(-220px, 0); }
+  	25% {	transform:translate(-220px, 0); }
+		75% {	transform:translate(-220px, 0); }
 		100% {	transform:translate(-0px, 0); }
 	}
 	@keyframes open-right {
-  	30% {	transform:translate(220px, 0); }
-		60% {	transform:translate(220px, 0); }
+  	25% {	transform:translate(220px, 0); }
+		75% {	transform:translate(220px, 0); }
 		100% {	transform:translate(-0px, 0); }
 	}
