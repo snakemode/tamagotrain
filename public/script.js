@@ -89,9 +89,7 @@ class cleanBuff {
     this.ticks--;    
     platform.hygiene += 0.5;
     
-    // if (!this.hasTicked) {
-      this.removeOneVom(platform); // Only on first tick
-    // }
+    this.removeOneTrash(platform);
     
     if (this.ticks == 0) {
       this.completed = true;
@@ -100,10 +98,10 @@ class cleanBuff {
     this.hasTicked = true;
   }
   
-  removeOneVom(platform) {
+  removeOneTrash(platform) {
     for (let index in platform.contents) {
       const entity = platform.contents[index];
-      if (entity.constructor.name === "Vomit") {
+      if (entity.constructor.name === "Trash") {
         platform.contents = platform.contents.filter(item => item !== entity);
         return;
       }
@@ -274,7 +272,7 @@ class Platform {
       }
             
       if (msg.departed) {
-        this.train.onDeparture();
+        this.train.onCompletion();
         this.hasTrain = false;
         this.train = null;
       }      
@@ -287,8 +285,12 @@ class Platform {
       if (item["tick"]) {
         item.tick(this);
       }
+            
+      if (item.completed && item["onCompletion"]) {
+        item.onCompletion(this);
+      }
     }
-    
+        
     this.buffs = this.buffs.filter(b => !b.completed);
     this.contents = this.contents.filter(b => !b.completed);
     this.capacity = this.capacity <= 0 ? 0 : this.capacity;
@@ -301,44 +303,44 @@ class Platform {
 
 
 class Problem {
-  constructor() {
+  constructor(x, y) {
     this.id = uuidv4();
+    this.ticks = 0;
+    this.x = x;
+    this.y = y;    
   }
 }
 
 class Fire extends Problem {
-  constructor() {
-    super();
-    this.ticks = 0;
-    this.x = x;
-    this.y = y;
+  constructor(x, y) {
+    super(x, y);
   } 
   
   tick(platform) {  
     platform.temperature += 1;
     this.ticks++;
+  }
+
+  onCompletion(platform) {
   } 
 }
 
 class Rat extends Problem {
   constructor(x, y) {
-    super();
-    this.ticks = 0;
-    this.x = x;
-    this.y = y;
+    super(x, y);
   }
     
   tick(platform) {    
     this.ticks++;
   }  
+
+  onCompletion(platform) {
+  }
 }
 
 class Trash extends Problem {
   constructor(x, y) {
-    super();
-    this.ticks = 0;
-    this.x = x;
-    this.y = y;
+    super(x, y);
     this.spawnedRat = false;
   }
   
@@ -355,6 +357,9 @@ class Trash extends Problem {
     
     this.ticks++;
   }  
+
+  onCompletion(platform) {
+  }
 }
 
 // train.js
@@ -386,7 +391,7 @@ class Train {
     this.hasTicked = true;    
   }
 
-  onDeparture() {
+  onCompletion(platform) {
   }
 }
 
