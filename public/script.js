@@ -13,6 +13,36 @@ function rand(start, end) {
   return result;
 }
 
+function walkNaturally(walker, target, unitSize) {
+  const manhattenDistance = (p1, p2) => Math.abs(p2.x - p1.x) + Math.abs(p2.y - p1.y);
+
+  if (walker.isDisplayed) { // Has been rendered
+
+    const stepSize = 1 * unitSize;
+
+    const possibleSteps = [
+      { x: walker.x - stepSize, y: walker.y - stepSize },
+      { x: walker.x - stepSize, y: walker.y },
+      { x: walker.x - stepSize, y: walker.y + stepSize },
+      { x: walker.x, y: walker.y - stepSize },
+      { x: walker.x, y: walker.y + stepSize },            
+      { x: walker.x + stepSize, y: walker.y - stepSize },
+      { x: walker.x + stepSize, y: walker.y },
+      { x: walker.x + stepSize, y: walker.y + stepSize },
+    ];
+
+    const currentManhattenDistance = manhattenDistance({x: walker.x, y: walker.y}, target);
+    const closerSteps = possibleSteps.filter(s => manhattenDistance(s, target) < currentManhattenDistance);
+    
+    if (closerSteps.length > 0) {
+      const stepChoice = rand(0, closerSteps.length);          
+      const selectedStep = closerSteps[stepChoice];
+      walker.x = selectedStep.x;
+      walker.y = selectedStep.y;
+    }
+  }
+}
+
 // consts
 
 const hot = 35;
@@ -331,7 +361,16 @@ class Rat extends Problem {
     super(x, y);
   }
     
-  tick(platform) {    
+  tick(platform) {   
+    
+    if (!this.destination) {
+      // pick a destination
+    }
+    
+    if (this.destination) {
+      walkNaturally(this, this.selectedExit, 10);      
+    }
+    
     this.ticks++;
   }  
 
@@ -398,6 +437,35 @@ class Train {
 
 // traveller.js
 
+function walkNaturally(walker, target, unitSize) {
+  const manhattenDistance = (p1, p2) => Math.abs(p2.x - p1.x) + Math.abs(p2.y - p1.y);
+
+  if (walker.isDisplayed) { // Has been rendered
+
+    const stepSize = 1 * unitSize;
+
+    const possibleSteps = [
+      { x: walker.x - stepSize, y: walker.y - stepSize },
+      { x: walker.x - stepSize, y: walker.y },
+      { x: walker.x - stepSize, y: walker.y + stepSize },
+      { x: walker.x, y: walker.y - stepSize },
+      { x: walker.x, y: walker.y + stepSize },            
+      { x: walker.x + stepSize, y: walker.y - stepSize },
+      { x: walker.x + stepSize, y: walker.y },
+      { x: walker.x + stepSize, y: walker.y + stepSize },
+    ];
+
+    const currentManhattenDistance = manhattenDistance({x: walker.x, y: walker.y}, target);
+    const closerSteps = possibleSteps.filter(s => manhattenDistance(s, target) < currentManhattenDistance);
+    
+    if (closerSteps.length > 0) {
+      const stepChoice = rand(0, closerSteps.length);          
+      const selectedStep = closerSteps[stepChoice];
+      walker.x = selectedStep.x;
+      walker.y = selectedStep.y;
+    }
+  }
+}
 
 class Traveller {
    constructor() {
@@ -427,7 +495,7 @@ class Traveller {
     
     if (!this.isPassedOut) {
       this.ticksFromExit--;
-      this.walkTowards(this.selectedExit);
+      walkNaturally(this, this.selectedExit, 15);
     }
     
     platform.temperature += 0.1;
@@ -446,38 +514,6 @@ class Traveller {
     if (!this.isPassedOut && platform.hygiene <= 30 && random >= 0.9) {      
       this.isPassedOut = true;
       return;
-    }
-  }
-  
-  walkTowards(target, unitSize) {
-    
-    unitSize = unitSize || 15;
-    const manhattenDistance = (p1, p2) => Math.abs(p2.x - p1.x) + Math.abs(p2.y - p1.y);
-    
-    if (this.isDisplayed) { // Has been rendered
-
-      const stepSize = 1 * unitSize;
-          
-      const possibleSteps = [
-        { x: this.x - stepSize, y: this.y - stepSize },
-        { x: this.x - stepSize, y: this.y },
-        { x: this.x - stepSize, y: this.y + stepSize },
-        { x: this.x, y: this.y - stepSize },
-        { x: this.x, y: this.y + stepSize },            
-        { x: this.x + stepSize, y: this.y - stepSize },
-        { x: this.x + stepSize, y: this.y },
-        { x: this.x + stepSize, y: this.y + stepSize },
-      ];
-
-      const currentManhattenDistance = manhattenDistance({x: this.x, y: this.y}, target);
-      const closerSteps = possibleSteps.filter(s => manhattenDistance(s, target) < currentManhattenDistance);
-
-      if (closerSteps.length > 0) {          
-        const stepChoice = rand(0, closerSteps.length);          
-        const selectedStep = closerSteps[stepChoice];
-        this.x = selectedStep.x;
-        this.y = selectedStep.y;
-      }
     }
   }
 

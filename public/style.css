@@ -247,6 +247,19 @@ div[data-ispassedout="true"] {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpika2.gif?v=1584717580600');
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.button {
+  width: 100px;
+  height: 100px;
+  border: 0;
+  border-radius: 50%;
+}
+
 /* train */
 
 .st0{fill:#E8E9E8;}
