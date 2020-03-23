@@ -13,11 +13,16 @@ function rand(start, end) {
   return result;
 }
 
-function inTargetZone(location, target, tolerance) { 
+function inTargetZone(location, target, tolerance) {
+  console.log(`Checking if in target for ${location.x},${location.y}`);
+  console.log(`Target ${target.x},${target.y} +- ${tolerance}`);
+  
   if (location.x < target.x - tolerance) return false;
   if (location.x > target.x + tolerance) return false;
   if (location.y < target.y - tolerance) return false;
   if (location.y > target.y + tolerance) return false;  
+  
+  console.log("they were!");
   return true;
 }
 
@@ -186,7 +191,7 @@ class MusicBuff {
   charmMice(platform) {
     const mice = platform.contents.filter(e => e.constructor.name === "Mouse");
     for (const mouse of mice) {
-      mouse.leave(platform);
+      mouse.leave(platform, 15);
     }    
   }
   
@@ -382,6 +387,7 @@ class Mouse extends Problem {
   constructor(x, y) {
     super(x, y);
     this.stepSize = 10;
+    this.offscreen = { x: 600, y: 300 };
   }
     
   tick(platform) {
@@ -397,11 +403,10 @@ class Mouse extends Problem {
     
     walkNaturally(this, this.destination, this.stepSize);    
 
-    if (inTargetZone(this, { x: platform.width + 100 , y: }) this.x >= platform.width && this.y >= platform.height) {
+    if (inTargetZone(this, this.offscreen)) {
+      console.log("mouse ran offscreen!");
       this.completed = true; // They left!
-    }
-    
-    if (inTargetZone(this, this.destination)) {
+    } else if (inTargetZone(this, this.destination)) {
       this.destination = null;
     }
       
@@ -411,7 +416,7 @@ class Mouse extends Problem {
   
   leave(platform, speed) {
     this.stepSize = speed || this.stepSize;
-    this.destination = { x: platform.width + 100, y: platform.height + 100 };
+    this.destination = this.offscreen;
   }
 
   onCompletion(platform) {
