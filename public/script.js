@@ -8,7 +8,9 @@ function uuidv4() {
 }
 
 function rand(start, end) {
-  return Math.floor(Math.random() * end) + start;
+  const result = Math.floor(Math.random() * end) + start;
+  // console.log(`rand(${start},${end}) = ${result}`);
+  return result;
 }
 
 // consts
@@ -239,7 +241,7 @@ class Platform {
     this.id = id;
     this.ticks = 0;
     
-    this.capacity = 40;
+    this.capacity = 60;
     this.temperature = 15;
     this.hygiene = 100;
     
@@ -308,6 +310,8 @@ class Fire extends Problem {
   constructor() {
     super();
     this.ticks = 0;
+    this.x = x;
+    this.y = y;
   } 
   
   tick(platform) {  
@@ -317,8 +321,11 @@ class Fire extends Problem {
 }
 
 class Rat extends Problem {
-  constructor() {
+  constructor(x, y) {
     super();
+    this.ticks = 0;
+    this.x = x;
+    this.y = y;
   }
     
   tick(platform) {    
@@ -658,12 +665,7 @@ function renderContents(currentGameState, previousGameState) {
 
       if (entity.constructor.name == "Trash") {        
         gfxTarget.style.zIndex = 20;
-      }
-      
-      if (entity.constructor.name == "Rat") {        
-        gfxTarget.style.zIndex = 25;
-      }
-      
+      }      
     }
   }    
 }
