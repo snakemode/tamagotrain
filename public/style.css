@@ -204,6 +204,12 @@ main {
   background: none;
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrash.png?v=1584724437085');
   background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.trash2 {
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpoop.svg?v=1584985066193');
+  background-size: 20px;
 }
 
 .mouse {

@@ -163,7 +163,7 @@ class VentBuff {
   }
 }
 
-class SomethingBuff {
+class MusicBuff {
   constructor() {
     this.ticks = 5;
     this.completed = false;
@@ -186,7 +186,7 @@ class Game {
     this.status = "inactive";
     this.platforms = [];
     this.possibleActions = [
-      "clean", "vent", "something"
+      "clean", "vent", "music"
     ];
     
     this.queuedActions = [];
@@ -416,7 +416,7 @@ class Trash extends Problem {
       platform.hygiene -= 5; 
     }
     
-    // Spawn rats if too trashy
+    // Spawn mouse if too trashy
     const random = rand(0, 10);
     if (!this.spawnedMouse && platform.hygiene <= 80 && random >= 7) {
       platform.contents.push(new Mouse(this.x, this.y));
@@ -759,9 +759,9 @@ function startGame() {
 // Jest
 if (typeof(module) != 'undefined') {
   module.exports = {
-    cleanBuff,
-    ventBuff,
-    somethingBuff,
+    CleanBuff,
+    VentBuff,
+    MusicBuff,
     Game,
     GameUI,
     Traveller,
