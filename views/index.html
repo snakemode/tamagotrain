@@ -40,9 +40,10 @@
       </div>
       <div id="actions">
         <section class="buttons">
-          <button class="button" onclick="game.queueAction('clean', 'platformId1');">Clean</button>
-          <button class="button" onclick="game.queueAction('vent', 'platformId1');">Vent</button>
-          <button class="button" onclick="game.queueAction('something', 'platformId1');">Something</button>
+          <label for="cleanit">Clean</label>
+          <button id="cleanit" class="button" onclick="game.queueAction('clean', 'platformId1');">Clean</button>
+          <button id="ventit" class="button" onclick="game.queueAction('vent', 'platformId1');">Vent</button>
+          <button id="somethingelse" class="button" onclick="game.queueAction('something', 'platformId1');">Something</button>
         </section>
 
         

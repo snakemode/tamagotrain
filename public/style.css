@@ -122,10 +122,8 @@ main {
   z-index: 9000;
   width: 100%;
   height: 90%;
-
   opacity: 30%;
   background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fzig2.gif?v=1584886862494');
-
   filter: blur(1px);
   animation: haze 2s infinite linear;
   transform: translate(0, -10px);
@@ -254,8 +252,8 @@ div[data-ispassedout="true"] {
 }
 
 .button {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border: 0;
   border-radius: 50%;
 }

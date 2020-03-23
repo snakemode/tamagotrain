@@ -269,6 +269,8 @@ class Platform {
   constructor(id) {
     this.id = id;
     this.ticks = 0;
+    this.width = 500;
+    this.height = 200;
     
     this.capacity = 60;
     this.temperature = 15;
@@ -359,17 +361,25 @@ class Fire extends Problem {
 class Rat extends Problem {
   constructor(x, y) {
     super(x, y);
+    this.stepSize = 10;
   }
     
   tick(platform) {   
     
     if (!this.destination) {
-      // pick a destination
+      this.destination = {
+        x: rand(0, platform.width),
+        y: rand(0, platform.height)
+      }
     }
     
     if (this.destination) {
-      walkNaturally(this, this.selectedExit, 10);      
-    }
+      walkNaturally(this, this.destination, this.stepSize);    
+      
+      if (this.x == this.destination.x && this.y == this.destination.y) {
+        this.destination = null;
+      }
+    }    
     
     this.ticks++;
   }  
