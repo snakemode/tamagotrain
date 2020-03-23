@@ -386,7 +386,6 @@ class Mouse extends Problem {
     walkNaturally(this, this.destination, this.stepSize);    
 
     if (inTargetZone(this, this.offscreen, this.stepSize)) {
-      console.log("mouse ran offscreen!");
       this.completed = true; // They left!
     } else if (inTargetZone(this, this.destination, this.stepSize)) {
       this.destination = null;
@@ -414,9 +413,8 @@ class Trash extends Problem {
   
   tick(platform) {   
     
-    if (this.ticks == 0) {
-      platform.hygiene -= 5; 
-    }
+    platform.hygiene -= 0.25; 
+    
     
     // Spawn mouse if too trashy
     const random = rand(0, 10);
@@ -481,6 +479,7 @@ class Traveller {
   }
   
   tick(platform) {
+    this.ticks++;    
 
     if (!this.selectedExit) {
       const exitIndex = rand(0, platform.exits.length);
@@ -493,7 +492,6 @@ class Traveller {
       return;
     }
     
-    this.ticks++;    
     this.dancing = platform.buffs.filter(x => x.constructor.name == "MusicBuff").length > 0;
     platform.temperature += 0.1;
 
