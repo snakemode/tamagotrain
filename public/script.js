@@ -178,12 +178,15 @@ class MusicBuff {
    
   onCompletion(platform) {
     this.charmMice(platform);
+    for (const traveller of platform.contents.filter(c => c.constructor.name == "Traveller")) {
+      traveller.isPassedOut = false;
+    }
   }
   
   charmMice(platform) {
     const mice = platform.contents.filter(e => e.constructor.name === "Mouse");
     for (const mouse of mice) {
-        mouse.leave(platform);
+      mouse.leave(platform);
     }    
   }
   
@@ -384,26 +387,24 @@ class Mouse extends Problem {
   tick(platform) {
     
     if (!this.destination) {
+      this.destination = { x: rand(0, platform.width), y: rand(0, platform.height) }; 
       // Go somewhere random
-      this.destination = { x: rand(0, platform.width), y: rand(0, platform.height) };
     } 
     
     if (platform.hygiene >= 80 || platform.temperature <= 0) {
-      // Too clean or too cold! going away.
-      this.leave(platform);
+      this.leave(platform); // Too clean or too cold! going away.
     }
     
-    if (this.destination) {
-      walkNaturally(this, this.destination, this.stepSize);    
+    walkNaturally(this, this.destination, this.stepSize);    
+
+    if (inTargetZone(this, { x: platform.width + 100 , y: }) this.x >= platform.width && this.y >= platform.height) {
+      this.completed = true; // They left!
+    }
+    
+    if (inTargetZone(this, this.destination)) {
+      this.destination = null;
+    }
       
-      if (inTargetZone(this, this.destination)) {
-        this.destination = null;
-      }
-      
-      if (this.x >= platform.width && this.y >= platform.height) {
-        this.completed = true; // They left!
-      }
-    }    
     
     this.ticks++;
   }
