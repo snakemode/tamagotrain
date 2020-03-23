@@ -13,6 +13,14 @@ function rand(start, end) {
   return result;
 }
 
+function inTargetZone(location, target, tolerance) { 
+  if (location.x < target.x - tolerance) return false;
+  if (location.x > target.x + tolerance) return false;
+  if (location.y < target.y - tolerance) return false;
+  if (location.y > target.y + tolerance) return false;  
+  return true;
+}
+
 function walkNaturally(walker, target, unitSize) {
   const manhattenDistance = (p1, p2) => Math.abs(p2.x - p1.x) + Math.abs(p2.y - p1.y);
 
@@ -358,14 +366,6 @@ class Fire extends Problem {
   } 
 }
 
-function inTargetZone(location, target, tolerance) { 
-  if (location.x < target.x - tolerance) return false;
-  if (location.x > target.x + tolerance) return false;
-  if (location.y < target.y - tolerance) return false;
-  if (location.y > target.y + tolerance) return false;  
-  return true;
-}
-
 class Mouse extends Problem {
   constructor(x, y) {
     super(x, y);
@@ -377,7 +377,9 @@ class Mouse extends Problem {
     if (!this.destination) {
       // Go somewhere random
       this.destination = { x: rand(0, platform.width), y: rand(0, platform.height) };
-    } else if (platform.hygiene >= 100) {
+    } 
+    
+    if (platform.hygiene >= 80) {
       // Too clean, going away.
       this.destination = { x: platform.width + 100, y: platform.height + 100 };
     }
@@ -407,8 +409,11 @@ class Trash extends Problem {
     this.spawnedMouse = false;
   }
   
-  tick(platform) {    
-    platform.hygiene -= 0.25
+  tick(platform) {   
+    
+    if (this.ticks == 0) {
+      platform.hygiene -= 5; 
+    }
     
     // Spawn rats if too trashy
     const random = rand(0, 10);

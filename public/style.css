@@ -30,6 +30,7 @@ main {
 #playfield {
   position: relative;
   overflow: hidden;
+  border-radius: 15px;
   background-color: #7b7a82;
 }
 
@@ -111,10 +112,6 @@ main {
   left: 0;
   height: 120px;
   z-index: 5999;
-}
-
-#actions {
-  background: green;
 }
 
 #temperatureOverlay {
@@ -251,15 +248,17 @@ div[data-ispassedout="true"] {
     "button1 button2 button3"
     "label1 label2 label3";
   flex-wrap: wrap;
-  margin: 0 20px;
+  margin:20px;
+  justify-content: space-around;
 }
 
 .button {
-  align-content: center;
   width: 70px;
   height: 70px;
   border: 0;
   border-radius: 50%;
+  color: #5da819;
+  background-color: #5da819;
 }
 
 .button:nth-of-type(1) {
@@ -267,20 +266,21 @@ div[data-ispassedout="true"] {
 }
 .button:nth-of-type(2) {
   grid-area: button2;
+  margin-top: 20px;
 }
 .button:nth-of-type(3) {
   grid-area: button3;
 }
 
 .label {
-  display: block;
-  width: 33.33%;
+  text-align: center;
 }
 .label:nth-of-type(1) {
   grid-area: label1;
 }
 .label:nth-of-type(2) {
   grid-area: label2;
+  margin-top: 20px;
 }
 .label:nth-of-type(3) {
   grid-area: label3;
