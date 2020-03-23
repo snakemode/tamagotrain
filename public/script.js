@@ -174,7 +174,10 @@ class MusicBuff {
     if (this.ticks == 0) {
       this.completed = true;
     }
-  } 
+  }  
+
+  onCompletion(platform) {
+  }   
 }
 
 // game.js
@@ -378,7 +381,7 @@ class Mouse extends Problem {
     
     if (platform.hygiene >= 80 || platform.temperature <= 0) {
       // Too clean or too cold! going away.
-      this.destination = { x: platform.width + 100, y: platform.height + 100 };
+      this.leave(platform);
     }
     
     if (this.destination) {
@@ -394,7 +397,11 @@ class Mouse extends Problem {
     }    
     
     this.ticks++;
-  }  
+  }
+  
+  leave(platform) {
+    this.destination = { x: platform.width + 100, y: platform.height + 100 };
+  }
 
   onCompletion(platform) {
   }
@@ -501,6 +508,7 @@ class Traveller {
     this.droppedTrash = false;
     this.isPassedOut = false;
     this.isDisplayed = false;
+    this.dancing = false;
   }
   
   tick(platform) {
@@ -517,7 +525,10 @@ class Traveller {
     
     this.ticks++;
     
-    if (!this.isPassedOut) {
+    const musicPlaying = platform.buffs.filter(x => x.constructor.name == "MusicBuff").length > 0;
+    this.dancing = musicPlaying;
+    
+    if (!this.isPassedOut && !dancing) {
       this.ticksFromExit--;
       walkNaturally(this, this.selectedExit, 15);
     }
