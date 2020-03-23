@@ -307,10 +307,16 @@ class Problem {
 class Fire extends Problem {
   constructor() {
     super();
-  }
+    this.ticks = 0;
+  } 
+  
+  tick(platform) {  
+    platform.temperature += 1;
+    this.ticks++;
+  } 
 }
 
-class Poop extends Problem {
+class Rat extends Problem {
   constructor() {
     super();
   }
@@ -320,13 +326,25 @@ class Trash extends Problem {
   constructor(x, y) {
     super();
     this.ticks = 0;
+    this.spawnedRats = false;
     this.x = x;
     this.y = y;
   }
   
   tick(platform) {
+    if (this.ticks <= 5) {
+      platform.hygiene -= 0.5;
+    }
+    
+    // Spawn rats if too trashy
+    const random = rand(0, 10);
+    if (!this.spawnedRats && platform.hygiene <= 80 && random >= 7) { 
+      platform.contents.push(new Rat(this.x, this.y));
+      platform.contents.push(new Rat(this.x + 10, this.y));
+      this.spawnedRats = true;
+    }
+    
     this.ticks++;
-    platform.hygiene -= 0.5;
   }  
 }
 
@@ -399,16 +417,10 @@ class Traveller {
     
     platform.temperature += 0.1;
     
-    const random = this.random();
-    
-    if (!this.droppedTrash && platform.temperature >= hot && random >= 0.9) { 
-      platform.contents.push(new Trash(this.x, this.y));
-      this.droppedTrash = true;
-      return;
-    }
+    const random = this.random();    
     
     // Am I gonna drop trash? 10% chance when too hot
-    if (!this.droppedTrash && random >= 0.9) { 
+    if (!this.droppedTrash && random >= 0.95) { 
       platform.contents.push(new Trash(this.x, this.y));
       this.droppedTrash = true;
       return;
