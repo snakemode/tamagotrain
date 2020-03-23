@@ -364,13 +364,14 @@ class Rat extends Problem {
     this.stepSize = 10;
   }
     
-  tick(platform) {   
+  tick(platform) {
     
     if (!this.destination) {
-      this.destination = {
-        x: rand(0, platform.width),
-        y: rand(0, platform.height)
-      }
+      // Go somewhere random
+      this.destination = { x: rand(0, platform.width), y: rand(0, platform.height) };
+    } else if (platform.hygiene >= 100) {
+      // Too clean, going away.
+      this.destination = { x: platform.width + 100, y: platform.height + 100 };
     }
     
     if (this.destination) {
@@ -378,6 +379,10 @@ class Rat extends Problem {
       
       if (this.x == this.destination.x && this.y == this.destination.y) {
         this.destination = null;
+      }
+      
+      if (this.x >= platform.width && this.y >= platform.height) {
+        this.completed = true; // They left!
       }
     }    
     
@@ -400,7 +405,6 @@ class Trash extends Problem {
     // Spawn rats if too trashy
     const random = rand(0, 10);
     if (!this.spawnedRat && platform.hygiene <= 80 && random >= 7) {
-      console.log("Spawning rat at " + this.x + "," + this.y);
       platform.contents.push(new Rat(this.x, this.y));
       this.spawnedRat = true;
     }
@@ -514,7 +518,6 @@ class Traveller {
     
     // Am I gonna drop trash? 10% chance when too hot
     if (!this.droppedTrash && random >= 0.95) { 
-      console.log("Spawning trash at "  + this.x + "," + this.y);
       platform.contents.push(new Trash(this.x, this.y));
       this.droppedTrash = true;
       return;

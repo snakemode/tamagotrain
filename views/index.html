@@ -40,13 +40,13 @@
       </div>
       <div id="actions">
         <section class="buttons">
-          <label for="cleanit">Clean</label>
           <button id="cleanit" class="button" onclick="game.queueAction('clean', 'platformId1');">Clean</button>
+          <label class="label" for="cleanit">Clean</label>
           <button id="ventit" class="button" onclick="game.queueAction('vent', 'platformId1');">Vent</button>
+          <label class="label" for="ventit">Vent</label>
           <button id="somethingelse" class="button" onclick="game.queueAction('something', 'platformId1');">Something</button>
-        </section>
-
-        
+          <label class="label" for="somethingelse">Something</label>
+        </section>        
         <div id="platform-stats">
           Platform Temperature: <span data-bind-platform-0-temperature></span><br>
           Platform Hygiene: <span data-bind-platform-0-hygiene></span><br>

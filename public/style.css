@@ -246,16 +246,26 @@ div[data-ispassedout="true"] {
 }
 
 .buttons {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: 
+    'button button button',
+    'label, label, label'/
+     30% 30% 30%;;
+  flex-wrap: wrap;
   margin: 0 20px;
 }
 
 .button {
+  gri
   width: 70px;
   height: 70px;
   border: 0;
   border-radius: 50%;
+}
+
+.label {
+  display: block;
+  width: 33.33%;
 }
 
 /* train */
