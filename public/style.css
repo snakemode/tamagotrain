@@ -161,12 +161,18 @@ main {
 }
 
 .cleanBuff {
-  position: 
+  position: absolute;
+  top: 0;
+  left: 100%;
   background: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fwash.svg?v=1584964657478') repeat-y;
-  height: 100%;
-  width: 100%;
+  height: 340px;
+  width: 500px;
   background-size: 100px;
-  animation: clean 2s infinite linear;
+  animation: clean 5s linear;
+}
+
+@keyframes clean {
+  100% { transform: translate(-1000px, 0); }
 }
 
 #game-over-message  {
