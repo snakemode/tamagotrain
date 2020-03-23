@@ -491,10 +491,6 @@ class Traveller {
   }
 }
 
-function rand(start, end) {
-  return Math.floor(Math.random() * end) + start;
-}
-
 function renderLabels(currentGameState, previousGameState) {
   
   const viewModel = {
@@ -535,8 +531,8 @@ function renderBuffs(currentGameState, previousGameState) {
   for (let platform of currentGameState.platforms) {
     for (let buff of platform.buffs) {
       const ele = document.createElement("div");
-      ele.innerHTML = buff.constructor.name[0].toUpperCase() + " " + buff.ticks;
-      ele.classList.add("buff");
+      ele.setAttribute("data-ticks", buff.ticks); 
+      ele.classList.add("buff");      
       ele.classList.add(buff.constructor.name);
       buffTing.appendChild(ele);
       
@@ -570,20 +566,17 @@ function renderPlatform(currentGameState, previousGameState) {
     const platformAsOfLastTick = previousGameState.platforms.filter(p => p.id == platform.id)[0];
     const trainImage = document.getElementById("trainSVG");
 
-    if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
-      if (trainImage) {
-        trainImage.classList.remove("train");
-        trainImage.classList.remove("arrival");
-        trainImage.classList.remove("slideOut");
-      }  
-      
+    if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {      
+      trainImage.classList.remove("train");
+      trainImage.classList.remove("arrival");
+      trainImage.classList.remove("slideOut");       
       trainImage.classList.add("train");
       trainImage.classList.add("arrival");
       this.track.appendChild(trainImage);
     } 
 
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
-      document.getElementById("trainSVG").classList.add("slideOut");
+      trainImage.classList.add("slideOut");
     }
   }    
 }
