@@ -568,28 +568,24 @@ function renderPlatform(currentGameState, previousGameState) {
   
   for (let platform of currentGameState.platforms) {        
     const platformAsOfLastTick = previousGameState.platforms.filter(p => p.id == platform.id)[0];
+    const trainImage = document.getElementById("trainSVG");
 
     if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
-      const existing = document.getElementById("active-train");
-      if (existing) {
-        //existing.remove();
-      }
-      renderArrivingTrain();
+      if (trainImage) {
+        trainImage.classList.remove("train");
+        trainImage.classList.remove("arrival");
+        trainImage.classList.remove("slideOut");
+      }  
+      
+      trainImage.classList.add("train");
+      trainImage.classList.add("arrival");
+      this.track.appendChild(trainImage);
     } 
 
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
-      document.getElementById("active-train").classList.add("slideOut");
+      document.getElementById("trainSVG").classList.add("slideOut");
     }
   }    
-}
-
-function renderArrivingTrain() {
-  const trainImage = document.getElementById("trainSVG");
-  console.log("got svg");
-  trainImage.setAttribute("id", "active-train");
-  trainImage.classList.add("train");
-  trainImage.classList.add("arrival");
-  this.track.appendChild(trainImage);
 }
 
 function renderContents(currentGameState, previousGameState) {
