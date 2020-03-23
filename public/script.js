@@ -126,7 +126,7 @@ class CleanBuff {
   
   tick(platform) {
     this.ticks--;    
-    platform.hygiene += 1;
+    platform.hygiene += 2.5;
     
     this.removeOneTrash(platform);
     
@@ -349,6 +349,7 @@ class Platform {
     this.contents = this.contents.filter(b => !b.completed);
     this.capacity = this.capacity <= 0 ? 0 : this.capacity;
     this.hygiene = this.hygiene <= 0 ? 0 : this.hygiene;
+    this.hygiene = this.hygiene > 100 ? 100 : this.hygiene;
   }
 }
 
@@ -413,8 +414,7 @@ class Trash extends Problem {
   
   tick(platform) {   
     
-    platform.hygiene -= 0.25; 
-    
+    platform.hygiene -= 0.25;    
     
     // Spawn mouse if too trashy
     const random = rand(0, 10);
