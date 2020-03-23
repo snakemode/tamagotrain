@@ -571,8 +571,8 @@ function renderPlatform(currentGameState, previousGameState) {
 
     if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {
       const existing = document.getElementById("active-train");
-      if(existing) {
-        existing.remove();
+      if (existing) {
+        //existing.remove();
       }
       renderArrivingTrain();
     } 
@@ -580,29 +580,16 @@ function renderPlatform(currentGameState, previousGameState) {
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
       document.getElementById("active-train").classList.add("slideOut");
     }
-
-    const allDoors = [];
-    const svgs = document.querySelectorAll("[data-train-image]");
-    for (const svg of svgs) {
-      const leftDoors = svg.querySelectorAll(`[data-door-left]`);
-      const rightDoors =  svg.querySelectorAll(`[data-door-right]`);
-      allDoors.push(...leftDoors);
-      allDoors.push(...rightDoors);
-    }
-
-    if (platform.train && platform.train.doorState == "opening") {   
-        for (let door of allDoors) {
-          door.classList.add("hide");
-        }
-    }
-
-    if (platform.train && platform.train.doorState == "closing") {   
-      for (let door of allDoors) {
-        door.classList.remove("hide");
-      }
-    }
-
   }    
+}
+
+function renderArrivingTrain() {
+  const trainImage = document.getElementById("trainSVG");
+  console.log("got svg");
+  trainImage.setAttribute("id", "active-train");
+  trainImage.classList.add("train");
+  trainImage.classList.add("arrival");
+  this.track.appendChild(trainImage);
 }
 
 function renderContents(currentGameState, previousGameState) {
@@ -669,15 +656,6 @@ function renderContents(currentGameState, previousGameState) {
     }
   }    
 }
-
-function renderArrivingTrain() {
-  const trainImage = document.getElementById("trainSVG");
-  trainImage.setAttribute("id", "active-train");
-  trainImage.classList.add("train");
-  trainImage.classList.add("arrival");
-  this.track.appendChild(trainImage);
-}
-
 
 /* globals GameUi, Game, StubAblyConnector */
 

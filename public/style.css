@@ -266,6 +266,7 @@ div[data-ispassedout="true"] {
 		animation: open-right 6s ease-out;
     animation-delay: 1.6s;
 	}
+
 	@keyframes open-left {
   	25% {	transform:translate(-220px, 0); }
 		75% {	transform:translate(-220px, 0); }
