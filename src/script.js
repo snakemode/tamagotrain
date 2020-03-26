@@ -730,9 +730,7 @@ function startGame() {
   setInterval(() => ui.draw(game), 1000 / fps);
 }
 
-// Jest
-if (typeof(module) != 'undefined') {
-  module.exports = {
+module.exports = {
     CleanBuff,
     VentBuff,
     MusicBuff,
@@ -740,8 +738,6 @@ if (typeof(module) != 'undefined') {
     GameUi,
     Traveller,
     Platform,
-    Train
-  };
-} else {
-  startGame();
-}
+    Train,
+    startGame
+};

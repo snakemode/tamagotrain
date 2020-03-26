@@ -11,7 +11,8 @@
     "express": "^4.17.1",    
     "webpack": "latest",
     "webpack-cli": "latest",
-    "clean-webpack-plugin": "latest",    
+    "clean-webpack-plugin": "latest",  
+    "html-webpack-plugin": "latest",    
     "jest": "latest",
     "jest-cli": "latest"
   },
