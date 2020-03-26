@@ -1,4 +1,5 @@
-
+const ticksPerSecond = require("./game-config").ticksPerSecond;
+const Platform = require("./Platform");
 
 class Game {
   constructor(stationName, platformIds) {
@@ -45,7 +46,7 @@ class Game {
   createBuff(name) {   
     try { 
       if (typeof(Buffs) !== "undefined") {
-        return new Buffs[name]();
+        // return new Buffs[name]();
       } else {
         return (Function('return new ' + name))();
       }

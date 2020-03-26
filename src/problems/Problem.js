@@ -1,4 +1,4 @@
-const uuidv4 = require("../utils").uuidv
+const uuidv4 = require("../utils").uuidv4;
 
 class Problem {
   constructor(x, y) {

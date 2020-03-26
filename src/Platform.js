@@ -1,3 +1,4 @@
+const Train = require("./Train");
 
 class Platform {
   constructor(id) {
