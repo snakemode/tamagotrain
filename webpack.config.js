@@ -2,18 +2,13 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: { index: './public-src/index.ts' },
+  entry: { index: './public-src/script.js' },
   plugins: [
-    new CleanWebpackPlugin(['dist'])
+    // new CleanWebpackPlugin(['dist'])
   ],
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: 'packed-script.js',
+    path: path.resolve(__dirname, 'public'),
     publicPath: ''
-  },
-  module: {
-    loaders: [
-      { test: /\.ts$/, loader: 'ts-loader' }
-    ]
   }
 };
