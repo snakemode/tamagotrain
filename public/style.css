@@ -242,16 +242,20 @@ div[data-ispassedout="true"] {
 .traveller1 {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fblobi.gif?v=1584714913877');
 }
-
+.traveller0[data-ispassedout="true"]{
+  background-image: url('hhttps://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fblobfaint.gif?v=1585233030104')
+}
 .traveller2 {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fkitty.gif?v=1584717567046');
 }
-
+.traveller0[data-ispassedout="true"]{
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ffaintkitty.gif?v=1585228510876')
+}
 .traveller3 {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpika2.gif?v=1584717580600');
 }
 .traveller3[data-ispassedout="true"]{
-  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ffaintkitty.gif?v=1585228510876')
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpikafaint.gif?v=1585233180148')
 }
 
 
