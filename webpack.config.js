@@ -16,6 +16,6 @@ module.exports = {
     filename: 'script.js',
     path: path.resolve(__dirname, 'public'),    
     library: 'train',
-    libraryTarget: 'var'
+    libraryTarget: 'umd'
   }
 };
