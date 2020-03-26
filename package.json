@@ -11,6 +11,13 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    
+    "webpack": "latest",
+    "html-webpack-plugin": "latest",
+    "clean-webpack-plugin": "latest",
+    "ts-loader": "latest",
+    "typescript": "latest",    
+    
     "jest": "latest",
     "jest-cli": "latest"
   },
