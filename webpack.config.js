@@ -6,7 +6,7 @@ console.log(path.resolve(__dirname, 'public'));
 
 module.exports = {
   mode: 'development',
-  entry: { index: './public-src/script.js' },
+  entry: { index: './src/script.js' },
   plugins: [
     // new CleanWebpackPlugin(['dist'])
   ],
