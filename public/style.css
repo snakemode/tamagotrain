@@ -250,6 +250,10 @@ div[data-ispassedout="true"] {
 .traveller3 {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpika2.gif?v=1584717580600');
 }
+.traveller3[data-ispassedout="true"]{
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ffaintkitty.gif?v=1585228510876')
+}
+
 
 .buttons {
   display: grid;
