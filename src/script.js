@@ -737,7 +737,7 @@ if (typeof(module) != 'undefined') {
     VentBuff,
     MusicBuff,
     Game,
-    GameUI,
+    GameUi,
     Traveller,
     Platform,
     Train
