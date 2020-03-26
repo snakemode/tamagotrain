@@ -236,7 +236,9 @@ div[data-ispassedout="true"] {
 .traveller0 {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Ftrainagotchi.gif?v=1584659771420');
 }
-
+.traveller0[data-ispassedout="true"]{
+  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fbirbfaint.gif?v=1585227806957')
+}
 .traveller1 {
     background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fblobi.gif?v=1584714913877');
 }

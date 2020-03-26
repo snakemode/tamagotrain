@@ -27,13 +27,13 @@ describe("Game", () => {
   });
 
   it("tick - triggers game over when temperature too hot", () => {
-    game.platforms[0].temperature = 50;
+    game.platforms[0].temperature = 60;
     game.tick();
     expect(game.status).toBe("ended");
   });
 
   it("tick - triggers game over when temperature too cold", () => {
-    game.platforms[0].temperature = -50;
+    game.platforms[0].temperature = -60;
     game.tick();
     expect(game.status).toBe("ended");
   });
@@ -64,7 +64,7 @@ describe("Game", () => {
   it("queueAction unknown buff, raises error", () => {
     game.queueAction("not_a_real_buff", "platformId1");
     
-    expect(() => game.tick()).toThrow("Could not find handler called not_a_real_buffBuff");
+    expect(() => game.tick()).toThrow("Could not find handler called Not_a_real_buffBuff");
   });
   
   

@@ -1,5 +1,5 @@
-const Traveller = require("./game-traveller").Traveller;
-const Platform = require("./game-platform").Platform;
+const Traveller = require("./Traveller");
+const Platform = require("./Platform");
 
 describe("Traveller", () => {
     
@@ -23,44 +23,41 @@ describe("Traveller", () => {
   });
 
   it("tick - reduces distance from exit by one", () => {
-    traveller.distanceFromExit = 100;
+    traveller.ticksFromExit = 100;
 
     traveller.tick(platform);    
 
-    expect(traveller.distanceFromExit).toBe(99);
+    expect(traveller.ticksFromExit).toBe(99);
   });
 
   it("tick - doesn't get closer to the exit when passed out", () => {
-    traveller.distanceFromExit = 100;
+    traveller.ticksFromExit = 100;
     traveller.isPassedOut = true;
 
     traveller.tick(platform);    
 
-    expect(traveller.distanceFromExit).toBe(100);
+    expect(traveller.ticksFromExit).toBe(100);
   });
 
-  it("tick - vomits 10 percent of the time when temp >= 30 and hasn't already vommed", () => {
-    platform.temperature = 30;
-    traveller.isVommy = false;
-    traveller.random = () => 1.0;
+  it("tick - litters 5 percent of the time when hasn't already littered", () => {
+    traveller.droppedTrash = false;
+    traveller.random = () => 0.95;
 
     traveller.tick(platform); 
 
-    expect(platform.contents[0].constructor.name).toBe("Vomit");
-    expect(traveller.isVommy).toBe(true);
+    expect(platform.contents[0].constructor.name).toBe("Trash");
+    expect(traveller.droppedTrash).toBe(true);
   });
 
-  it("tick - doesn't vomit 90% of the time", () => {
-    platform.temperature = 30;
+  it("tick - doesn't litter 95% of the time", () => {
     traveller.random = () => 0.5;
 
     traveller.tick(platform); 
 
-    expect(traveller.isVommy).toBe(false);
+    expect(traveller.droppedTrash).toBe(false);
   });
 
-  it("tick - doesn't vomit if they already have", () => {
-    platform.temperature = 30;
+  it("tick - doesn't litter if they already have", () => {
     traveller.random = () => 1.0;
 
     traveller.tick(platform);  // voms

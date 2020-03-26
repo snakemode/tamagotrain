@@ -1,5 +1,5 @@
-const Train = require("./game-train").Train;
-const Platform = require("./game-platform").Platform;
+const Train = require("./Train");
+const Platform = require("./Platform");
 
 describe("Train", () => {
     
@@ -21,14 +21,16 @@ describe("Train", () => {
     expect(train.ticks).toBe(1);
   });  
 
-  it("tick - increase temperature by 0.5", () => {
-    platform.temperature = 10;    
+  it("tick - increase temperature by 0.25", () => {
+    platform.temperature = 10.25;    
     train.tick(platform);    
     expect(platform.temperature).toBe(10.5);
   });  
 
-  it("tick - adds a new traveller to the platform", () => {       
-    train.tick(platform);  
+  it("tick - adds a new traveller to the platform from third tick", () => {       
+    train.tick(platform); 
+    train.tick(platform);
+    train.tick(platform);
 
     expect(platform.contents.length).toBe(1);
     expect(platform.contents[0].constructor.name).toBe("Traveller");

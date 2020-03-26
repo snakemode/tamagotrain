@@ -1,4 +1,4 @@
-const Platform = require("./game-platform");
+const Platform = require("./Platform");
 
 describe("Platform", () => {
     
