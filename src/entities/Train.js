@@ -1,4 +1,4 @@
-const uuidv4 = require("./utils").uuidv4;
+const uuidv4 = require("../utils").uuidv4;
 const Traveller = require("./Traveller");
 
 class Train {

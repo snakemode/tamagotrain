@@ -1,4 +1,4 @@
-const hot = require("./game-config").hot;
+const hot = require("./Config").hot;
 const rand = require("./utils").rand;
 
 class GameUi {

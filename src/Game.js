@@ -1,5 +1,5 @@
-const ticksPerSecond = require("./game-config").ticksPerSecond;
-const Platform = require("./Platform");
+const ticksPerSecond = require("./Config").ticksPerSecond;
+const Platform = require("./entities/Platform");
 
 class Game {
   constructor(stationName, platformIds) {

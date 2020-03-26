@@ -1,6 +1,7 @@
-const rand = require("./utils").rand;
-const uuidv4 = require("./utils").uuidv4;
-const walkNaturally = require("./utils").walkNaturally;
+const rand = require("../utils").rand;
+const uuidv4 = require("../utils").uuidv4;
+const walkNaturally = require("../traits/Pathfinder").walkNaturally;
+const Trash = require("../problems/Trash");
 
 class Traveller {
    constructor() {

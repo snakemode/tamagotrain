@@ -1,7 +1,7 @@
 const Problem = require("./Problem");
 const rand = require("../utils").rand;
-const inTargetZone = require("../utils").inTargetZone;
-const walkNaturally = require("../utils").walkNaturally;
+const inTargetZone = require("../traits/Pathfinder").inTargetZone;
+const walkNaturally = require("../traits/Pathfinder").walkNaturally;
 
 class Mouse extends Problem {
   constructor(x, y) {

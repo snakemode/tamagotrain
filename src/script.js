@@ -1,4 +1,4 @@
-const fps = require("./game-config").fps;
+const fps = require("./Config").fps;
 const StubAblyConnector = require("./AblyConnector");
 const Game = require("./Game");
 const GameUi = require("./GameUi");
