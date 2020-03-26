@@ -14,10 +14,20 @@ body {
 }
 
 main {
-  max-width: 500px;
-  margin: 0 auto;
-  position: relative;
-  background: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fbg.svg?v=1585259532517') no-repeat;
+    max-width: 620px;
+    margin: 0 auto;
+    position: relative;
+    background-size: 680px;
+    padding: 60px;
+}
+
+main:after {
+  content: "";
+  display: block;
+  width: 126px;
+  height: 180px;
+  background-color: red;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
 }
 
 #assets {
