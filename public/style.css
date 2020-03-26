@@ -197,6 +197,11 @@ main:before {
   transform: translate(0px, 0);
 }
 
+.MusicBuff {
+  background: url("https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fflute.svg?v=1585263677040") no-repeat;
+  background-size: contain;
+}
+
 @keyframes clean {
   100% { transform: translate(-3000px, 0); }
 }
