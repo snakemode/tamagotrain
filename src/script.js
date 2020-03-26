@@ -16,6 +16,8 @@ function startGame() {
   ably.fakeIncomingData('KINGS CROSS');
   
   setInterval(() => ui.draw(game), 1000 / fps);
+  
+  return game;
 }
 
 module.exports = { startGame };

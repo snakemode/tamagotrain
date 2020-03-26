@@ -8,12 +8,17 @@
     <meta name="description" content="A cool thing made with Glitch" />
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon" />
 
+    <script src="/script.js"></script>
+
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     
-    <!--<button onclick="startGame();">Start</button><br>-->
+    <!--<button onclick="startGame();">Start</button><br>-->        
+    <script>
+      const game = train.startGame();
+    </script>
 
     Ticks: <span data-bind-ticks></span><br>
     Total Platforms: <span data-bind-total-platforms></span><br>
@@ -232,11 +237,6 @@
 </svg>
   
   </section>
-    
-    <script src="/script.js"></script>
-    <script>
-      train.startGame();
-    </script>
 
   </body>
 </html>

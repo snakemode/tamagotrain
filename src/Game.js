@@ -1,6 +1,16 @@
 const ticksPerSecond = require("./Config").ticksPerSecond;
 const Platform = require("./entities/Platform");
 
+const CleanBuff = require("./buffs/CleanBuff");
+const MusicBuff = require("./buffs/MusicBuff");
+const VentBuff = require("./buffs/VentBuff");
+
+const buffs = { 
+  CleanBuff,
+  MusicBuff,
+  VentBuff
+};
+
 class Game {
   constructor(stationName, platformIds) {
     this.ticks = 0;
@@ -44,12 +54,8 @@ class Game {
   }
 
   createBuff(name) {   
-    try { 
-      if (typeof(Buffs) !== "undefined") {
-        // return new Buffs[name]();
-      } else {
-        return (Function('return new ' + name))();
-      }
+    try {
+      return new buffs[name]();      
     } catch (ex) {
       throw "Could not find handler called " + name;
     }
