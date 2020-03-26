@@ -87,8 +87,9 @@ function renderBuffs(currentGameState, previousGameState) {
 
 function renderGameStatus(currentGameState, previousGameState) {
   if (currentGameState.status !== "ended") return;  
-  document.getElementById("game-over-message").classList.remove("hide");
-  
+  document.getElementById("game-over-message").classList.remove("hide");  
+  document.getElementById("game-over-message").classList.add(currentGameState.status);  
+  document.getElementById("game-over-message").classList.add("game-over-failure-" + currentGameState.gameover.conditionId);  
   return -1;
 }
 

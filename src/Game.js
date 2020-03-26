@@ -33,9 +33,12 @@ class Game {
   tick() {
     this.ticks++;
          
-    const gameOverCheck = this.isGameOver(this);
-    if (gameOverCheck.gameover) {
-      this.endGame(gameOverCheck.message);
+    const gameOverCheck = this.isGameOver(this);    
+    if (gameOverCheck.gameover) {      
+      this.status = "ended";
+      this.gameover = gameOverCheck;
+      this.gameovermsg = gameOverCheck.message;
+      clearInterval(this.tickInterval);      
       return;
     }   
     
@@ -69,19 +72,14 @@ class Game {
       { condition: (g) => (g.platforms.filter(p => p.contents.length >= p.capacity).length > 0), message: "Your platforms are too full!" }
     ];
     
-    for (let c of failureConditions) {
+    for (let index in failureConditions) {
+      const c = failureConditions[index];
       if (c.condition(this)) {
-        return { gameover: true, message: c.message };
+        return { gameover: true, message: c.message, conditionId: index };
       }
     }
     
     return { gameover: false };
-  }
-  
-  endGame(message) {
-    this.status = "ended";
-    this.gameovermsg = message;
-    clearInterval(this.tickInterval);    
   }
   
   queueAction(key, target) {
