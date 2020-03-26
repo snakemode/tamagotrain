@@ -15,8 +15,7 @@ module.exports = {
   output: {
     filename: 'script.js',
     path: path.resolve(__dirname, 'public'),    
-    library: 'trainagotchi',
-    libraryTarget: 'window',
-    libraryExport: 'default'
+    library: 'train',
+    libraryTarget: 'var'
   }
 };

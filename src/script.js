@@ -730,6 +730,8 @@ function startGame() {
   setInterval(() => ui.draw(game), 1000 / fps);
 }
 
+console.log("heyhey");
+
 module.exports = {
     CleanBuff,
     VentBuff,
