@@ -166,6 +166,17 @@ eval("class StubAblyConnector {\n  constructor() {\n    this.callbacks = {};\n  
 
 /***/ }),
 
+/***/ "./src/AblyTrainArrivalsClient.js":
+/*!****************************************!*\
+  !*** ./src/AblyTrainArrivalsClient.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const ably = __webpack_require__(/*! ably */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nclass AblyTrainArrivalsClient {\n  constructor() {\n    this._client = new ably.Realtime({ authUrl: '/api/createTokenRequest' });\n  }\n  \n  async subscribeToLine(channelName, onSubscriptionData) {\n    const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;\n    const channel = ably.channels.get(channelId);\n\n    await this.attachPromise(channel);  \n    channel.subscribe(this.onSubscriptionMessage); \n\n    const resultPage = await this.getHistoryPromise(channel, { untilAttach: true, limit: 1 });\n    console.log(\"History retrieved for \" + channelName); \n\n    const recentMessage = resultPage.items[0] || { data: [] }; \n    return recentMessage.data;\n  }\n  \n  onSubscriptionMessage(data) {\n    console.log(data); \n  }\n  \n  async attachPromise(channel) {\n    return new Promise((resolve, reject) => {\n      channel.attach(err => {      \n        if (err) { reject(err); } else { resolve(); }\n      });\n    });\n  }\n\n  async getHistoryPromise(channel, params) {\n    return new Promise((resolve, reject) => {\n      channel.history(params, (err, response) => {\n        if (err) { reject(err); } else { resolve(response); }\n      });\n    });\n  }\n}\n\nmodule.exports = AblyTrainArrivalsClient;\n\n//# sourceURL=webpack://train/./src/AblyTrainArrivalsClient.js?");
+
+/***/ }),
+
 /***/ "./src/Config.js":
 /*!***********************!*\
   !*** ./src/Config.js ***!
@@ -305,7 +316,7 @@ eval("const Problem = __webpack_require__(/*! ./Problem */ \"./src/problems/Prob
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const fps = __webpack_require__(/*! ./Config */ \"./src/Config.js\").fps;\nconst StubAblyConnector = __webpack_require__(/*! ./AblyConnector */ \"./src/AblyConnector.js\");\nconst Game = __webpack_require__(/*! ./Game */ \"./src/Game.js\");\nconst GameUi = __webpack_require__(/*! ./GameUi */ \"./src/GameUi.js\");\n\nconst ably = __webpack_require__(/*! ably */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nlet game, ui;\nlet ablyConnector;\n\nfunction startGame(ablyTokenRequest) {\n  const client = new ably.Realtime({ authUrl: '/api/createTokenRequest' });\n  \n  \n  ablyConnector = new StubAblyConnector();\n  \n  game = new Game(\"KINGS CROSS\", [ \"platformId1\" ]);\n  ui = new GameUi(game);  \n  \n  ablyConnector.onArrivalTo(\"KINGS CROSS\", msg => game.registerEvent(game, msg));  \n  game.start();  \n  \n  ablyConnector.fakeIncomingData('KINGS CROSS');\n  \n  setInterval(() => ui.draw(game), 1000 / fps);\n  \n  return game;\n}\n\nmodule.exports = { startGame };\n\n//# sourceURL=webpack://train/./src/script.js?");
+eval("const fps = __webpack_require__(/*! ./Config */ \"./src/Config.js\").fps;\nconst Game = __webpack_require__(/*! ./Game */ \"./src/Game.js\");\nconst GameUi = __webpack_require__(/*! ./GameUi */ \"./src/GameUi.js\");\n\nconst FakeTrainArrivalsData = __webpack_require__(/*! ./AblyConnector */ \"./src/AblyConnector.js\");\nconst AblyTrainArrivalsClient = __webpack_require__(/*! ./AblyTrainArrivalsClient */ \"./src/AblyTrainArrivalsClient.js\");\n\nlet game, ui;\nlet dataSource;\n\nfunction startGame(useRealData = false) {\n  dataSource = useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();\n  \n  game = new Game(\"KINGS CROSS\", [ \"platformId1\" ]);\n  ui = new GameUi(game);  \n  \n  dataSource.onArrivalTo(\"KINGS CROSS\", msg => game.registerEvent(game, msg));  \n  game.start();  \n  \n  dataSource.fakeIncomingData('KINGS CROSS');\n  \n  setInterval(() => ui.draw(game), 1000 / fps);\n  \n  return game;\n}\n\nmodule.exports = { startGame };\n\n//# sourceURL=webpack://train/./src/script.js?");
 
 /***/ }),
 

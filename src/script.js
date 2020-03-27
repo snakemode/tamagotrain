@@ -1,26 +1,23 @@
 const fps = require("./Config").fps;
-const StubAblyConnector = require("./AblyConnector");
 const Game = require("./Game");
 const GameUi = require("./GameUi");
 
-const ably = require('ably');
+const FakeTrainArrivalsData = require("./AblyConnector");
+const AblyTrainArrivalsClient = require("./AblyTrainArrivalsClient");
 
 let game, ui;
-let ablyConnector;
+let dataSource;
 
-function startGame(ablyTokenRequest) {
-  const client = new ably.Realtime({ authUrl: '/api/createTokenRequest' });
-  
-  
-  ablyConnector = new StubAblyConnector();
+function startGame(useRealData = false) {
+  dataSource = useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();
   
   game = new Game("KINGS CROSS", [ "platformId1" ]);
   ui = new GameUi(game);  
   
-  ablyConnector.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
+  dataSource.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
   game.start();  
   
-  ablyConnector.fakeIncomingData('KINGS CROSS');
+  dataSource.fakeIncomingData('KINGS CROSS');
   
   setInterval(() => ui.draw(game), 1000 / fps);
   

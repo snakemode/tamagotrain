@@ -10,7 +10,6 @@
   "dependencies": {
     "express": "^4.17.1", 
     "ably": "latest",
-    "bluebird": "latest",
     "webpack": "latest",
     "webpack-cli": "latest",
     "clean-webpack-plugin": "latest",  
