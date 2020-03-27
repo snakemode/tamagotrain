@@ -6,25 +6,19 @@ const readFileAsync = promisify(fs.readFile);
 const ably = require('ably');
 const client = new ably.Realtime(process.env.ABLY_API_KEY);
 
-
 const app = express();
-
-
 app.use(express.static("public"));
 
 app.get("/", async (request, response) => {
   const tokenRequestData = await createTokenRequest({ clientId: 'trainagotchi' });  
   const templateFile = await readFileAsync(__dirname + "/views/index.html");
-  
-  response.sendFile(__dirname + "/views/index.html");
+  const templated = templateFile.toString().replace('"{ createTokenRequest }"', JSON.stringify(tokenRequestData));  
+  response.set('Content-Type', 'text/html');
+  response.send(templated);
 });
 
-app.get("/test", async (request, response) => {
+app.get("/", async (request, response) => {
   const tokenRequestData = await createTokenRequest({ clientId: 'trainagotchi' });  
-  const templateFile = await readFileAsync(__dirname + "/views/index.html");
-  let templated = templateFile;
-  //const templated = templateFile.replace('"{ createTokenRequest }"', tokenRequestData);
-  
   response.set('Content-Type', 'text/html');
   response.send(templated);
 });
