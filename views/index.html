@@ -8,9 +8,6 @@
     <meta name="description" content="A cool thing made with Glitch" />
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon" />
 
-    <script>
-      const ablyToken = @Model.createTokenRequest;
-    </script>
     <script src="/script.js"></script>
 
     <!-- import the webpage's stylesheet -->
@@ -20,7 +17,7 @@
     
     <!--<button onclick="startGame();">Start</button><br>-->        
     <script>
-      const game = train.startGame(ablyToken);
+      const game = train.startGame();
     </script>
 
     Ticks: <span data-bind-ticks></span><br>
