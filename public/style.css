@@ -245,6 +245,17 @@ main:before {
     background-size: contain;
 }
 
+.game-over-failure-1:after {
+    content: "";
+    margin-top: 40px;
+    width: 140px;
+    height: 140px;
+    background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fice.gif?v=1585310595796) no-repeat;
+    background-size: contain;
+}
+
+
+
 .hide {
   display: none;
 }
