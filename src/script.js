@@ -15,7 +15,7 @@ async function startGame(useRealData = false) {
   messageRouter = new TrainMessageRouter();  
   messageRouter.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));
   
-  dataSource = new SimulatedTrainArrivalsClient(); //useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();
+  dataSource = useRealData ? new AblyTrainArrivalsClient() : new SimulatedTrainArrivalsClient();
   await dataSource.listenForEvents('KINGS CROSS', msg =>  messageRouter.onDataReceived(msg));  
   
   game.start();
