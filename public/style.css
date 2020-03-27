@@ -210,9 +210,10 @@ main:before {
   100% { transform: translate(-3000px, 0); }
 }
 
-#game-over-message  {
+.gameover {
     position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     top: 0;
