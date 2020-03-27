@@ -3,17 +3,22 @@ const StubAblyConnector = require("./AblyConnector");
 const Game = require("./Game");
 const GameUi = require("./GameUi");
 
-let game, ui;
-let ably = new StubAblyConnector();
+const ably = require('ably');
 
-function startGame() {
+let game, ui;
+let ablyConnector;
+
+function startGame(ablyTokenRequest) {
+  const client = new ably.Realtime({ authCallback: ablyTokenRequest });  
+  ablyConnector = new StubAblyConnector();
+  
   game = new Game("KINGS CROSS", [ "platformId1" ]);
   ui = new GameUi(game);  
   
-  ably.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
+  ablyConnector.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
   game.start();  
   
-  ably.fakeIncomingData('KINGS CROSS');
+  ablyConnector.fakeIncomingData('KINGS CROSS');
   
   setInterval(() => ui.draw(game), 1000 / fps);
   
