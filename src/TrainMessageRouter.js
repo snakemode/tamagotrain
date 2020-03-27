@@ -1,4 +1,4 @@
-class AblyMessageRouter {
+class TrainMessageRouter {
   constructor() {
     this.callbacks = {};
   }
@@ -20,11 +20,10 @@ class AblyMessageRouter {
   }
   
   onDataReceived(data) {
-    console.log(data);
     for (const cb of this.callbacks[data.station]) {      
       cb(data);      
     }
   }
 }
 
-module.exports = AblyMessageRouter;
+module.exports = TrainMessageRouter;

@@ -155,17 +155,6 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
-/***/ "./src/AblyMessageRouter.js":
-/*!**********************************!*\
-  !*** ./src/AblyMessageRouter.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("class AblyMessageRouter {\n  constructor() {\n    this.callbacks = {};\n  }\n  \n  hasCallbacksFor(stationName) {\n    const stationCallbacks = Object.getOwnPropertyNames(this.callbacks);    \n    if (stationCallbacks.indexOf(stationName) == -1) {\n      return false;\n    }\n    return true;\n  }\n  \n  onArrivalTo(stationName, callback) {    \n    if(!this.hasCallbacksFor(stationName)) {\n      this.callbacks[stationName] = [];\n    }\n    \n    this.callbacks[stationName].push(callback);\n  }\n  \n  onDataReceived(data) {\n    console.log(data);\n    for (const cb of this.callbacks[data.station]) {      \n      cb(data);      \n    }\n  }\n}\n\nmodule.exports = AblyMessageRouter;\n\n//# sourceURL=webpack://train/./src/AblyMessageRouter.js?");
-
-/***/ }),
-
 /***/ "./src/AblyTrainArrivalsClient.js":
 /*!****************************************!*\
   !*** ./src/AblyTrainArrivalsClient.js ***!
@@ -173,7 +162,7 @@ eval("class AblyMessageRouter {\n  constructor() {\n    this.callbacks = {};\n  
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const ably = __webpack_require__(/*! ably */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nclass AblyTrainArrivalsClient {\n  constructor(client) {\n    this._client = client || new ably.Realtime({ authUrl: '/api/createTokenRequest' });\n  }\n  \n  async listenForEvents(stationName, callback) { \n    \n  }\n  \n  async subscribeToLine(channelName, onSubscriptionData) {\n    const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;\n    const channel = ably.channels.get(channelId);\n\n    await this.attachPromise(channel);  \n    channel.subscribe(this.onSubscriptionMessage); \n\n    const resultPage = await this.getHistoryPromise(channel, { untilAttach: true, limit: 1 });\n    console.log(\"History retrieved for \" + channelName); \n\n    const recentMessage = resultPage.items[0] || { data: [] }; \n    return recentMessage.data;\n  }\n  \n  onSubscriptionMessage(data) {\n    console.log(data); \n  }\n  \n  async attachPromise(channel) {\n    return new Promise((resolve, reject) => {\n      channel.attach(err => {      \n        if (err) { reject(err); } else { resolve(); }\n      });\n    });\n  }\n\n  async getHistoryPromise(channel, params) {\n    return new Promise((resolve, reject) => {\n      channel.history(params, (err, response) => {\n        if (err) { reject(err); } else { resolve(response); }\n      });\n    });\n  }\n}\n\nmodule.exports = AblyTrainArrivalsClient;\n\n//# sourceURL=webpack://train/./src/AblyTrainArrivalsClient.js?");
+eval("const ably = __webpack_require__(/*! ably */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nclass AblyTrainArrivalsClient {\n  constructor(client) {\n    this._client = client || new ably.Realtime({ authUrl: '/api/createTokenRequest' });\n  }\n  \n  async listenForEvents(stationName, callback) { \n    // subscribe to things and callback when messages arrive\n  }\n  \n  async subscribeToLine(channelName, onSubscriptionData) {\n    const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;\n    const channel = ably.channels.get(channelId);\n\n    await this.attachPromise(channel);  \n    channel.subscribe(this.onSubscriptionMessage); \n\n    const resultPage = await this.getHistoryPromise(channel, { untilAttach: true, limit: 1 });\n    console.log(\"History retrieved for \" + channelName); \n\n    const recentMessage = resultPage.items[0] || { data: [] }; \n    return recentMessage.data;\n  }\n  \n  onSubscriptionMessage(data) {\n    console.log(data); \n  }\n  \n  async attachPromise(channel) {\n    return new Promise((resolve, reject) => {\n      channel.attach(err => {      \n        if (err) { reject(err); } else { resolve(); }\n      });\n    });\n  }\n\n  async getHistoryPromise(channel, params) {\n    return new Promise((resolve, reject) => {\n      channel.history(params, (err, response) => {\n        if (err) { reject(err); } else { resolve(response); }\n      });\n    });\n  }\n}\n\nmodule.exports = AblyTrainArrivalsClient;\n\n//# sourceURL=webpack://train/./src/AblyTrainArrivalsClient.js?");
 
 /***/ }),
 
@@ -217,7 +206,18 @@ eval("const hot = __webpack_require__(/*! ./Config */ \"./src/Config.js\").hot;\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const ably = __webpack_require__(/*! ably */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nclass SimulatedTrainArrivalsClient {\n \n  async listenForEvents(stationName, callback) {    \n    // Train arrives and departs every 2 seconds.\n    const interval = 1000 * 12;\n\n    callback({ station: stationName, line: \"platformId1\", arrived: true });\n    setTimeout(() => { callback({ station: stationName, line: \"platformId1\", departed: true }); }, interval);  \n  }\n  \n}\n\nmodule.exports = SimulatedTrainArrivalsClient;\n\n//# sourceURL=webpack://train/./src/SimulatedTrainArrivalsClient.js?");
+eval("const ably = __webpack_require__(/*! ably */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nclass SimulatedTrainArrivalsClient {\n\n  async listenForEvents(stationName, callback) {    \n    // Train arrives and departs every 2 seconds.\n    const interval = 1000 * 12;\n\n    callback({ station: stationName, line: \"platformId1\", arrived: true });\n    setTimeout(() => { callback({ station: stationName, line: \"platformId1\", departed: true }); }, interval);  \n  }\n  \n}\n\nmodule.exports = SimulatedTrainArrivalsClient;\n\n//# sourceURL=webpack://train/./src/SimulatedTrainArrivalsClient.js?");
+
+/***/ }),
+
+/***/ "./src/TrainMessageRouter.js":
+/*!***********************************!*\
+  !*** ./src/TrainMessageRouter.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("class TrainMessageRouter {\n  constructor() {\n    this.callbacks = {};\n  }\n  \n  hasCallbacksFor(stationName) {\n    const stationCallbacks = Object.getOwnPropertyNames(this.callbacks);    \n    if (stationCallbacks.indexOf(stationName) == -1) {\n      return false;\n    }\n    return true;\n  }\n  \n  onArrivalTo(stationName, callback) {    \n    if(!this.hasCallbacksFor(stationName)) {\n      this.callbacks[stationName] = [];\n    }\n    \n    this.callbacks[stationName].push(callback);\n  }\n  \n  onDataReceived(data) {\n    for (const cb of this.callbacks[data.station]) {      \n      cb(data);      \n    }\n  }\n}\n\nmodule.exports = TrainMessageRouter;\n\n//# sourceURL=webpack://train/./src/TrainMessageRouter.js?");
 
 /***/ }),
 
@@ -327,7 +327,7 @@ eval("const Problem = __webpack_require__(/*! ./Problem */ \"./src/problems/Prob
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const fps = __webpack_require__(/*! ./Config */ \"./src/Config.js\").fps;\nconst Game = __webpack_require__(/*! ./Game */ \"./src/Game.js\");\nconst GameUi = __webpack_require__(/*! ./GameUi */ \"./src/GameUi.js\");\n\nconst AblyMessageRouter = __webpack_require__(/*! ./AblyMessageRouter */ \"./src/AblyMessageRouter.js\");\nconst AblyTrainArrivalsClient = __webpack_require__(/*! ./AblyTrainArrivalsClient */ \"./src/AblyTrainArrivalsClient.js\");\nconst SimulatedTrainArrivalsClient = __webpack_require__(/*! ./SimulatedTrainArrivalsClient */ \"./src/SimulatedTrainArrivalsClient.js\");\n\nlet game, ui, messageRouter, dataSource;\n\nasync function startGame(useRealData = false) {\n  game = new Game(\"KINGS CROSS\", [ \"platformId1\" ]);\n  ui = new GameUi(game);  \n  \n  dataSource = new SimulatedTrainArrivalsClient(); //useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();\n  \n  messageRouter = new AblyMessageRouter();\n  await dataSource.listenForEvents('KINGS CROSS', messageRouter.onDataReceived);  \n  messageRouter.onArrivalTo(\"KINGS CROSS\", msg => game.registerEvent(game, msg));\n  \n  game.start();\n  setInterval(() => ui.draw(game), 1000 / fps);\n  \n  return game;\n}\n\nmodule.exports = { startGame };\n\n//# sourceURL=webpack://train/./src/script.js?");
+eval("const fps = __webpack_require__(/*! ./Config */ \"./src/Config.js\").fps;\nconst Game = __webpack_require__(/*! ./Game */ \"./src/Game.js\");\nconst GameUi = __webpack_require__(/*! ./GameUi */ \"./src/GameUi.js\");\nconst TrainMessageRouter = __webpack_require__(/*! ./TrainMessageRouter */ \"./src/TrainMessageRouter.js\");\n\nconst AblyTrainArrivalsClient = __webpack_require__(/*! ./AblyTrainArrivalsClient */ \"./src/AblyTrainArrivalsClient.js\");\nconst SimulatedTrainArrivalsClient = __webpack_require__(/*! ./SimulatedTrainArrivalsClient */ \"./src/SimulatedTrainArrivalsClient.js\");\n\nlet game, ui, messageRouter, dataSource;\n\nasync function startGame(useRealData = false) {\n  game = new Game(\"KINGS CROSS\", [ \"platformId1\" ]);\n  ui = new GameUi(game);\n  \n  messageRouter = new TrainMessageRouter();  \n  messageRouter.onArrivalTo(\"KINGS CROSS\", msg => game.registerEvent(game, msg));\n  \n  dataSource = new SimulatedTrainArrivalsClient(); //useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();\n  await dataSource.listenForEvents('KINGS CROSS', msg =>  messageRouter.onDataReceived(msg));  \n  \n  game.start();\n  setInterval(() => ui.draw(game), 1000 / fps);\n  \n  return game;\n}\n\nmodule.exports = { startGame };\n\n//# sourceURL=webpack://train/./src/script.js?");
 
 /***/ }),
 

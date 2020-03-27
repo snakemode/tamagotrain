@@ -1,7 +1,7 @@
 const ably = require('ably');
 
 class SimulatedTrainArrivalsClient {
- 
+
   async listenForEvents(stationName, callback) {    
     // Train arrives and departs every 2 seconds.
     const interval = 1000 * 12;

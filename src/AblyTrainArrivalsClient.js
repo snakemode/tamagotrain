@@ -6,7 +6,7 @@ class AblyTrainArrivalsClient {
   }
   
   async listenForEvents(stationName, callback) { 
-    
+    // subscribe to things and callback when messages arrive
   }
   
   async subscribeToLine(channelName, onSubscriptionData) {
