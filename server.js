@@ -6,17 +6,17 @@ const TemplatingEngine = require("./templating-engine.js");
 const ably = require('ably');
 
 const client = new ably.Realtime(process.env.ABLY_API_KEY);
-const render = new TemplatingEngine();
+const templateEngine = new TemplatingEngine();
 
 const app = express();
 app.use(express.static("public"));
 
 app.get("/", async (request, response) => {
-  const tokenRequestData = await createTokenRequest();  
-  const templateFile = await readFileAsync(__dirname + "/views/index.html");
-  const templated = templateFile.toString().replace('"{ createTokenRequest }"', JSON.stringify(tokenRequestData));  
-  response.set('Content-Type', 'text/html');
-  response.send(templated);
+  const tokenRequestData = await createTokenRequest();
+  const model = { createTokenRequest: tokenRequestData };
+  const output = await templateEngine.render("index", model);
+  
+  response.send(output);
 });
 
 app.get("/api/createTokenRequest", async (request, response) => {
@@ -31,6 +31,11 @@ async function createTokenRequest(request) {
         if (err) { reject(err); } else { resolve(tokenRequest); }
     });
   });
+}
+
+async function renderView(view, model) {  
+  const output = await templateEngine.render("index", model);  
+  //response.send(output);
 }
 
 const listener = app.listen(process.env.PORT, () => {
