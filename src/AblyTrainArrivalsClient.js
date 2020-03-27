@@ -5,7 +5,7 @@ class AblyTrainArrivalsClient {
     this._client = client || new ably.Realtime({ authUrl: '/api/createTokenRequest' });
   }
   
-  async listenForEvents() {
+  async listenForEvents(stationName, callback) { 
     
   }
   

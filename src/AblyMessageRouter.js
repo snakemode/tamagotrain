@@ -20,6 +20,7 @@ class AblyMessageRouter {
   }
   
   onDataReceived(data) {
+    console.log(data);
     for (const cb of this.callbacks[data.station]) {      
       cb(data);      
     }
