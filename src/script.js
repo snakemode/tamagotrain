@@ -11,6 +11,7 @@ let ablyConnector;
 function startGame(ablyTokenRequest) {
   const client = new ably.Realtime({ authUrl: '/api/createTokenRequest' });
   
+  
   ablyConnector = new StubAblyConnector();
   
   game = new Game("KINGS CROSS", [ "platformId1" ]);
