@@ -5,6 +5,10 @@ class AblyTrainArrivalsClient {
     this._client = client || new ably.Realtime({ authUrl: '/api/createTokenRequest' });
   }
   
+  async listenForEvents() {
+    
+  }
+  
   async subscribeToLine(channelName, onSubscriptionData) {
     const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
     const channel = ably.channels.get(channelId);

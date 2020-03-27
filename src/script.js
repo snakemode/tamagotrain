@@ -2,41 +2,34 @@ const fps = require("./Config").fps;
 const Game = require("./Game");
 const GameUi = require("./GameUi");
 
-const FakeTrainArrivalsData = require("./AblyConnector");
+const AblyMessageRouter = require("./AblyMessageRouter");
 const AblyTrainArrivalsClient = require("./AblyTrainArrivalsClient");
 
 let game, ui;
-let dataSource;
-
- function fakeIncomingData(stationName) {
-    // Train arrives and departs every 2 seconds.
-    const interval = 1000 * 12;    
-    
-    for (let cb of this.callbacks[stationName]) {
-      
-      cb({ station: stationName, line: "platformId1", arrived: true });
-      setTimeout(() => {
-        cb({ station: stationName, line: "platformId1", departed: true });
-        setTimeout(() => this.fakeIncomingData(stationName), interval);
-      }, interval);
-      
-    }    
-  }
+let messageRouter;
 
 function startGame(useRealData = false) {
-  dataSource = useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();
+  messageRouter = new AblyMessageRouter(); //useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();
   
   game = new Game("KINGS CROSS", [ "platformId1" ]);
   ui = new GameUi(game);  
   
-  dataSource.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
+  messageRouter.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));  
   game.start();  
   
-  dataSource.fakeIncomingData('KINGS CROSS');
+  fakeIncomingData(messageRouter, 'KINGS CROSS');
   
   setInterval(() => ui.draw(game), 1000 / fps);
   
   return game;
+}
+
+
+function fakeIncomingData(messageRouter, stationName) {
+  // Train arrives and departs every 2 seconds.
+  const interval = 1000 * 12;    
+  messageRouter.onDataReceived({ station: stationName, line: "platformId1", arrived: true });
+  setTimeout(() => { messageRouter.onDataReceived({ station: stationName, line: "platformId1", departed: true }); }, interval);      
 }
 
 module.exports = { startGame };
