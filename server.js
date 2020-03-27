@@ -1,7 +1,4 @@
-const { promisify } = require('util');
 const express = require("express");
-const fs = require("fs");
-const readFileAsync = promisify(fs.readFile);
 const TemplatingEngine = require("./templating-engine.js");
 const ably = require('ably');
 
@@ -15,7 +12,6 @@ app.get("/", async (request, response) => {
   const tokenRequestData = await createTokenRequest();
   const model = { createTokenRequest: tokenRequestData };
   const output = await templateEngine.render("index", model);
-  
   response.send(output);
 });
 
@@ -31,11 +27,6 @@ async function createTokenRequest(request) {
         if (err) { reject(err); } else { resolve(tokenRequest); }
     });
   });
-}
-
-async function renderView(view, model) {  
-  const output = await templateEngine.render("index", model);  
-  //response.send(output);
 }
 
 const listener = app.listen(process.env.PORT, () => {
