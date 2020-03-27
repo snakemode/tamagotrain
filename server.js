@@ -1,18 +1,12 @@
 const express = require("express");
-const TemplatingEngine = require("./templating-engine.js");
 const ably = require('ably');
-
 const client = new ably.Realtime(process.env.ABLY_API_KEY);
-const templateEngine = new TemplatingEngine();
 
 const app = express();
 app.use(express.static("public"));
 
 app.get("/", async (request, response) => {
-  const tokenRequestData = await createTokenRequest();
-  const model = { createTokenRequest: tokenRequestData };
-  const output = await templateEngine.render("index", model);
-  response.send(output);
+  response.sendFile(__dirname + '/views/index.html');
 });
 
 app.get("/api/createTokenRequest", async (request, response) => {
