@@ -19,36 +19,20 @@ class StubAblyConnector {
     this.callbacks[stationName].push(callback);
   }
   
-  fakeTrainArrival(stationName) {
-    if (this.callbacks[stationName])
-    
-    for (let cb of this.callbacks[stationName]) {
-      cb({ station: stationName, line: "platformId1", arrived: true });
-    }
-  }  
-  
-  fakeTrainDeparture(stationName) {
-    if (this.callbacks[stationName])
-    
-    for (let cb of this.callbacks[stationName]) {
-      cb({ station: stationName, line: "platformId1", departed: true });
+  onIncomingData(data) {
+    const stationName = data.stationName;    
+    console.log(this.callbacks);
+    console.log(this);
+    for (let cb of this.callbacks[stationName]) {      
+      cb(data);      
     }
   }
-  
   
   fakeIncomingData(stationName) {
     // Train arrives and departs every 2 seconds.
     const interval = 1000 * 12;    
-    
-    for (let cb of this.callbacks[stationName]) {
-      
-      cb({ station: stationName, line: "platformId1", arrived: true });
-      setTimeout(() => {
-        cb({ station: stationName, line: "platformId1", departed: true });
-        setTimeout(() => this.fakeIncomingData(stationName), interval);
-      }, interval);
-      
-    }    
+    this.onIncomingData({ station: stationName, line: "platformId1", arrived: true });
+    setTimeout(() => { this.onIncomingData({ station: stationName, line: "platformId1", departed: true }); }, interval);      
   }  
 }
 

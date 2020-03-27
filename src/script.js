@@ -8,6 +8,21 @@ const AblyTrainArrivalsClient = require("./AblyTrainArrivalsClient");
 let game, ui;
 let dataSource;
 
+ function fakeIncomingData(stationName) {
+    // Train arrives and departs every 2 seconds.
+    const interval = 1000 * 12;    
+    
+    for (let cb of this.callbacks[stationName]) {
+      
+      cb({ station: stationName, line: "platformId1", arrived: true });
+      setTimeout(() => {
+        cb({ station: stationName, line: "platformId1", departed: true });
+        setTimeout(() => this.fakeIncomingData(stationName), interval);
+      }, interval);
+      
+    }    
+  }
+
 function startGame(useRealData = false) {
   dataSource = useRealData ? new AblyTrainArrivalsClient() : new FakeTrainArrivalsData();
   

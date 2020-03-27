@@ -2,7 +2,7 @@ const ably = require('ably');
 
 class AblyTrainArrivalsClient {
   constructor(client) {
-    this._client = new ably.Realtime({ authUrl: '/api/createTokenRequest' });
+    this._client = client || new ably.Realtime({ authUrl: '/api/createTokenRequest' });
   }
   
   async subscribeToLine(channelName, onSubscriptionData) {
