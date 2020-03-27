@@ -1,6 +1,8 @@
 const express = require("express");
-const ably = require('ably');
+const ably = require("ably");
+
 const client = new ably.Realtime(process.env.ABLY_API_KEY);
+
 
 const app = express();
 app.use(express.static("public"));
