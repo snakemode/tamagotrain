@@ -16,7 +16,7 @@ async function startGame(useRealData = false) {
   messageRouter.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));
   
   dataSource = useRealData ? new AblyTrainArrivalsClient() : new SimulatedTrainArrivalsClient();
-  await dataSource.listenForEvents('KINGS CROSS', msg =>  messageRouter.onDataReceived(msg));  
+  await dataSource.listenForEvents('KINGS CROSS', msg => game.registerEvent(game, msg));  
   
   game.start();
   setInterval(() => ui.draw(game), 1000 / fps);
