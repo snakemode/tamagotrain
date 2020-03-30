@@ -7,11 +7,11 @@ class AblyTrainArrivalsClient {
   
   async listenForEvents(stationName, callback) { 
     this._callback = callback;
-    await this.subscribeToLine("northern");
+    await this.subscribeToLine("940GZZLUKSX", "northern");
   }
   
-  async subscribeToLine(channelName) {
-    const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
+  async subscribeToLine(stationId, lineName) {
+    const channelId = `[product:ably-tfl/tube]tube:${lineName}:${stationId}:arrivals`;
     const channel = await this._client.channels.get(channelId);
     await channel.attach();    
         
