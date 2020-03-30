@@ -6,15 +6,12 @@ const TrainMessageRouter = require("./TrainMessageRouter");
 const AblyTrainArrivalsClient = require("./AblyTrainArrivalsClient");
 const SimulatedTrainArrivalsClient = require("./SimulatedTrainArrivalsClient");
 
-let game, ui, messageRouter, dataSource;
+let game, ui, dataSource;
 
 async function startGame(useRealData = false) {
   game = new Game("KINGS CROSS", [ "platformId1" ]);
   ui = new GameUi(game);
-  
-  messageRouter = new TrainMessageRouter();  
-  messageRouter.onArrivalTo("KINGS CROSS", msg => game.registerEvent(game, msg));
-  
+    
   dataSource = useRealData ? new AblyTrainArrivalsClient() : new SimulatedTrainArrivalsClient();
   await dataSource.listenForEvents('KINGS CROSS', msg => game.registerEvent(game, msg));  
   
