@@ -1,46 +1,23 @@
-const ably = require('ably');
+const Ably = require('ably/promises');
 
 class AblyTrainArrivalsClient {
   constructor(client) {
-    this._client = client || new ably.Realtime({ authUrl: '/api/createTokenRequest' });
+    this._client = client || new Ably.Realtime({ authUrl: '/api/createTokenRequest' });
   }
   
   async listenForEvents(stationName, callback) { 
-    // subscribe to things and callback when messages arrive
+    await this.subscribeToLine("northern");
   }
   
-  async subscribeToLine(channelName, onSubscriptionData) {
+  async subscribeToLine(channelName) {
     const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;
-    const channel = ably.channels.get(channelId);
-
-    await this.attachPromise(channel);  
+    const channel = await this._client.channels.get(channelId);
+    await channel.attach();    
     channel.subscribe(this.onSubscriptionMessage); 
-
-    const resultPage = await this.getHistoryPromise(channel, { untilAttach: true, limit: 1 });
-    console.log("History retrieved for " + channelName); 
-
-    const recentMessage = resultPage.items[0] || { data: [] }; 
-    return recentMessage.data;
   }
   
   onSubscriptionMessage(data) {
     console.log(data); 
-  }
-  
-  async attachPromise(channel) {
-    return new Promise((resolve, reject) => {
-      channel.attach(err => {      
-        if (err) { reject(err); } else { resolve(); }
-      });
-    });
-  }
-
-  async getHistoryPromise(channel, params) {
-    return new Promise((resolve, reject) => {
-      channel.history(params, (err, response) => {
-        if (err) { reject(err); } else { resolve(response); }
-      });
-    });
   }
 }
 

@@ -98,6 +98,18 @@ eval("/* WEBPACK VAR INJECTION */(function(Buffer) {/**\n * @license Copyright 2
 
 /***/ }),
 
+/***/ "../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/promises.js":
+/*!****************************************************************************************************************************************!*\
+  !*** /rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/promises.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nfunction promisifyOptions(options) {\n  if(typeof options == 'string') {\n    options = (options.indexOf(':') == -1) ? {token: options} : {key: options};\n  }\n  options.promises = true;\n  return options;\n}\n\nvar Ably = __webpack_require__(/*! ./nodejs/index */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nvar RestPromise = function(options) {\n  return new Ably.Rest(promisifyOptions(options));\n}\nObject.assign(RestPromise, Ably.Rest);\n\nvar RealtimePromise = function(options) {\n  return new Ably.Realtime(promisifyOptions(options));\n}\nObject.assign(RealtimePromise, Ably.Realtime);\n\nmodule.exports = {\n  Rest: RestPromise,\n  Realtime: RealtimePromise\n};\n\n\n//# sourceURL=webpack://train//rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/promises.js?");
+
+/***/ }),
+
 /***/ "../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/base64-js/1.3.1/node_modules/base64-js/index.js":
 /*!**********************************************************************************************************************************************!*\
   !*** /rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/base64-js/1.3.1/node_modules/base64-js/index.js ***!
@@ -162,7 +174,7 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const ably = __webpack_require__(/*! ably */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/browser/static/ably-commonjs.js\");\n\nclass AblyTrainArrivalsClient {\n  constructor(client) {\n    this._client = client || new ably.Realtime({ authUrl: '/api/createTokenRequest' });\n  }\n  \n  async listenForEvents(stationName, callback) { \n    // subscribe to things and callback when messages arrive\n  }\n  \n  async subscribeToLine(channelName, onSubscriptionData) {\n    const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;\n    const channel = ably.channels.get(channelId);\n\n    await this.attachPromise(channel);  \n    channel.subscribe(this.onSubscriptionMessage); \n\n    const resultPage = await this.getHistoryPromise(channel, { untilAttach: true, limit: 1 });\n    console.log(\"History retrieved for \" + channelName); \n\n    const recentMessage = resultPage.items[0] || { data: [] }; \n    return recentMessage.data;\n  }\n  \n  onSubscriptionMessage(data) {\n    console.log(data); \n  }\n  \n  async attachPromise(channel) {\n    return new Promise((resolve, reject) => {\n      channel.attach(err => {      \n        if (err) { reject(err); } else { resolve(); }\n      });\n    });\n  }\n\n  async getHistoryPromise(channel, params) {\n    return new Promise((resolve, reject) => {\n      channel.history(params, (err, response) => {\n        if (err) { reject(err); } else { resolve(response); }\n      });\n    });\n  }\n}\n\nmodule.exports = AblyTrainArrivalsClient;\n\n//# sourceURL=webpack://train/./src/AblyTrainArrivalsClient.js?");
+eval("const Ably = __webpack_require__(/*! ably/promises */ \"../rbd/pnpm-volume/0993a1dd-56b8-4a95-8ad8-5383c9b59d24/node_modules/.registry.npmjs.org/ably/1.1.24/node_modules/ably/promises.js\");\n\nclass AblyTrainArrivalsClient {\n  constructor(client) {\n    this._client = client || new Ably.Realtime({ authUrl: '/api/createTokenRequest' });\n  }\n  \n  async listenForEvents(stationName, callback) { \n    await this.subscribeToLine(\"northern\");\n  }\n  \n  async subscribeToLine(channelName) {\n    const channelId = `[product:ably-tfl/tube]tube:${channelName}:940GZZLUKSX:arrivals`;\n    const channel = await this._client.channels.get(channelId);\n    await channel.attach();    \n    channel.subscribe(this.onSubscriptionMessage); \n  }\n  \n  onSubscriptionMessage(data) {\n    console.log(data); \n  }\n}\n\nmodule.exports = AblyTrainArrivalsClient;\n\n//# sourceURL=webpack://train/./src/AblyTrainArrivalsClient.js?");
 
 /***/ }),
 
