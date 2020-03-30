@@ -6,6 +6,7 @@ class AblyTrainArrivalsClient {
   }
   
   async listenForEvents(stationName, callback) { 
+    this._callback = callback;
     await this.subscribeToLine("northern");
   }
   
@@ -21,14 +22,19 @@ class AblyTrainArrivalsClient {
   }
   
   onSubscriptionMessage(data) {
+    console.log(data);
     
     // unpack ably message, and 
-    const arrivedMessage =  station: stationName, line: "platformId1", arrived: true };
-    /* callback({ station: stationName, line: "platformId1", arrived: true });
-    setTimeout(() => { callback({ station: stationName, line: "platformId1", departed: true }); }, interval);  
-    */
+    const stationName = "KINGS CROSS"; // Something real here.
+    const isArrival = true;
+    const message = isArrival 
+          ? { station: stationName, line: "platformId1", arrived: true } 
+          : { station: stationName, line: "platformId1", departed: true };
     
-    console.log(data); 
+    if (this._callback) {
+      this._callback(message);
+    }
+    
   }
 }
 
