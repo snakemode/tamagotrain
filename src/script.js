@@ -13,12 +13,15 @@ async function startGame(useRealData = false) {
                 ? new AblyTrainArrivalsClient() 
                 : new SimulatedTrainArrivalsClient();
   
-  game = new Game([ "platformId1" ]);
+  game = new Game([ "platformId1" ]);  
   ui = new GameUi(game);
     
   await dataSource.listenForEvents("northern:940GZZLUKSX", msg => game.registerEvent(game, msg));  
   
-  game.start();
+  game.start(gameOver => {
+    dataSource.stopListening();
+  });
+  
   setInterval(() => ui.draw(game), 1000 / fps);
   
   return game;

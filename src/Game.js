@@ -14,19 +14,19 @@ const buffs = {
 };
 
 class Game {
-  constructor(platformIds, onGameOver) {
+  constructor(platformIds) {
     this.ticks = 0;
     this.status = "inactive";
     this.platforms = [];    
     this.queuedActions = [];
-    this.onGameOver = onGameOver || nothing;
         
     for (let id of platformIds) {
       this.platforms.push(new Platform(id));
     }
   }
   
-  start() {
+  start(onGameOver) {
+    this.onGameOver = onGameOver || nothing;
     this.tickInterval = setInterval(() => {
       this.tick();
     }, 1000 / ticksPerSecond);

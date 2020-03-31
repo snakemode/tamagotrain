@@ -12,7 +12,12 @@ class AblyTrainArrivalsClient {
     setInterval(() => this.dispatchAnyMessagesDue(), 1000 * 1);
     
     await this.subscribeToLine(id);
+  }  
+  
+  stopListening() {
+    // Ably unsub.
   }
+  
   
   async subscribeToLine(id) {
     const channelId = `[product:ably-tfl/tube]tube:${id}:arrivals`;

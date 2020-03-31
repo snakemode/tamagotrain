@@ -10,7 +10,13 @@ class SimulatedTrainArrivalsClient {
     
     this._callback = callback;
     this.simulateSingleTrain();
-  }  
+  }
+  
+  stopListening() {
+    if (this._timeout) {
+      clearTimeout(this._timeout);
+    }
+  }
   
   simulateSingleTrain() {
     const interval = 1000 * 12;
