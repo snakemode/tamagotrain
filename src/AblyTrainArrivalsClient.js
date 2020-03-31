@@ -19,41 +19,37 @@ class AblyTrainArrivalsClient {
         
     const resultPage = await channel.history({ untilAttach: true, limit: 1 });
     console.log(resultPage);
+    this.timetableUpdated(resultPage);
     
     channel.subscribe(this.timetableUpdated); 
   }
   
   timetableUpdated(message) {
+    console.log(message.data);
     this._timetable = message.data;
     this._timetableAgeInSeconds = 0;
-    console.log(message.data);
   }
   
   dispatchAnyMessagesDue() {    
     this._timetableAgeInSeconds++;
-        
+    
     for (const [ index, item ] of this._timetable.data.entries()) {
-      // if age >= TimeToStation create a train arrival and pop the message
-      // if there are more records, send a departure message for current train
-      // to arive at 50% of the next trains TimeToStation
-      // Even if the timetalbe is replaced, this departure message will still fire to "clear the platform"
-
-      if (item.TimeToStation > this._timetableAgeInSeconds) {
-        
-        let departsAt = 15;
-        
-        if(this._timetable.data.length > index + 1) {
-          const nextTrain = this._timetable.data[index + 1];
-          let departsAt = nextTrain.TimeToStation / 2;
-        }
-        
-                this.raiseEvent(true);
-        setTimeout(() => this.raiseEvent(false), 1000 * departsAt); // 15 seconds for now.
-        item.completed = true;
+      if (item.TimeToStation > this.timetableAgeInSeconds) {
+        continue;
       }
-      
-      this._timetable.data = this._timetable.data.filter(i => !item.completed);
+
+      // Work out when to raise a departure message
+      const departsAt = this._timetable.data.length > index + 1
+                      ? this._timetable.data[index + 1].TimeToStation / 2
+                      : 15;
+
+      // Raise messages
+      item.completed = true;
+      this.raiseEvent(true);
+      setTimeout(() => this.raiseEvent(false), 1000 * departsAt);  
     }
+    
+    this._timetable.data = this._timetable.data.filter(i => !i.completed);
   }
   
   raiseEvent(isArrival) {
