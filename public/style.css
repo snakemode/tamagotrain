@@ -1,7 +1,7 @@
 @font-face {
 	font-family: 'DOTMATRI';
-	src: url('./DOTMATRI.eot');
-	src: local('DOTMATRI'), url('./DOTMATRI.woff') format('woff'), url('./DOTMATRI.ttf') format('truetype');
+	src: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2FDOTMATRI.eot?v=1585672843888');
+	src: local('DOTMATRI'), url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2FDOTMATRI.woff?v=1585672843630') format('woff'), url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2FDOTMATRI.ttf?v=1585672843536') format('truetype');
 }
 
 /* Font downloaded from FontsForWeb.com */
@@ -21,7 +21,19 @@ body {
   margin: 0;
 }
 
-h1 {font-family: 'DOTMATRI' !important;}
+h1 {
+  position: relative;
+  font-family: 'DOTMATRI';
+  font-size: 3em;
+  text-align: center;
+  color: #3cacd3;
+}
+
+h1:before {
+  content: "Tamago-train!";
+  position: absolute;
+}
+
 
 main {
     max-width: 620px;
@@ -451,7 +463,7 @@ div[data-ispassedout="true"] {
 
 @media (min-width: 700px) {
   main {
-    padding: 60px;
+    padding: 0 60px 60px;
   }
   
   main:before {
