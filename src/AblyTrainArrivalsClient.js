@@ -7,15 +7,15 @@ class AblyTrainArrivalsClient {
     this._client = client || new Ably.Realtime({ authUrl: '/api/createTokenRequest' });
   }
   
-  async listenForEvents(stationName, callback) { 
+  async listenForEvents(id, callback) { 
     this._callback = callback;
     setInterval(() => this.dispatchAnyMessagesDue(), 1000 * 1);
     
-    await this.subscribeToLine("940GZZLUKSX", "northern");
+    await this.subscribeToLine(id);
   }
   
-  async subscribeToLine(stationId, lineName) {
-    const channelId = `[product:ably-tfl/tube]tube:${lineName}:${stationId}:arrivals`;
+  async subscribeToLine(id) {
+    const channelId = `[product:ably-tfl/tube]tube:${id}:arrivals`;
     const channel = await this._client.channels.get(channelId);
     await channel.attach();    
         

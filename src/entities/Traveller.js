@@ -14,6 +14,8 @@ class Traveller {
     this.isPassedOut = false;
     this.isDisplayed = false;
     this.dancing = false;
+     
+    console.log(this.constructor.name + "(id=" + this.id + ") ctor");
   }
   
   tick(platform) {
@@ -27,6 +29,8 @@ class Traveller {
     if (this.ticksFromExit == 0) {
       platform.temperature -= 1;
       this.completed = true;
+      
+      console.log("Traveller(id="+ this.id + ") reached exit");
       return;
     }
     
@@ -52,6 +56,7 @@ class Traveller {
     // Maybe I'm going to pass out? 10% chance if the platform is rancid.
     if (!this.isPassedOut && platform.hygiene <= 30 && random >= 0.9) {      
       this.isPassedOut = true;
+      console.log("Traveller(id="+ this.id + ") passed out.");
       return;
     }
   }

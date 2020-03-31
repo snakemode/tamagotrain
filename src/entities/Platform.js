@@ -52,8 +52,8 @@ class Platform {
     
     let tickables = [ this.train, ...this.contents, ...this.buffs ];
 
-    //console.log("Ticking:", tickables);
-    console.log("Ticking " + tickables.length + " items.");
+    // console.log("Ticking:", tickables);
+    // console.log("Ticking " + tickables.length + " items.");
     
     for (let item of tickables) {
       if (!item) continue;      

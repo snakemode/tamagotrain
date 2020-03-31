@@ -1,5 +1,6 @@
 class CleanBuff {
   constructor() {
+    console.log("Creating CleanBuff 🧼🧼🧼");
     this.ticks = 5;
     this.completed = false;
     this.hasTicked = false;

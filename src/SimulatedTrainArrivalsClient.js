@@ -5,7 +5,9 @@ class SimulatedTrainArrivalsClient {
     console.log("SimulatedTrainArrivalsClient created.");
   }
 
-  async listenForEvents(stationName, callback) {
+  async listenForEvents(id, callback) {
+    console.log("Faking train arrivals for", id);
+    
     this._callback = callback;
     this.simulateSingleTrain();
   }  

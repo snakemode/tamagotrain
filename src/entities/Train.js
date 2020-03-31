@@ -3,12 +3,13 @@ const Traveller = require("./Traveller");
 
 class Train {
   constructor() {
-    console.log("Train() ctor");
     this.id = uuidv4();
     this.ticks = 0;
     this.hasTicked = false;
     this.doorState = "closed";
-  }
+    
+    console.log("Train(id=" + this.id + ") ctor train");
+ }
   
   tick(platform) {
     

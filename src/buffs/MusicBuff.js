@@ -1,5 +1,6 @@
 class MusicBuff {
   constructor() {
+    console.log("Creating MusicBuff 🎶🎶🎶");
     this.ticks = 4;
     this.completed = false;
   }

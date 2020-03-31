@@ -16,7 +16,7 @@ async function startGame(useRealData = false) {
   game = new Game([ "platformId1" ]);
   ui = new GameUi(game);
     
-  await dataSource.listenForEvents('KINGS CROSS', msg => game.registerEvent(game, msg));  
+  await dataSource.listenForEvents("northern:940GZZLUKSX", msg => game.registerEvent(game, msg));  
   
   game.start();
   setInterval(() => ui.draw(game), 1000 / fps);
