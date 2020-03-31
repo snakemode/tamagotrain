@@ -25,7 +25,7 @@ class SimulatedTrainArrivalsClient {
     
     this._timeout = setTimeout(() => { 
       this.fakeDeparture();      
-      setTimeout(() => { this.simulateSingleTrain(); }, interval);      
+      this._timeout = setTimeout(() => { this.simulateSingleTrain(); }, interval);      
     }, interval); 
   }
   
