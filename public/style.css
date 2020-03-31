@@ -28,8 +28,8 @@ h1 {
   text-align: center;
   color: #3cacd3;
   letter-spacing: -2px;
-  -webkit-text-stroke: 4px white;
-  text-stroke: 4px white;
+  -webkit-text-stroke: 8px white;
+  text-stroke: 8px white;
 }
 
 h1:after {
@@ -37,12 +37,13 @@ h1:after {
   position: absolute;
   font-size: 48px;
   color: #3cacd3;
-  top: 2px;
+  top: 0px;
   left: calc(50%);
   width: max-content;
   transform: translate(-50%, 0);
+   -webkit-text-stroke: 0;
+  text-stroke: 0;
 }
-
 
 main {
     max-width: 620px;
@@ -367,8 +368,8 @@ div[data-ispassedout="true"] {
     "button1 button2 button3"
     "label1 label2 label3";
   flex-wrap: wrap;
-  margin:20px;
   justify-content: space-around;
+  margin: 20px auto;
 }
 
 .button {
@@ -413,9 +414,11 @@ div[data-ispassedout="true"] {
 
 .label {
   text-align: center;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: 'DOTMATRI';
+  font-size: 1.3em;
+  text-transform: uppercase;
   z-index: 1;
-  transform: translate(0, -10px);
+  transform: translate(0, -5px);
 }
 .label:nth-of-type(1) {
   grid-area: label1;
@@ -487,5 +490,6 @@ div[data-ispassedout="true"] {
       border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
       background-color: #ebc8e2;
       transform: translate(-50%, 0);
+      box-shadow: inset 0px -30px 60px 0px rgba(0,0,0,0.75);
   }
 }
