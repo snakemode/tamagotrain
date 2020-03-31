@@ -1,6 +1,6 @@
 class VentBuff {
   constructor() {
-    console.log("Creating VentBuff 🌬🌬🌬");
+    console.log("🌬 VentBuff()");
     this.ticks = 5;
     this.completed = false;
   }

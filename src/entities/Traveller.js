@@ -15,7 +15,7 @@ class Traveller {
     this.isDisplayed = false;
     this.dancing = false;
      
-    console.log(this.constructor.name + "(id=" + this.id + ") ctor");
+    console.log("🕺 Traveller(id=" + this.id + ")");
   }
   
   tick(platform) {

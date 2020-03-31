@@ -34,7 +34,7 @@ class Platform {
     while (this.unprocessedMessages.length > 0) {
       const msg = this.unprocessedMessages.shift(); // FIFO
       
-      console.log("Message:", msg);
+      console.log("✉ Message:", msg);
       
       if (msg.arrived) {
         this.hasTrain = true;
@@ -46,7 +46,7 @@ class Platform {
         this.complete(this.train);
         this.hasTrain = false;
         this.train = null;        
-        console.log("Removed train");
+        console.log("🚆 Removed train.");
       }      
     }
     
@@ -76,7 +76,7 @@ class Platform {
       return;
     }
     
-    console.log("Completed", i);    
+    console.log("✅ Completed", i);    
     if (i["onCompletion"]) {       
       i.onCompletion(this);
     } 

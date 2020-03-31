@@ -6,7 +6,7 @@ class Problem {
     this.ticks = 0;
     this.x = x;
     this.y = y;    
-    console.log(this.constructor.name + "(id=" + this.id + ") ctor");
+    console.log("❗ " + this.constructor.name + "(id=" + this.id + ")");
   }
 }
 

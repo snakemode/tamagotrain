@@ -5,6 +5,8 @@ const CleanBuff = require("./buffs/CleanBuff");
 const MusicBuff = require("./buffs/MusicBuff");
 const VentBuff = require("./buffs/VentBuff");
 
+const nothing = () => { };
+
 const buffs = { 
   CleanBuff,
   MusicBuff,
@@ -17,6 +19,7 @@ class Game {
     this.status = "inactive";
     this.platforms = [];    
     this.queuedActions = [];
+    this.onGameOver = onGameOver || nothing;
         
     for (let id of platformIds) {
       this.platforms.push(new Platform(id));
@@ -39,6 +42,9 @@ class Game {
       this.gameover = gameOverCheck;
       this.gameovermsg = gameOverCheck.message;
       clearInterval(this.tickInterval);      
+      
+      console.log("☠ Game ended");
+      this.onGameOver(this);
       return;
     }   
     

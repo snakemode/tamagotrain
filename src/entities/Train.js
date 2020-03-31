@@ -8,7 +8,7 @@ class Train {
     this.hasTicked = false;
     this.doorState = "closed";
     
-    console.log("Train(id=" + this.id + ") ctor train");
+    console.log("🚂 Train(id=" + this.id + ")");
  }
   
   tick(platform) {

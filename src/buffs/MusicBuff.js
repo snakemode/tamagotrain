@@ -1,6 +1,6 @@
 class MusicBuff {
   constructor() {
-    console.log("Creating MusicBuff 🎶🎶🎶");
+    console.log("🎶 MusicBuff()");
     this.ticks = 4;
     this.completed = false;
   }
