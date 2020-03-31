@@ -17,7 +17,11 @@
     
     <button onclick="train.startGame(true);">Start with live data</button><br>        
     <script>
-      const game = train.startGame();
+      let game;
+      async function start() {
+        game = await train.startGame();
+      }
+      start();
     </script>
 
     Ticks: <span data-bind-ticks></span><br>

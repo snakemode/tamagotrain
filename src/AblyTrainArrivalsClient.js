@@ -2,6 +2,7 @@ const Ably = require('ably/promises');
 
 class AblyTrainArrivalsClient {
   constructor(client) {
+    this._timetableAgeInSeconds = 0;
     this._client = client || new Ably.Realtime({ authUrl: '/api/createTokenRequest' });
   }
   
@@ -18,9 +19,7 @@ class AblyTrainArrivalsClient {
     await channel.attach();    
         
     const resultPage = await channel.history({ untilAttach: true, limit: 1 });
-    console.log(resultPage);
-    this.timetableUpdated(resultPage.items[0]);
-    
+    this.timetableUpdated(resultPage.items[0]);    
     channel.subscribe(this.timetableUpdated); 
   }
   
@@ -38,9 +37,11 @@ class AblyTrainArrivalsClient {
     }
     
     for (const [ index, item ] of this._timetable.entries()) {
-      if (item.TimeToStation > this.timetableAgeInSeconds) {
+      if (item.TimeToStation > this._timetableAgeInSeconds) {
         continue;
       }
+      
+      console.log("Train ready to go!");
 
       // Work out when to raise a departure message
       const departsAt = this._timetable.length > index + 1
