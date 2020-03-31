@@ -164,12 +164,12 @@ main {
   position: absolute;
   z-index: 9000;
   width: 100%;
-  height: 400px;
+  height: 600px;
   opacity: 30%;
-  background-image: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fzig2.gif?v=1584886862494');
+  background: url('https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fzig2.gif?v=1584886862494');
   background-size: 450%;
-  filter: blur(1px);
-  animation: haze 2s infinite linear;
+  filter: blur(2px);
+  animation: haze 4s infinite linear;
   transform: translate(0, -10px);
   pointer-events: none;
 }
@@ -207,7 +207,7 @@ main {
 
 
 @keyframes haze {
-  100% { transform: translate(0, -10px); }
+  100% { transform: translate(0, -70px); }
 }
 
 #buffs {

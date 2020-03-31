@@ -3,6 +3,7 @@ const Traveller = require("./Traveller");
 
 class Train {
   constructor() {
+    console.log("Train() ctor");
     this.id = uuidv4();
     this.ticks = 0;
     this.hasTicked = false;

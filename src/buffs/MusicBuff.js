@@ -19,6 +19,7 @@ class MusicBuff {
   }
   
   charmMice(platform) {
+    console.log("Charming all the mice! 🐭🐭🐁🐁");    
     const mice = platform.contents.filter(e => e.constructor.name === "Mouse");
     for (const mouse of mice) {
       mouse.leave(platform, 15);

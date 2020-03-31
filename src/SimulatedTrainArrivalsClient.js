@@ -8,6 +8,17 @@ class SimulatedTrainArrivalsClient {
   async listenForEvents(stationName, callback) {
     this._callback = callback;
     this.simulateSingleTrain();
+  }  
+  
+  simulateSingleTrain() {
+    const interval = 1000 * 12;
+
+    this.fakeArrival();
+    
+    setTimeout(() => { 
+      this.fakeDeparture();      
+      setTimeout(() => { this.simulateSingleTrain(); }, interval);      
+    }, interval); 
   }
   
   fakeArrival() {        
@@ -19,21 +30,7 @@ class SimulatedTrainArrivalsClient {
     console.log("Faking train arrival.");
     this._callback({ line: "platformId1", arrived: true });
   }
-  
-  simulateSingleTrain() {
-    const interval = 1000 * 12;
 
-    this.fakeArrival();
-    
-    setTimeout(() => { 
-      this.fakeDeparture();
-      
-      setTimeout(() => {
-        this.simulateSingleTrain();
-      }, interval);
-      
-    }, interval); 
-  }
   
 }
 

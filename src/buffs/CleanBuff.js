@@ -23,6 +23,8 @@ class CleanBuff {
       const entity = platform.contents[index];
       if (entity.constructor.name === "Trash") {
         platform.contents = platform.contents.filter(item => item !== entity);
+        
+        console.log("Removed an item of trash 🚮");
         return;
       }
     }    

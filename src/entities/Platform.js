@@ -40,7 +40,6 @@ class Platform {
       if (msg.arrived) {
         this.hasTrain = true;
         this.train = new Train();        
-        console.log("Created train");
       }
             
       if (msg.departed) {   
@@ -71,10 +70,15 @@ class Platform {
   }
   
   complete(i) {
-     if (i.completed && i["onCompletion"]) {
-      i.onCompletion(this);
+    if(!i.completed) {
+      return;
     }
-  }  
+    
+    console.log("Completed", i);    
+    if (i["onCompletion"]) {       
+      i.onCompletion(this);
+    } 
+  }
 }
 
 module.exports = Platform;
