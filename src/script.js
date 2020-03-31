@@ -8,7 +8,7 @@ const SimulatedTrainArrivalsClient = require("./SimulatedTrainArrivalsClient");
 
 let game, ui, dataSource;
 
-async function startGame(useRealData = false) {
+async function startGame(useRealData = true) {
   game = new Game("KINGS CROSS", [ "platformId1" ]);
   ui = new GameUi(game);
     

@@ -19,7 +19,7 @@ class AblyTrainArrivalsClient {
         
     const resultPage = await channel.history({ untilAttach: true, limit: 1 });
     console.log(resultPage);
-    this.timetableUpdated(resultPage);
+    this.timetableUpdated(resultPage.items[0]);
     
     channel.subscribe(this.timetableUpdated); 
   }
@@ -33,14 +33,18 @@ class AblyTrainArrivalsClient {
   dispatchAnyMessagesDue() {    
     this._timetableAgeInSeconds++;
     
-    for (const [ index, item ] of this._timetable.data.entries()) {
+    if (!this._timetable) {
+      return;
+    }
+    
+    for (const [ index, item ] of this._timetable.entries()) {
       if (item.TimeToStation > this.timetableAgeInSeconds) {
         continue;
       }
 
       // Work out when to raise a departure message
-      const departsAt = this._timetable.data.length > index + 1
-                      ? this._timetable.data[index + 1].TimeToStation / 2
+      const departsAt = this._timetable.length > index + 1
+                      ? this._timetable[index + 1].TimeToStation / 2
                       : 15;
 
       // Raise messages
@@ -49,7 +53,7 @@ class AblyTrainArrivalsClient {
       setTimeout(() => this.raiseEvent(false), 1000 * departsAt);  
     }
     
-    this._timetable.data = this._timetable.data.filter(i => !i.completed);
+    this._timetable = this._timetable.filter(i => !i.completed);
   }
   
   raiseEvent(isArrival) {
