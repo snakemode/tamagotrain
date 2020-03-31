@@ -2,6 +2,7 @@ const Ably = require('ably/promises');
 
 class AblyTrainArrivalsClient {
   constructor(client) {
+    console.log("AblyTrainArrivalsClient created.");
     this._timetableAgeInSeconds = 0;
     this._client = client || new Ably.Realtime({ authUrl: '/api/createTokenRequest' });
   }
