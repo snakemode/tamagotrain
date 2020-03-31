@@ -25,7 +25,7 @@ class AblyTrainArrivalsClient {
   }
   
   timetableUpdated(message) {
-    console.log(message.data);
+    console.log("Timetable snapshot updated.");
     this._timetable = message.data;
     this._timetableAgeInSeconds = 0;
   }
@@ -42,13 +42,16 @@ class AblyTrainArrivalsClient {
         continue;
       }
       
-      console.log("Train ready to go!");
+      console.log("Train ready to go.");
+      console.log(item);
 
       // Work out when to raise a departure message
       const departsAt = this._timetable.length > index + 1
                       ? this._timetable[index + 1].TimeToStation / 2
                       : 15;
 
+      console.log("Scheduling departure for " + 1000 * departsAt + " from now.");
+      
       // Raise messages
       item.completed = true;
       this.raiseEvent(true);

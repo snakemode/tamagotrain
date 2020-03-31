@@ -24,14 +24,22 @@ body {
 h1 {
   position: relative;
   font-family: 'DOTMATRI';
-  font-size: 3em;
+  font-size: 58px;
   text-align: center;
-  color: #3cacd3;
+  color: white;
+  letter-spacing: -2px;
 }
 
 h1:before {
   content: "Tamago-train!";
   position: absolute;
+  font-size: 48px;
+  color: #3cacd3;
+  top: 6px;
+  left: calc(50% + 3px);
+  width: max-content;
+  transform: translate(-50%, 0);
+  letter-spacing: 3px;
 }
 
 
