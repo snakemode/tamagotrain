@@ -20,16 +20,28 @@ class AblyTrainArrivalsClient {
     const resultPage = await channel.history({ untilAttach: true, limit: 1 });
     console.log(resultPage);
     
-    channel.subscribe(this.onSubscriptionMessage); 
+    channel.subscribe(this.timetableUpdated); 
   }
   
-  dispatchAnyMessagesDue() {
-    console.log("dispatching");
+  timetableUpdated(message) {
+    this._timetable = message.data;
+    this._timetableAgeInSecond = 0;
+    console.log(message.data);
   }
   
-  onSubscriptionMessage(data) {
-    console.log(data);
+  dispatchAnyMessagesDue() {    
+    console.log("dispatching");    
+    this._timetableAgeInSecond++;
     
+    for (const item of this._timetable.data) {
+      // if age >= TimeToStation create a train arrival and pop the message
+      // if there are more records, send a departure message for current train
+      // to arive at 50% of the next trains TimeToStation
+      // Even if the timetalbe is replaced, this departure message will still fire to "clear the platform"
+    }
+  }
+  
+  raiseEvent() {
     // unpack ably message, and 
     const stationName = "KINGS CROSS"; // Something real here.
     const isArrival = true;
@@ -40,8 +52,8 @@ class AblyTrainArrivalsClient {
     if (this._callback) {
       this._callback(message);
     }
-    
   }
+  
 }
 
 module.exports = AblyTrainArrivalsClient;
