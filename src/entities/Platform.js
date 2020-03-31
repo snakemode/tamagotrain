@@ -30,12 +30,11 @@ class Platform {
   
   tick() {
     this.ticks++;
-    
+
     while (this.unprocessedMessages.length > 0) {
       const msg = this.unprocessedMessages.shift(); // FIFO
       
-      console.log("Platform processing");
-      console.log(msg);
+      console.log("Message:", msg);
       
       if (msg.arrived) {
         this.hasTrain = true;
@@ -53,6 +52,9 @@ class Platform {
     
     let tickables = [ this.train, ...this.contents, ...this.buffs ];
 
+    //console.log("Ticking:", tickables);
+    console.log("Ticking " + tickables.length + " items.");
+    
     for (let item of tickables) {
       if (!item) continue;      
       if (item["tick"]) {

@@ -9,10 +9,13 @@ const SimulatedTrainArrivalsClient = require("./SimulatedTrainArrivalsClient");
 let game, ui, dataSource;
 
 async function startGame(useRealData = false) {
-  game = new Game("KINGS CROSS", [ "platformId1" ]);
+  dataSource = useRealData 
+                ? new AblyTrainArrivalsClient() 
+                : new SimulatedTrainArrivalsClient();
+  
+  game = new Game([ "platformId1" ]);
   ui = new GameUi(game);
     
-  dataSource = useRealData ? new AblyTrainArrivalsClient() : new SimulatedTrainArrivalsClient();
   await dataSource.listenForEvents('KINGS CROSS', msg => game.registerEvent(game, msg));  
   
   game.start();

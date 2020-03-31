@@ -5,7 +5,7 @@ describe("Game", () => {
   
   let game;
   beforeEach(() => {
-    game = new Game("KINGS CROSS", [ "platformId1" ]);
+    game = new Game([ "platformId1" ]);
   });
   
   it("can be constructed", () => {

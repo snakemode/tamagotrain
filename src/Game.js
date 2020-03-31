@@ -12,7 +12,7 @@ const buffs = {
 };
 
 class Game {
-  constructor(stationName, platformIds) {
+  constructor(platformIds, onGameOver) {
     this.ticks = 0;
     this.status = "inactive";
     this.platforms = [];    

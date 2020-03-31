@@ -15,7 +15,7 @@ class SimulatedTrainArrivalsClient {
 
     this.fakeArrival();
     
-    setTimeout(() => { 
+    this._timeout = setTimeout(() => { 
       this.fakeDeparture();      
       setTimeout(() => { this.simulateSingleTrain(); }, interval);      
     }, interval); 
@@ -27,8 +27,8 @@ class SimulatedTrainArrivalsClient {
   }
     
   fakeDeparture() {        
-    console.log("Faking train arrival.");
-    this._callback({ line: "platformId1", arrived: true });
+    console.log("Faking train departure.");
+    this._callback({ line: "platformId1", departed: true });
   }
 
   
