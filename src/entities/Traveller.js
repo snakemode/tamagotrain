@@ -30,7 +30,7 @@ class Traveller {
       platform.temperature -= 1;
       this.completed = true;
       
-      console.log("Traveller(id="+ this.id + ") reached exit");
+      console.log("🚪 Traveller(id="+ this.id + ") reached exit");
       return;
     }
     
@@ -56,7 +56,7 @@ class Traveller {
     // Maybe I'm going to pass out? 10% chance if the platform is rancid.
     if (!this.isPassedOut && platform.hygiene <= 30 && random >= 0.9) {      
       this.isPassedOut = true;
-      console.log("Traveller(id="+ this.id + ") passed out.");
+      console.log("🤒 Traveller(id="+ this.id + ") passed out.");
       return;
     }
   }
