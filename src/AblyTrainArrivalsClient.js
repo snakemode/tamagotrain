@@ -28,6 +28,11 @@ class AblyTrainArrivalsClient {
     console.log("Timetable snapshot updated.");
     this._timetable = message.data;
     this._timetableAgeInSeconds = 0;
+    
+    for (const entry of this._timetable) {
+      console.log(entry);
+    }
+
   }
   
   dispatchAnyMessagesDue() {    

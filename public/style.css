@@ -490,6 +490,6 @@ div[data-ispassedout="true"] {
       border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
       background-color: #ebc8e2;
       transform: translate(-50%, 0);
-      box-shadow: inset 0px -30px 60px 0px rgba(0,0,0,0.75);
+      box-shadow: inset 0px -30px 60px 0px #b675a6;
   }
 }

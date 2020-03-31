@@ -39,8 +39,8 @@ class Platform {
         this.train = new Train();
       }
             
-      if (msg.departed) {
-        this.train.onCompletion();
+      if (msg.departed) {        
+        this.complete(this.train);
         this.hasTrain = false;
         this.train = null;
       }      
@@ -54,17 +54,21 @@ class Platform {
         item.tick(this);
       }
             
-      if (item.completed && item["onCompletion"]) {
-        item.onCompletion(this);
-      }
+      this.complete(item);
     }
-        
+    
     this.buffs = this.buffs.filter(b => !b.completed);
     this.contents = this.contents.filter(b => !b.completed);
     this.capacity = this.capacity <= 0 ? 0 : this.capacity;
     this.hygiene = this.hygiene <= 0 ? 0 : this.hygiene;
     this.hygiene = this.hygiene > 100 ? 100 : this.hygiene;
   }
+  
+  complete(i) {
+     if (i.completed && i["onCompletion"]) {
+      i.onCompletion(this);
+    }
+  }  
 }
 
 module.exports = Platform;
