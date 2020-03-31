@@ -34,15 +34,21 @@ class Platform {
     while (this.unprocessedMessages.length > 0) {
       const msg = this.unprocessedMessages.shift(); // FIFO
       
+      console.log("Platform processing");
+      console.log(msg);
+      
       if (msg.arrived) {
         this.hasTrain = true;
-        this.train = new Train();
+        this.train = new Train();        
+        console.log("Created train");
       }
             
-      if (msg.departed) {        
+      if (msg.departed) {   
+        this.train.completed = true;
         this.complete(this.train);
         this.hasTrain = false;
-        this.train = null;
+        this.train = null;        
+        console.log("Removed train");
       }      
     }
     

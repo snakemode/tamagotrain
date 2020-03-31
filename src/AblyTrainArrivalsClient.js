@@ -47,7 +47,7 @@ class AblyTrainArrivalsClient {
         continue;
       }
       
-      console.log("Train ready to go.");
+      console.log("Train from timetable reached arrival.");
       console.log(item);
 
       // Work out when to raise a departure message
