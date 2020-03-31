@@ -25,29 +25,31 @@ class AblyTrainArrivalsClient {
   
   timetableUpdated(message) {
     this._timetable = message.data;
-    this._timetableAgeInSecond = 0;
+    this._timetableAgeInSeconds = 0;
     console.log(message.data);
   }
   
   dispatchAnyMessagesDue() {    
-    console.log("dispatching");    
-    this._timetableAgeInSecond++;
+    this._timetableAgeInSeconds++;
     
     for (const item of this._timetable.data) {
       // if age >= TimeToStation create a train arrival and pop the message
       // if there are more records, send a departure message for current train
       // to arive at 50% of the next trains TimeToStation
       // Even if the timetalbe is replaced, this departure message will still fire to "clear the platform"
+      
+      if (item.TimeToStation > this._timetableAgeInSeconds) {
+        this.raiseEvent(true);
+        setTimeout(() => this.raiseEvent(false), 1000 * 15); // 15 seconds for now.
+      }
+      
     }
   }
   
-  raiseEvent() {
-    // unpack ably message, and 
-    const stationName = "KINGS CROSS"; // Something real here.
-    const isArrival = true;
+  raiseEvent(isArrival) {
     const message = isArrival 
-          ? { station: stationName, line: "platformId1", arrived: true } 
-          : { station: stationName, line: "platformId1", departed: true };
+          ? { line: "platformId1", arrived: true } 
+          : { line: "platformId1", departed: true };
     
     if (this._callback) {
       this._callback(message);
