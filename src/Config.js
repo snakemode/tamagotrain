@@ -17,6 +17,12 @@ const cfg = {
       hygieneCap: 100,
       hygieneFloor: 0
     },
+    train: {
+      temperatureChangePerTick: 0.25,
+      doorsCloseAtTick: 10,
+      spawnPassengersFromTick: 2,
+      spawnPassengersPerTick: 1
+    },
     traveller: {
       startValues: {
         ticksFromExit: 14
@@ -27,12 +33,6 @@ const cfg = {
       dropTrashPercentageChance: 5,
       chanceOfPassingOutWhenHygieneLessThan: 80,
       passOutPercentageChance: 10
-    },
-    train: {
-      temperatureChangePerTick: 0.25,
-      doorsCloseAtTick: 10,
-      spawnPassengersFromTick: 2,
-      spawnPassengersPerTick: 1
     }
   },
   failureConditions: {

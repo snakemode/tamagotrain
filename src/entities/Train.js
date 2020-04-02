@@ -1,3 +1,5 @@
+const config = require("../Config");
+const cfg = config.entities.train;
 const uuidv4 = require("../utils").uuidv4;
 const Traveller = require("./Traveller");
 
@@ -13,17 +15,19 @@ class Train {
   
   tick(platform) {
     
-    platform.temperature += 0.25;
+    platform.temperature += cfg.temperatureChangePerTick;
 
     if (this.ticks ==  0) {
       this.doorState = "opening";
     }
-    if (this.ticks >  10) {
+    if (this.ticks > cfg.doorsCloseAtTick) {
       this.doorState = "closing";
     }
 
-    if (this.ticks >= 2 && this.ticks <= 10) {
-      platform.contents.push(new Traveller());
+    if (this.ticks >= cfg.spawnPassengersFromTick && this.ticks <= cfg.doorsCloseAtTick) {
+      for (const i = 0; i < cfg.spawnPassengersPerTick; i++) {
+        platform.contents.push(new Traveller());
+      }
     }
 
     this.ticks++;

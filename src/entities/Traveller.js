@@ -1,3 +1,5 @@
+const config = require("../Config");
+const cfg = config.entities.traveller;
 const rand = require("../utils").rand;
 const uuidv4 = require("../utils").uuidv4;
 const walkNaturally = require("../traits/Pathfinder").walkNaturally;
@@ -8,7 +10,7 @@ class Traveller {
    constructor() {
     this.id = uuidv4();
     this.ticks = 0;
-    this.ticksFromExit = 14;
+    this.ticksFromExit = cfg.startValues.ticksFromExit;
 
     this.completed = false;
     this.droppedTrash = false;

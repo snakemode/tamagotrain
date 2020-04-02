@@ -1,7 +1,6 @@
-const cfg = require("./Config");
 const Train = require("./Train");
-
-const platformCfg = cfg.entities.platform;
+const config = require("../Config");
+const cfg = config.entities.platform;
 
 class Platform {
   constructor(id) {
@@ -10,9 +9,9 @@ class Platform {
     this.width = 500;
     this.height = 200;
     
-    this.capacity = platformCfg.startValues.capacity;
-    this.temperature = platformCfg.startValues.temperature;
-    this.hygiene = platformCfg.startValues.hygiene;
+    this.capacity = cfg.startValues.capacity;
+    this.temperature = cfg.startValues.temperature;
+    this.hygiene = cfg.startValues.hygiene;
     
     this.train = null;
     this.hasTrain = false;
@@ -70,8 +69,8 @@ class Platform {
     this.buffs = this.buffs.filter(b => !b.completed);
     this.contents = this.contents.filter(b => !b.completed);
     this.capacity = this.capacity <= 0 ? 0 : this.capacity;
-    this.hygiene = this.hygiene <= 0 ? 0 : this.hygiene;
-    this.hygiene = this.hygiene > 100 ? 100 : this.hygiene;
+    this.hygiene = this.hygiene <= cfg.hygieneFloor ? cfg.hygieneFloor : this.hygiene;
+    this.hygiene = this.hygiene > cfg.hygieneCap ? cfg.hygieneCap : this.hygiene;
   }
   
   complete(i) {
