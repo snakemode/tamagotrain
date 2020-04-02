@@ -1,5 +1,8 @@
+const config = require("../Config");
+const cfg = config.entities.traveller;
 const Traveller = require("./Traveller");
 const Platform = require("./Platform");
+const MusicBuff = require("../buffs/MusicBuff");
 
 describe("Traveller", () => {
     
@@ -33,6 +36,15 @@ describe("Traveller", () => {
   it("tick - doesn't get closer to the exit when passed out", () => {
     traveller.ticksFromExit = 100;
     traveller.isPassedOut = true;
+
+    traveller.tick(platform);    
+
+    expect(traveller.ticksFromExit).toBe(100);
+  });
+
+  it("tick - doesn't get closer to the exit when muic is playing", () => {
+    traveller.ticksFromExit = 100;
+    platform.buffs.push(new MusicBuff());
 
     traveller.tick(platform);    
 
@@ -73,5 +85,22 @@ describe("Traveller", () => {
     traveller.tick(platform); 
 
     expect(traveller.isPassedOut).toBe(true);
+  });
+
+  it("tick - traveller is at the exit, flags as completed", () => {
+    traveller.ticksFromExit = 0;
+
+    traveller.tick(platform); 
+
+    expect(traveller.completed).toBe(true);
+  });
+
+  it("tick - traveller is at the exit, changes temperature by configured delta", () => {
+    platform.temperature = 20;
+    traveller.ticksFromExit = 0;
+
+    traveller.tick(platform);
+
+    expect(platform.temperature).toBe(20 + cfg.temperatureChangeOnCompletion);
   });
 });
