@@ -185,7 +185,7 @@ eval("const Ably = __webpack_require__(/*! ably/promises */ \"../rbd/pnpm-volume
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("const hot = 35;\nconst fps = 30;\nconst ticksPerSecond = 1;\n\nconst cfg = {\n  game: {\n    ticksPerSecond: 1,\n    fps: 30\n  },\n  failureConditions: {\n    tooHot: 60,\n    tooCold: -20,\n    tooDirty: 0,\n    platformCapacity: 60,\n  },\n  problems: {\n    mouse: {\n      stepSize: 10,\n      hygieneChangeWhenMouseLeaves: 5\n    },\n    trash: {\n      hygieneChangePerTick: -0.25,\n      chanceOfMouseWhenLessThanHygiene: 80,\n      chanceOfMousePercent: 10\n    },\n    heat: {\n      heatOverlayDisplaysAt: 35\n    }\n  }\n}\n\nmodule.exports = {\n  hot, fps, ticksPerSecond\n}\n\n//# sourceURL=webpack://train/./src/Config.js?");
+eval("const hot = 35;\nconst fps = 30;\nconst ticksPerSecond = 1;\n\nconst cfg = {\n  game: {\n    ticksPerSecond: 1,\n    fps: 30\n  },\n  entities: {\n    platform: {\n      startValues: {\n        capacity: 60,\n        temperature: 15,\n        hygiene: 100\n      },\n      hygieneCap: 100\n    },\n    traveller: {\n      startValues: {\n        ticksFromExit: 14\n      },\n      temperatureChangePerTick: 0.1,\n      stepSize: 15\n    }\n  },\n  failureConditions: {\n    tooHot: 60,\n    tooCold: -20,\n    tooDirty: 0,\n    platformCap: 60,\n  },\n  problems: {\n    mouse: {\n      stepSize: 10,\n      hygieneChangeWhenMouseLeaves: 5\n    },\n    trash: {\n      hygieneChangePerTick: -0.25,\n      chanceOfMouseWhenLessThanHygiene: 80,\n      chanceOfMousePercent: 10\n    },\n    heat: {\n      heatOverlayDisplaysAt: 35\n    }\n  }\n}\n\nmodule.exports = {\n  hot, fps, ticksPerSecond\n}\n\n//# sourceURL=webpack://train/./src/Config.js?");
 
 /***/ }),
 

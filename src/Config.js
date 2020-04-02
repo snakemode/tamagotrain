@@ -7,11 +7,28 @@ const cfg = {
     ticksPerSecond: 1,
     fps: 30
   },
+  entities: {
+    platform: {
+      startValues: {
+        capacity: 60,
+        temperature: 15,
+        hygiene: 100
+      },
+      hygieneCap: 100
+    },
+    traveller: {
+      startValues: {
+        ticksFromExit: 14
+      },
+      temperatureChangePerTick: 0.1,
+      stepSize: 15
+    }
+  },
   failureConditions: {
     tooHot: 60,
     tooCold: -20,
     tooDirty: 0,
-    platformCapacity: 60,
+    platformCap: 60,
   },
   problems: {
     mouse: {
