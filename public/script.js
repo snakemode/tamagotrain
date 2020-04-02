@@ -185,7 +185,7 @@ eval("const Ably = __webpack_require__(/*! ably/promises */ \"../rbd/pnpm-volume
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("const hot = 35;\nconst fps = 30;\nconst ticksPerSecond = 1;\n\nconst cfg = {\n  failureConditions: {\n    tooHot: 60,\n    tooCold: -20,\n    tooDirty: 0,\n    platformCapacity: 60,\n  },\n  \n}\n\nmodule.exports = {\n  hot, fps, ticksPerSecond\n}\n\n//# sourceURL=webpack://train/./src/Config.js?");
+eval("const hot = 35;\nconst fps = 30;\nconst ticksPerSecond = 1;\n\nconst cfg = {\n  game: {\n    ticksPerSecond: 1,\n    fps: 30\n  },\n  failureConditions: {\n    tooHot: 60,\n    tooCold: -20,\n    tooDirty: 0,\n    platformCapacity: 60,\n  },\n  problems: {\n    mouse: {\n      stepSize: 10,\n      hygieneChangeWhenMouseLeaves: 5\n    },\n    trash: {\n      hygieneChangePerTick: -0.25,\n      chanceOfMouseWhenLessThanHygiene: 80,\n      chanceOfMousePercent: 10\n    },\n    heat: {\n      heatOverlayDisplaysAt: 35\n    }\n  }\n}\n\nmodule.exports = {\n  hot, fps, ticksPerSecond\n}\n\n//# sourceURL=webpack://train/./src/Config.js?");
 
 /***/ }),
 
@@ -328,7 +328,7 @@ eval("const uuidv4 = __webpack_require__(/*! ../utils */ \"./src/utils.js\").uui
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Problem = __webpack_require__(/*! ./Problem */ \"./src/problems/Problem.js\");\nconst Mouse = __webpack_require__(/*! ./Mouse */ \"./src/problems/Mouse.js\");\nconst rand = __webpack_require__(/*! ../utils */ \"./src/utils.js\").rand;\n\nclass Trash extends Problem {\n  constructor(x, y) {\n    super(x, y);\n    this.spawnedMouse = false;\n  }\n  \n  tick(platform) {   \n    \n    platform.hygiene -= 0.25;    \n    \n    // Spawn mouse if too trashy\n    const random = rand(0, 10);\n    if (!this.spawnedMouse && platform.hygiene <= 80 && random >= 9) {\n      platform.contents.push(new Mouse(this.x, this.y));\n      this.spawnedMouse = true;\n    }\n    \n    this.ticks++;\n  }  \n\n  onCompletion(platform) {\n  }\n}\n\nmodule.exports = Trash;\n\n//# sourceURL=webpack://train/./src/problems/Trash.js?");
+eval("const Problem = __webpack_require__(/*! ./Problem */ \"./src/problems/Problem.js\");\nconst Mouse = __webpack_require__(/*! ./Mouse */ \"./src/problems/Mouse.js\");\nconst rand = __webpack_require__(/*! ../utils */ \"./src/utils.js\").rand;\n\nclass Trash extends Problem {\n  constructor(x, y) {\n    super(x, y);\n    this.spawnedMouse = false;\n  }\n  \n  tick(platform) {   \n    \n    platform.hygiene -= 0.25;    \n    \n    // Spawn mouse if too trashy\n    const random = rand(0, 100);\n    if (!this.spawnedMouse && platform.hygiene <= 80 && random <= 10) {\n      platform.contents.push(new Mouse(this.x, this.y));\n      this.spawnedMouse = true;\n    }\n    \n    this.ticks++;\n  }  \n\n  onCompletion(platform) {\n  }\n}\n\nmodule.exports = Trash;\n\n//# sourceURL=webpack://train/./src/problems/Trash.js?");
 
 /***/ }),
 
