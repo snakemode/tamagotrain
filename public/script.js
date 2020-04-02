@@ -185,7 +185,7 @@ eval("const Ably = __webpack_require__(/*! ably/promises */ \"../rbd/pnpm-volume
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("const hot = 35;\nconst fps = 30;\nconst ticksPerSecond = 1;\n\nmodule.exports = {\n  hot, fps, ticksPerSecond\n}\n\n//# sourceURL=webpack://train/./src/Config.js?");
+eval("const hot = 35;\nconst fps = 30;\nconst ticksPerSecond = 1;\n\nconst cfg = {\n  failureConditions: {\n    tooHot: 60,\n    tooCold: -20,\n    tooDirty: 0,\n    platformCapacity: 60,\n  },\n  \n}\n\nmodule.exports = {\n  hot, fps, ticksPerSecond\n}\n\n//# sourceURL=webpack://train/./src/Config.js?");
 
 /***/ }),
 
