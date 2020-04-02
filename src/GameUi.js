@@ -22,7 +22,7 @@ class GameUi {
   }
 
   startRendering(game) {
-    setInterval(() => ui.draw(game), 1000 / fps);
+    setInterval(() => this.draw(game), 1000 / fps);
   }
   
   draw(g) {
