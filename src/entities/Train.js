@@ -22,7 +22,7 @@ class Train {
       this.doorState = "closing";
     }
 
-    if (this.ticks > 1 && this.ticks <= 10) {
+    if (this.ticks >= 2 && this.ticks <= 10) {
       platform.contents.push(new Traveller());
     }
 

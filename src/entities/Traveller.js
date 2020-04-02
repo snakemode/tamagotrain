@@ -3,6 +3,7 @@ const uuidv4 = require("../utils").uuidv4;
 const walkNaturally = require("../traits/Pathfinder").walkNaturally;
 const Trash = require("../problems/Trash");
 
+
 class Traveller {
    constructor() {
     this.id = uuidv4();
@@ -44,17 +45,17 @@ class Traveller {
     walkNaturally(this, this.selectedExit, 15);
     this.ticksFromExit--;
 
-    const random = this.random();    
+    const random = rand(0, 100);
     
-    // Am I gonna drop trash? 10% chance when too hot
-    if (!this.droppedTrash && random >= 0.95) { 
+    // Am I gonna drop trash? 
+    if (!this.droppedTrash && random <= 5) { 
       platform.contents.push(new Trash(this.x, this.y));
       this.droppedTrash = true;
       return;
     }
     
-    // Maybe I'm going to pass out? 10% chance if the platform is rancid.
-    if (!this.isPassedOut && platform.hygiene <= 30 && random >= 0.9) {      
+    // Maybe I'm going to pass out?
+    if (!this.isPassedOut && platform.hygiene <= 30 && random <= 10) {      
       this.isPassedOut = true;
       console.log("🤒 Traveller(id="+ this.id + ") passed out.");
       return;

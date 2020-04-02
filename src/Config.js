@@ -14,14 +14,22 @@ const cfg = {
         temperature: 15,
         hygiene: 100
       },
-      hygieneCap: 100
+      hygieneCap: 100,
+      hygieneFloor: 0
     },
     traveller: {
       startValues: {
         ticksFromExit: 14
       },
       temperatureChangePerTick: 0.1,
+      temperatureChangeOnCompletion: -1,
       stepSize: 15
+    },
+    train: {
+      temperatureChangePerTick: 0.25,
+      doorsCloseAtTick: 10,
+      spawnPassengersFromTick: 2,
+      spawnPassengersPerTick: 1
     }
   },
   failureConditions: {
