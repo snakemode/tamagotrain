@@ -41,7 +41,9 @@ But don't worry!
 The game is split into two parts - the simulation, which runs in `ticks`, and the `ui` which runs at 30 frames per second.
 
 The timer that calls our `tick` function is commonly called `the game loop` in game programming.
-The loop that draws to the screen, is frequently referred to as the `render loop`
+The loop that draws to the screen, is frequently referred to as the `render loop`.
+
+Having the two things run independently of one another prevents us tying the game logic to our frame rate.
 
 ## Game.js
 
@@ -130,3 +132,80 @@ For example:
 * Trains add an extra Traveller to the platform every tick
 
 All of this logic exists in the `tick` function of each kind of entity or problem.
+
+## GameUi.js
+
+GameUi is where all our rendering happens. It loosely follows an *Observer* pattern.
+This is CS jargon for "a piece of code that looks at the state of something else".
+
+30 times a second, we call our GameUI.draw function, passing it a snapshot of the game state.
+
+Internally, the GameUI instance keeps track of the last state it was called with, so it can avoid re-drawing things that haven't changed all the time.
+
+The GameUi class has a collection called `_renderingFunctions` - a list of functions it calls in order, each being passed the current game state.
+This is a simple way for us to split out the logic for rendering different kinds of things in the game world.
+
+If any rendering function returns a value of `-1`, we use this as a signal to stop drawing to the screen.
+This is used to make sure the game over screen gets displayed and any additional rendering is stopped.
+
+The rendering code isn't too complicated - we have some placeholder *div*s that we're applying some beautiful styling to, and our rendering code adds and removes
+elements that are absolutely positioned inside our `Platform` div.
+
+We're doing a few things to make our lives easier here - adding `css classes` and `data attributes` with various properties from our entities and problem objects- this
+lets us target those dynamically added divs with CSS to apply animated gif backgrounds, and other styles to the objects.
+
+The `renderContents` function renders most of the entities in the world with the same block of code, just applying their `ids` and `entity-types` as classes and attributes
+while our `css` does most of the hard work.
+
+The UI also has special code for making sure trains arrive and leave the platform - where it compares the previous state of the game, and the current state, so if a 
+train has arrived or left the platform it can trigger the addition or removal of the appropriate css classes.
+
+## Ending the game
+
+The game failure states are managed in `Game.js` in the function `isGameOver`.
+
+You'll see a collection of objects with functions embedded in them for different failure conditions.
+At the start of each tick, each of those functions are run, and if any of them return true, the game is over.
+
+The game then updates it's state to have ended, keeping track of the reason the game has failed.
+
+# Where the train arrival and departure messages come from
+
+- We fake them
+- In fake mode, they arrive every 12 seconds, wait 12 seconds, then leave for 12 seconds
+- It's just a timer
+
+## Ably Realtime TFL data mode
+
+- Real train data!
+- We keep track of arrivals to all the platforms at **station name**
+- When we detect an arrival we send a train arrived message
+- We schedule a departure message for half way to the next train.
+
+# Starting the game
+
+`script.js` is referenced in our HTML, and it takes care of starting our new games.
+
+The `startGame` function does all the work...
+
+```js
+async function startGame(useRealData = false) {
+  dataSource = useRealData 
+                ? new AblyTrainArrivalsClient() 
+                : new SimulatedTrainArrivalsClient();
+  
+  game = new Game();
+  ui = new GameUi(game);
+  
+  game.start({
+    onGameStart: async () => await dataSource.listenForEvents("northern:940GZZLUKSX", msg => game.registerEvent(game, msg)),
+    onGameEnd: () => dataSource.stopListening()
+  });
+
+  ui.startRendering(game);
+  
+  return game;
+}
+```
+
+I
