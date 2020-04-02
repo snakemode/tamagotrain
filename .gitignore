@@ -101,9 +101,3 @@ typings/
 
 # TernJS port file
 .tern-port
-
-# dist/ including this to do scm cloud build
-src/**/*.js
-src/**/*.map
-test_results/
-tmp/**/*.*
