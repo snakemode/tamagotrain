@@ -17,9 +17,10 @@ class Train {
     
     platform.temperature += cfg.temperatureChangePerTick;
 
-    if (this.ticks ==  0) {
+    if (this.ticks == 0) {
       this.doorState = "opening";
     }
+
     if (this.ticks > cfg.doorsCloseAtTick) {
       this.doorState = "closing";
     }

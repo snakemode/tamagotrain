@@ -5,7 +5,6 @@ const uuidv4 = require("../utils").uuidv4;
 const walkNaturally = require("../traits/Pathfinder").walkNaturally;
 const Trash = require("../problems/Trash");
 
-
 class Traveller {
    constructor() {
     this.id = uuidv4();
@@ -39,7 +38,7 @@ class Traveller {
     
     this.dancing = platform.buffs.filter(x => x.constructor.name == "MusicBuff").length > 0;
     platform.temperature += cfg.temperatureChangePerTick;
-
+    
     if (this.dancing || this.isPassedOut) {
       return;
     }

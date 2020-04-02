@@ -30,7 +30,6 @@ class Mouse extends Problem {
       this.destination = null;
     }
       
-    
     this.ticks++;
   }
   

@@ -1,3 +1,5 @@
+const config = require("../Config");
+const cfg = config.entities.train;
 const Train = require("./Train");
 const Platform = require("./Platform");
 
@@ -27,13 +29,34 @@ describe("Train", () => {
     expect(platform.temperature).toBe(10.5);
   });  
 
-  it("tick - adds a new traveller to the platform from third tick", () => {       
-    train.tick(platform); 
-    train.tick(platform);
+  it("tick - opens doors on first tick", () => {
+    train.ticks = 0;
+    train.tick(platform);    
+    expect(train.doorState).toBe("opening");
+  }); 
+
+  it("tick - closes doors after configured value", () => {
+    train.ticks = cfg.doorsCloseAtTick + 1;
+    train.tick(platform);    
+    expect(train.doorState).toBe("closing");
+  });  
+
+  it("tick - adds a new traveller to the platform from confgured tick number", () => {       
+    train.ticks = cfg.spawnPassengersFromTick;
+    
     train.tick(platform);
 
-    expect(platform.contents.length).toBe(1);
+    expect(platform.contents.length).toBe(cfg.spawnPassengersPerTick);
     expect(platform.contents[0].constructor.name).toBe("Traveller");
+  }); 
+
+  it("tick - spawn rate observes configuration", () => {       
+    cfg.spawnPassengersPerTick = 3;
+    train.ticks = cfg.spawnPassengersFromTick;
+    
+    train.tick(platform);
+
+    expect(platform.contents.length).toBe(3);
   }); 
 
 });
