@@ -20,6 +20,7 @@ class Game {
     this.status = "inactive";
     this.platforms = [];    
     this.queuedActions = [];
+    this.onGameOver = nothing;
         
     for (let id of platformIds) {
       this.platforms.push(new Platform(id));

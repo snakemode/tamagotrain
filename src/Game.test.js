@@ -58,7 +58,7 @@ describe("Game", () => {
     game.tick();
 
     expect(game.platforms[0].buffs.length).toBe(1);
-    expect(game.platforms[0].buffs[0].constructor.name).toBe("cleanBuff");
+    expect(game.platforms[0].buffs[0].constructor.name).toBe("CleanBuff");
   });
   
   it("queueAction unknown buff, raises error", () => {

@@ -43,9 +43,11 @@ class Platform {
         this.train = new Train();        
       }
             
-      if (msg.departed) {   
-        this.train.completed = true;
-        this.complete(this.train);
+      if (msg.departed) {
+        if (this.train) { 
+          this.train.completed = true;
+          this.complete(this.train);
+        }
         this.hasTrain = false;
         this.train = null;        
         console.log("🚆 Removed train.");

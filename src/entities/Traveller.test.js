@@ -41,7 +41,7 @@ describe("Traveller", () => {
 
   it("tick - litters 5 percent of the time when hasn't already littered", () => {
     traveller.droppedTrash = false;
-    traveller.random = () => 0.95;
+    traveller.random = () => 5;
 
     traveller.tick(platform); 
 
@@ -50,7 +50,7 @@ describe("Traveller", () => {
   });
 
   it("tick - doesn't litter 95% of the time", () => {
-    traveller.random = () => 0.5;
+    traveller.random = () => 6;
 
     traveller.tick(platform); 
 
@@ -58,12 +58,12 @@ describe("Traveller", () => {
   });
 
   it("tick - doesn't litter if they already have", () => {
-    traveller.random = () => 1.0;
+    traveller.random = () => 5;
 
-    traveller.tick(platform);  // voms
-    traveller.tick(platform);  // doesn't vom
+    traveller.tick(platform);  // litters
+    traveller.tick(platform);  // doesn't litter
 
-    expect(platform.contents.length).toBe(1); // only one vom
+    expect(platform.contents.length).toBe(1); // only one trash
   });
 
   it("tick - passes out 10 percent of the time when hygiene is poor", () => {
