@@ -23,7 +23,10 @@ const cfg = {
       },
       temperatureChangePerTick: 0.1,
       temperatureChangeOnCompletion: -1,
-      stepSize: 15
+      stepSize: 15,
+      dropTrashPercentageChance: 5,
+      chanceOfPassingOutWhenHygieneLessThan: 80,
+      passOutPercentageChance: 10
     },
     train: {
       temperatureChangePerTick: 0.25,
@@ -54,6 +57,4 @@ const cfg = {
   }
 }
 
-module.exports = {
-  hot, fps, ticksPerSecond
-}
+module.exports = cfg;

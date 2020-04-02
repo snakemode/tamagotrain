@@ -1,4 +1,5 @@
-const hot = require("./Config").hot;
+const cfg = require("./Config");
+const hot = cfg.problems.heat.heatOverlayDisplaysAt;
 const rand = require("./utils").rand;
 
 class GameUi {

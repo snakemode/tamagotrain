@@ -1,4 +1,5 @@
-const ticksPerSecond = require("./Config").ticksPerSecond;
+const cfg = require("./Config")
+const ticksPerSecond = cfg.game.ticksPerSecond;
 const Platform = require("./entities/Platform");
 
 const CleanBuff = require("./buffs/CleanBuff");

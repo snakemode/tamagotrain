@@ -1,4 +1,7 @@
+const cfg = require("./Config");
 const Train = require("./Train");
+
+const platformCfg = cfg.entities.platform;
 
 class Platform {
   constructor(id) {
@@ -7,9 +10,9 @@ class Platform {
     this.width = 500;
     this.height = 200;
     
-    this.capacity = 60;
-    this.temperature = 15;
-    this.hygiene = 100;
+    this.capacity = platformCfg.startValues.capacity;
+    this.temperature = platformCfg.startValues.temperature;
+    this.hygiene = platformCfg.startValues.hygiene;
     
     this.train = null;
     this.hasTrain = false;
