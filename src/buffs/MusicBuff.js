@@ -1,7 +1,10 @@
+const config = require("../Config");
+const cfg = config.buffs.music;
+
 class MusicBuff {
   constructor() {
     console.log("🎶 MusicBuff()");
-    this.ticks = 4;
+    this.ticks = cfg.buffLengthInTicks;
     this.completed = false;
   }
   

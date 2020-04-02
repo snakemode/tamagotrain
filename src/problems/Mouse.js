@@ -8,7 +8,7 @@ const walkNaturally = require("../traits/Pathfinder").walkNaturally;
 class Mouse extends Problem {
   constructor(x, y) {
     super(x, y);
-    this.stepSize = 10;
+    this.stepSize = cfg.stepSize;
     this.offscreen = { x: 600, y: 300 };
   }
     
@@ -19,7 +19,7 @@ class Mouse extends Problem {
       // Go somewhere random
     } 
     
-    if (platform.hygiene >= 80 || platform.temperature <= 0) {
+    if (platform.hygiene >= cfg.leavesWhenHygieneIsAbove || platform.temperature <= cfg.leavesWhenTemperatureIsBelow) {
       this.leave(platform); // Too clean or too cold! going away.
     }
     
@@ -41,7 +41,7 @@ class Mouse extends Problem {
   }
 
   onCompletion(platform) {
-    platform.hygiene += 5;
+    platform.hygiene += cfg.hygieneChangeWhenMouseLeaves;
   }
 }
 

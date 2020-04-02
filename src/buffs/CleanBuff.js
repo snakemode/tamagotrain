@@ -1,14 +1,17 @@
+const config = require("../Config");
+const cfg = config.buffs.clean;
+
 class CleanBuff {
   constructor() {
     console.log("🧼 CleanBuff()");
-    this.ticks = 5;
+    this.ticks = cfg.buffLengthInTicks;
     this.completed = false;
     this.hasTicked = false;
   }
   
   tick(platform) {
     this.ticks--;    
-    platform.hygiene += 2.5;
+    platform.hygiene += cfg.hygieneChangePerTick;
     
     this.removeOneTrash(platform);
     

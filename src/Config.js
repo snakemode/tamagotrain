@@ -13,6 +13,20 @@ const cfg = {
       platformCap: 60,
     }
   },
+  buffs: {
+    clean: {
+      buffLengthInTicks: 5,
+      hygieneChangePerTick: 2.5,
+    },
+    music: {
+      buffLengthInTicks: 4
+    },
+    vent: {    
+      buffLengthInTicks: 5,
+      temperatureChangePerTick: -1,
+      hygieneChangePerTick: 0.2
+    }
+  },
   entities: {
     platform: {
       startValues: {
@@ -44,6 +58,8 @@ const cfg = {
   problems: {
     mouse: {
       stepSize: 10,
+      leavesWhenHygieneIsAbove: 80,
+      leavesWhenTemperatureIsBelow: 0,
       hygieneChangeWhenMouseLeaves: 5
     },
     trash: {
