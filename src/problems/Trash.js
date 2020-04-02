@@ -17,6 +17,8 @@ class Trash extends Problem {
     // Spawn mouse if too trashy
     const random = this.random();
     
+
+    
     if (!this.spawnedMouse && platform.hygiene <= cfg.chanceOfMouseWhenLessThanHygiene && random <= cfg.chanceOfMousePercent) {
       platform.contents.push(new Mouse(this.x, this.y));
       this.spawnedMouse = true;
