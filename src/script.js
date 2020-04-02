@@ -1,7 +1,8 @@
-const fps = require("./Config").fps;
+const config = require("./Config");
+const cfg = config.game;
+
 const Game = require("./Game");
 const GameUi = require("./GameUi");
-const TrainMessageRouter = require("./TrainMessageRouter");
 
 const AblyTrainArrivalsClient = require("./AblyTrainArrivalsClient");
 const SimulatedTrainArrivalsClient = require("./SimulatedTrainArrivalsClient");
@@ -22,7 +23,7 @@ async function startGame(useRealData = false) {
     dataSource.stopListening();
   });
   
-  setInterval(() => ui.draw(game), 1000 / fps);
+  setInterval(() => ui.draw(game), 1000 / cfg.fps);
   
   return game;
 }

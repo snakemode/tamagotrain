@@ -1,5 +1,5 @@
-const cfg = require("./Config")
-const ticksPerSecond = cfg.game.ticksPerSecond;
+const config = require("./Config");
+const cfg = config.game;
 const Platform = require("./entities/Platform");
 
 const CleanBuff = require("./buffs/CleanBuff");
@@ -30,7 +30,7 @@ class Game {
     this.onGameOver = onGameOver || nothing;
     this.tickInterval = setInterval(() => {
       this.tick();
-    }, 1000 / ticksPerSecond);
+    }, 1000 / cfg.ticksPerSecond);
     this.status = "active";
   }
   
@@ -73,9 +73,9 @@ class Game {
   
   isGameOver() {    
     const failureConditions = [
-      { condition: (g) => (g.platforms.filter(p => p.temperature >= 60).length > 0), message: "It's too hot!" },
-      { condition: (g) => (g.platforms.filter(p => p.temperature <= -20).length > 0), message: "It's too cold!" },
-      { condition: (g) => (g.platforms.filter(p => p.hygiene <= 0).length > 0), message: "It's too disgusting!" },
+      { condition: (g) => (g.platforms.filter(p => p.temperature >= cfg.failureConditions.tooHot).length > 0), message: "It's too hot!" },
+      { condition: (g) => (g.platforms.filter(p => p.temperature <= cfg.failureConditions.tooCold).length > 0), message: "It's too cold!" },
+      { condition: (g) => (g.platforms.filter(p => p.hygiene <= cfg.failureConditions.tooDirty).length > 0), message: "It's too disgusting!" },
       { condition: (g) => (g.platforms.filter(p => p.contents.length >= p.capacity).length > 0), message: "Your platforms are too full!" }
     ];
     
@@ -90,7 +90,7 @@ class Game {
   }
   
   queueAction(key, target) {
-    if (this.queuedActions.length >= 3) return; // Rate limit actions to 3 per tick.  
+    if (this.queuedActions.length >= cfg.actionQueueCap) return;
     this.queuedActions.push({ key: key, target: target })
   }
   

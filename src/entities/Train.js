@@ -25,7 +25,7 @@ class Train {
     }
 
     if (this.ticks >= cfg.spawnPassengersFromTick && this.ticks <= cfg.doorsCloseAtTick) {
-      for (const i = 0; i < cfg.spawnPassengersPerTick; i++) {
+      for (let i = 0; i < cfg.spawnPassengersPerTick; i++) {
         platform.contents.push(new Traveller());
       }
     }

@@ -42,7 +42,7 @@ describe("Platform", () => {
     expect(platform.hasTrain).toBe(true);
   });
 
-  it("tick - creates a train when message is for arrival", () => {
+  it("tick - creates a train when message is for departure", () => {
     platform.unprocessedMessages.push({ departed: true });
     
     platform.tick(); 

@@ -1,16 +1,12 @@
-const hot = 35;
-const fps = 30;
-const ticksPerSecond = 1;
-
-const cfg = {
+module.exports = {
   game: {
     ticksPerSecond: 1,
     fps: 30,
+    actionQueueCap: 3,
     failureConditions: {
       tooHot: 60,
       tooCold: -20,
       tooDirty: 0,
-      platformCap: 60,
     }
   },
   buffs: {
@@ -71,6 +67,4 @@ const cfg = {
       heatOverlayDisplaysAt: 35
     }
   }
-}
-
-module.exports = cfg;
+};
