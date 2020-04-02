@@ -1,4 +1,5 @@
 const config = require("./Config");
+const fps = config.game.fps;
 const hot = config.problems.heat.heatOverlayDisplaysAt;
 const rand = require("./utils").rand;
 
@@ -18,6 +19,10 @@ class GameUi {
       renderContents,
       renderBuffs
     ];
+  }
+
+  startRendering(game) {
+    setInterval(() => ui.draw(game), 1000 / fps);
   }
   
   draw(g) {

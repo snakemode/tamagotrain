@@ -7,6 +7,7 @@ const MusicBuff = require("./buffs/MusicBuff");
 const VentBuff = require("./buffs/VentBuff");
 
 const nothing = () => { };
+const asyncNothing = async () => { };
 
 const buffs = { 
   CleanBuff,
@@ -21,18 +22,30 @@ class Game {
     this.platforms = [];    
     this.queuedActions = [];
     this.onGameOver = nothing;
+
+    platformIds = platformIds || [ "platformId1" ];
         
     for (let id of platformIds) {
       this.platforms.push(new Platform(id));
     }
   }
   
-  start(onGameOver) {
-    this.onGameOver = onGameOver || nothing;
+  async start(options) {
+    const onStart = options.onGameStart || asyncNothing;
+    this.onGameOver = options.onGameOver || nothing;
+    this.status = "active";
+
+    await onStart();
+
     this.tickInterval = setInterval(() => {
       this.tick();
     }, 1000 / cfg.ticksPerSecond);
-    this.status = "active";
+  }
+
+  stop() {    
+    clearInterval(this.tickInterval);      
+    this.status = "ended";
+    this.onGameOver(this);
   }
   
   tick() {
@@ -40,13 +53,10 @@ class Game {
          
     const gameOverCheck = this.isGameOver(this);    
     if (gameOverCheck.gameover) {      
-      this.status = "ended";
       this.gameover = gameOverCheck;
       this.gameovermsg = gameOverCheck.message;
-      clearInterval(this.tickInterval);      
-      
       console.log("☠ Game ended");
-      this.onGameOver(this);
+      this.stop();
       return;
     }   
     

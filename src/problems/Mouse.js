@@ -1,7 +1,6 @@
 const config = require("../Config");
 const cfg = config.problems.mouse;
 const Problem = require("./Problem");
-const rand = require("../utils").rand;
 const inTargetZone = require("../traits/Pathfinder").inTargetZone;
 const walkNaturally = require("../traits/Pathfinder").walkNaturally;
 
@@ -15,7 +14,7 @@ class Mouse extends Problem {
   tick(platform) {
     
     if (!this.destination) {
-      this.destination = { x: rand(0, platform.width), y: rand(0, platform.height) }; 
+      this.destination = { x: this.random(0, platform.width), y: this.random(0, platform.height) }; 
       // Go somewhere random
     } 
     

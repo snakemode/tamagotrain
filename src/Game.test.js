@@ -5,7 +5,7 @@ describe("Game", () => {
   
   let game;
   beforeEach(() => {
-    game = new Game([ "platformId1" ]);
+    game = new Game();
   });
   
   it("can be constructed", () => {
@@ -52,20 +52,61 @@ describe("Game", () => {
     expect(game.status).toBe("ended");
   });
   
-  it("queueAction queues appropriate buff up", () => {
+  it("queueAction clean queues appropriate buff up", () => {
     game.queueAction("clean", "platformId1");
     
     game.tick();
 
     expect(game.platforms[0].buffs.length).toBe(1);
     expect(game.platforms[0].buffs[0].constructor.name).toBe("CleanBuff");
+  }); 
+
+  it("queueAction vent queues appropriate buff up", () => {
+    game.queueAction("vent", "platformId1");
+    
+    game.tick();
+
+    expect(game.platforms[0].buffs.length).toBe(1);
+    expect(game.platforms[0].buffs[0].constructor.name).toBe("VentBuff");
+  });  
+
+  it("queueAction music queues appropriate buff up", () => {
+    game.queueAction("music", "platformId1");
+    
+    game.tick();
+
+    expect(game.platforms[0].buffs.length).toBe(1);
+    expect(game.platforms[0].buffs[0].constructor.name).toBe("MusicBuff");
   });
   
   it("queueAction unknown buff, raises error", () => {
-    game.queueAction("not_a_real_buff", "platformId1");
-    
+    game.queueAction("not_a_real_buff", "platformId1");    
     expect(() => game.tick()).toThrow("Could not find handler called Not_a_real_buffBuff");
   });
-  
-  
+    
+  it("start updates game status", () => {    
+    game.start(startOptions);
+
+    expect(game.status).toBe("active");
+    game.stop();
+  }); 
+
+  it("start updates game status", () => {
+    game.stop();
+    expect(game.status).toBe("ended");
+  }); 
+        
+  it("start ticks game counter", async () => {
+    game.start(startOptions);    
+    await sleep(1500);
+
+    expect(game.ticks).toBe(1);
+    game.stop();
+  });  
 });
+
+const startOptions = {
+  onGameStart: async () => {},
+  onGameEnd: () => {}
+};
+const sleep = (timeout) => new Promise(r => setTimeout(r, timeout));

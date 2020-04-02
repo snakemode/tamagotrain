@@ -8,12 +8,12 @@
     "build": "webpack"
   },
   "dependencies": {
-    "express": "^4.17.1", 
+    "express": "^4.17.1",
     "ably": "latest",
     "webpack": "latest",
     "webpack-cli": "latest",
-    "clean-webpack-plugin": "latest",  
-    "html-webpack-plugin": "latest",    
+    "clean-webpack-plugin": "latest",
+    "html-webpack-plugin": "latest",
     "jest": "latest",
     "jest-cli": "latest"
   },
