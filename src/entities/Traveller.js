@@ -30,7 +30,7 @@ class Traveller {
     }
 
     if (this.ticksFromExit == 0) {
-      platform.temperature -= 1;
+      platform.temperature += cfg.temperatureChangeOnCompletion;
       this.completed = true;
       
       console.log("🚪 Traveller(id="+ this.id + ") reached exit");
@@ -38,26 +38,26 @@ class Traveller {
     }
     
     this.dancing = platform.buffs.filter(x => x.constructor.name == "MusicBuff").length > 0;
-    platform.temperature += 0.1;
+    platform.temperature += cfg.temperatureChangePerTick;
 
     if (this.dancing || this.isPassedOut) {
       return;
     }
     
-    walkNaturally(this, this.selectedExit, 15);
+    walkNaturally(this, this.selectedExit, cfg.stepSize);
     this.ticksFromExit--;
 
     const random = rand(0, 100);
     
     // Am I gonna drop trash? 
-    if (!this.droppedTrash && random <= 5) { 
+    if (!this.droppedTrash && random <= cfg.dropTrashPercentageChance) { 
       platform.contents.push(new Trash(this.x, this.y));
       this.droppedTrash = true;
       return;
     }
     
     // Maybe I'm going to pass out?
-    if (!this.isPassedOut && platform.hygiene <= 30 && random <= 10) {      
+    if (!this.isPassedOut && platform.hygiene <= cfg.chanceOfPassingOutWhenHygieneLessThan && random <= cfg.passOutPercentageChance) {      
       this.isPassedOut = true;
       console.log("🤒 Traveller(id="+ this.id + ") passed out.");
       return;

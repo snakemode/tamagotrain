@@ -5,7 +5,13 @@ const ticksPerSecond = 1;
 const cfg = {
   game: {
     ticksPerSecond: 1,
-    fps: 30
+    fps: 30,
+    failureConditions: {
+      tooHot: 60,
+      tooCold: -20,
+      tooDirty: 0,
+      platformCap: 60,
+    }
   },
   entities: {
     platform: {
@@ -31,15 +37,9 @@ const cfg = {
       temperatureChangeOnCompletion: -1,
       stepSize: 15,
       dropTrashPercentageChance: 5,
-      chanceOfPassingOutWhenHygieneLessThan: 80,
+      chanceOfPassingOutWhenHygieneLessThan: 30,
       passOutPercentageChance: 10
     }
-  },
-  failureConditions: {
-    tooHot: 60,
-    tooCold: -20,
-    tooDirty: 0,
-    platformCap: 60,
   },
   problems: {
     mouse: {

@@ -1,3 +1,5 @@
+const config = require("../Config");
+const cfg = config.problems.mouse;
 const Problem = require("./Problem");
 const rand = require("../utils").rand;
 const inTargetZone = require("../traits/Pathfinder").inTargetZone;
