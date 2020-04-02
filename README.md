@@ -208,4 +208,14 @@ async function startGame(useRealData = false) {
 }
 ```
 
-I
+startGame:
+
+* Picks the data source (based on a flag)
+* Creates a `game` instance
+* Creates an instance of our UI class, passing it a reference to our new `game` instance
+* Calls `game.start` passing a configuration object of two actions - one to execute on start, one on end.
+** Our start action listens for events on our dataSource - giving us a uniform way to listen to either our fake train arrivals, or Ably's realtime data.
+** Our end action disconnects our dataSource to stop us using API calls we don't need.
+* The UI `startRendering` function is called that sets up our render loop.
+
+Finally the game is returned so that our UI buttons work in the browser.
