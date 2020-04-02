@@ -68,20 +68,10 @@ describe("Traveller", () => {
 
   it("tick - passes out 10 percent of the time when hygiene is poor", () => {
     platform.hygiene = 30;
-    traveller.random = () => 1.0;
+    traveller.random = () => 10;
 
     traveller.tick(platform); 
 
     expect(traveller.isPassedOut).toBe(true);
   });
-
-  it("tick - doesn't pass out 90% of the time when hygiene is poor", () => {
-    platform.hygiene = 30;
-    traveller.random = () => 0.5;
-
-    traveller.tick(platform); 
-
-    expect(traveller.isPassedOut).toBe(false);
-  });
-
 });

@@ -47,8 +47,8 @@ class Traveller {
     walkNaturally(this, this.selectedExit, cfg.stepSize);
     this.ticksFromExit--;
 
-    const random = rand(0, 100);
-    
+    const random = this.random();
+
     // Am I gonna drop trash? 
     if (!this.droppedTrash && random <= cfg.dropTrashPercentageChance) { 
       platform.contents.push(new Trash(this.x, this.y));
@@ -64,7 +64,7 @@ class Traveller {
     }
   }
 
-  random() { return Math.random(); }
+  random() { return rand(0, 100); }
 }
 
 module.exports = Traveller;
