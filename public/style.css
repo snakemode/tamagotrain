@@ -302,12 +302,10 @@ main {
 }
 
 .gameover-text {
-  width: 60%;
   margin-top: 10px;
   font-family: 'DOTMATRI';
   font-size: 30px;
   line-height: 1.3em;
-
 }
 
 .hide {

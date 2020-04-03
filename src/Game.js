@@ -84,10 +84,10 @@ class Game {
   
   isGameOver() {    
     const failureConditions = [
-      { condition: (g) => (g.platforms.filter(p => p.temperature >= cfg.failureConditions.tooHot).length > 0), message: "It's too hot! Score: " +  this.ticks },
-      { condition: (g) => (g.platforms.filter(p => p.temperature <= cfg.failureConditions.tooCold).length > 0), message: "It's too cold! Score: " +  this.ticks },
-      { condition: (g) => (g.platforms.filter(p => p.hygiene <= cfg.failureConditions.tooDirty).length > 0), message: "It's too disgusting! Score: " +  this.ticks},
-      { condition: (g) => (g.platforms.filter(p => p.contents.length >= p.capacity).length > 0), message: "Your platforms are too full! Score: " +  this.ticks}
+      { condition: (g) => (g.platforms.filter(p => p.temperature >= cfg.failureConditions.tooHot).length > 0), message: "It's too hot!<br>Score: " +  this.ticks },
+      { condition: (g) => (g.platforms.filter(p => p.temperature <= cfg.failureConditions.tooCold).length > 0), message: "It's too cold!<br>Score: " +  this.ticks },
+      { condition: (g) => (g.platforms.filter(p => p.hygiene <= cfg.failureConditions.tooDirty).length > 0), message: "It's too disgusting!<br>Score: " +  this.ticks},
+      { condition: (g) => (g.platforms.filter(p => p.contents.length >= p.capacity).length > 0), message: "Your platforms are too full!<br>Score: " +  this.ticks}
     ];
     
     for (let index in failureConditions) {
