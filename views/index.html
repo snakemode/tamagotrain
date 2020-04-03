@@ -22,9 +22,10 @@
       }
       start();
     </script>
-
     Ticks: <span data-bind-ticks></span><br>
     Total Platforms: <span data-bind-total-platforms></span><br>
+    Platform Temperature: <span data-bind-platform-0-temperature></span><br>
+    Platform Hygiene: <span data-bind-platform-0-hygiene></span><br>
     <main>
        <h1>Tamago-train!</h1>
       <div id="timetable">timetable</div>
@@ -53,10 +54,7 @@
           <button id="musicit" class="button" onclick="game.queueAction('music', 'platformId1');">something</button>
           <label class="label" for="musicit">Music</label>
         </section>        
-        <div id="platform-stats">
-          Platform Temperature: <span data-bind-platform-0-temperature></span><br>
-          Platform Hygiene: <span data-bind-platform-0-hygiene></span><br>
-        </div>
+        
       </div>
     </main>
   

@@ -278,9 +278,9 @@ main {
 .game-over-failure-2:after {
     content: "";
     width: 200px;
-    height: 200px;
+    height: 168px;
     background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fpoop.gif?v=1585311870021) no-repeat;
-    background-size: contain;
+    background-size: cover;
 }
 
 .game-over-failure-0:after {
@@ -294,18 +294,20 @@ main {
 
 .game-over-failure-1:after {
     content: "";
-    margin-top: 40px;
+    margin-top: 0px;
     width: 140px;
-    height: 140px;
+    height: 160px;
     background: url(https://cdn.glitch.com/0993a1dd-56b8-4a95-8ad8-5383c9b59d24%2Fice.gif?v=1585310595796) no-repeat;
     background-size: contain;
 }
 
 .gameover-text {
-  margin-top: 20px;
+  width: 60%;
+  margin-top: 10px;
   font-family: 'DOTMATRI';
   font-size: 30px;
-  width: 60%;
+  line-height: 1.3em;
+
 }
 
 .hide {
