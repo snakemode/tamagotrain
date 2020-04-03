@@ -34,7 +34,7 @@ class Mouse extends Problem {
   }
   
   leave(platform, speed) {
-his.stepSize;
+this.stepSize;
     this.destination = this.offscreen;
   }
 
