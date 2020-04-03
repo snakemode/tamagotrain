@@ -302,11 +302,11 @@ main {
 }
 
 .gameover-text {
+  margin-top: 20px;
   font-family: 'DOTMATRI';
-  font-size: 1em;
+  font-size: 30px;
   width: 60%;
 }
-
 
 .hide {
   display: none;
