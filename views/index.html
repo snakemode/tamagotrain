@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <button onclick="train.startGame(true);">Start with live data</button><br>        
+    <button onclick="train.startGame(true);" class="livedata">Start with live data</button>     
     <script>
       let game;
       async function start() {
@@ -22,10 +22,6 @@
       }
       start();
     </script>
-    Ticks: <span data-bind-ticks></span><br>
-    Total Platforms: <span data-bind-total-platforms></span><br>
-    Platform Temperature: <span data-bind-platform-0-temperature></span><br>
-    Platform Hygiene: <span data-bind-platform-0-hygiene></span><br>
     <main>
        <h1>Tamago-train!</h1>
       <div id="timetable">timetable</div>
