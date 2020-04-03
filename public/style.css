@@ -19,6 +19,8 @@ body {
   padding: 0;
   border: 0;
   margin: 0;
+  font-family: 'DOTMATRI';
+  font-size: 1.3em;
 }
 
 h1 {
@@ -299,6 +301,11 @@ main {
     background-size: contain;
 }
 
+.gameover-text {
+  font-family: 'DOTMATRI';
+  font-size: 1em;
+  width: 60%;
+}
 
 
 .hide {
