@@ -31,12 +31,12 @@ class SimulatedTrainArrivalsClient {
   
   fakeArrival() {        
     console.log("Faking train arrival.");
-    this._callback({ line: "platformId1", arrived: true });
+    this._callback({ line: "platformId1", arrived: true, source: this.constructor.name });
   }
     
   fakeDeparture() {        
     console.log("Faking train departure.");
-    this._callback({ line: "platformId1", departed: true });
+    this._callback({ line: "platformId1", departed: true, source: this.constructor.name });
   }
 
   

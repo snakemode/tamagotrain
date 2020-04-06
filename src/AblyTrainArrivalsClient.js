@@ -18,7 +18,6 @@ class AblyTrainArrivalsClient {
     // Ably unsub.
   }
   
-  
   async subscribeToLine(id) {
     const channelId = `[product:ably-tfl/tube]tube:${id}:arrivals`;
     const channel = await this._client.channels.get(channelId);
@@ -73,8 +72,8 @@ class AblyTrainArrivalsClient {
   
   raiseEvent(isArrival) {
     const message = isArrival 
-          ? { line: "platformId1", arrived: true } 
-          : { line: "platformId1", departed: true };
+          ? { line: "platformId1", arrived: true, source: this.constructor.name } 
+          : { line: "platformId1", departed: true, source: this.constructor.name };
     
     if (this._callback) {
       this._callback(message);

@@ -56,6 +56,8 @@ class Game {
   
   tick() {
     this.ticks++;
+    
+    console.log("🕹 Game tick", this.ticks, this.status, this.queuedActions.length);
          
     const gameOverCheck = this.isGameOver(this);    
     if (gameOverCheck.gameover) {      
