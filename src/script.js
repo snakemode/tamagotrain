@@ -7,6 +7,10 @@ const SimulatedTrainArrivalsClient = require("./SimulatedTrainArrivalsClient");
 let game, ui, dataSource;
 
 async function startGame(useRealData = false) {
+  if (game) {
+    game.stop();
+  }  
+  
   dataSource = useRealData 
                 ? new AblyTrainArrivalsClient() 
                 : new SimulatedTrainArrivalsClient();

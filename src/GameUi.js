@@ -30,6 +30,10 @@ class GameUi {
       return; // No state has changed, do we need to re-render?
     }
     
+    if (g.ticks === 0) {
+      this.platform.innerHTML = "";
+    }
+    
     const lastStateSnapshot = JSON.parse(this._lastState);
     for (let renderer of this._renderingFunctions) {
       const ret = renderer(g, lastStateSnapshot)

@@ -42,7 +42,7 @@ class Game {
     }, 1000 / cfg.ticksPerSecond);
   }
 
-  stop() {    
+  stop(showGameOver = true) {    
     clearInterval(this.tickInterval);      
     this.status = "ended";
     this.onGameOver(this);
