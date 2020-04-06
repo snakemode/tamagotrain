@@ -30,8 +30,8 @@ class GameUi {
       return; // No state has changed, do we need to re-render?
     }
     
-    if (g.ticks === 0) {
-      this.platform.innerHTML = "";
+    if (g.ticks === 0 && this.platform) {
+      this.resetUi();
     }
     
     const lastStateSnapshot = JSON.parse(this._lastState);
@@ -44,7 +44,12 @@ class GameUi {
     
     this._lastState = JSON.stringify(g);
   }
+  
+  resetUi() {
+    this.platform.innerHTML = "";
+  }
 }
+
 
 function renderLabels(currentGameState, previousGameState) {
   
@@ -96,10 +101,16 @@ function renderBuffs(currentGameState, previousGameState) {
 }
 
 function renderGameStatus(currentGameState, previousGameState) {
-  if (currentGameState.status !== "ended") return;  
-  document.getElementById("game-over-message").classList.remove("hide");  
-  document.getElementById("game-over-message").classList.add(currentGameState.status);  
-  document.getElementById("game-over-message").classList.add("game-over-failure-" + currentGameState.gameover.conditionId);  
+  const gameOverScreen = document.getElementById("game-over-message");
+  
+  if (currentGameState.status !== "ended") {   
+    gameOverScreen.classList.add("hide");  
+    return; 
+  }
+  
+  gameOverScreen.classList.remove("hide");  
+  gameOverScreen.classList.add(currentGameState.status);  
+  gameOverScreen.classList.add("game-over-failure-" + currentGameState.gameover.conditionId);  
   return -1;
 }
 

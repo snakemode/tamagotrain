@@ -17,12 +17,16 @@ const buffs = {
 
 class Game {
   constructor(platformIds) {
+    this.init(platformIds);
+  }
+  
+  init(platformIds) {
     this.ticks = 0;
     this.status = "inactive";
     this.platforms = [];    
     this.queuedActions = [];
     this.onGameOver = nothing;
-
+    
     platformIds = platformIds || [ "platformId1" ];
         
     for (let id of platformIds) {
@@ -31,6 +35,8 @@ class Game {
   }
   
   async start(options) {
+    this.init();
+    
     const onStart = options.onGameStart || asyncNothing;
     this.onGameOver = options.onGameOver || nothing;
     this.status = "active";
@@ -44,7 +50,7 @@ class Game {
 
   stop(showGameOver = true) {    
     clearInterval(this.tickInterval);      
-    this.status = "ended";
+    this.status = showGameOver ? "ended" : "inactive";
     this.onGameOver(this);
   }
   

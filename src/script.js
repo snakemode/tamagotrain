@@ -8,7 +8,7 @@ let game, ui, dataSource;
 
 async function startGame(useRealData = false) {
   if (game) {
-    game.stop();
+    game.stop(false);
   }  
   
   dataSource = useRealData 
