@@ -14,19 +14,19 @@ class SimulatedTrainArrivalsClient {
   
   stopListening() {
     if (this._timeout) {
+      console.log("✉ Stopped simulating trains.");
       clearTimeout(this._timeout);
     }
   }
   
-  simulateSingleTrain() {
+  async simulateSingleTrain() {
     const interval = 1000 * 12;
-
-    this.fakeArrival();
     
-    this._timeout = setTimeout(() => { 
-      this.fakeDeparture();      
-      this._timeout = setTimeout(() => { this.simulateSingleTrain(); }, interval);      
-    }, interval); 
+    this.fakeArrival();
+    await sleep(interval);      
+    this.fakeDeparture();
+    
+    this._timeout = setTimeout(async () => await this.simulateSingleTrain(), interval);
   }
   
   fakeArrival() {        
@@ -38,8 +38,10 @@ class SimulatedTrainArrivalsClient {
     console.log("Faking train departure.");
     this._callback({ line: "platformId1", departed: true, source: this.constructor.name });
   }
-
   
 }
+
+const sleep = (timeout) => new Promise(r => setTimeout(r, timeout));
+
 
 module.exports = SimulatedTrainArrivalsClient;
