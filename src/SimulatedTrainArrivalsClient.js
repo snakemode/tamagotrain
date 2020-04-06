@@ -13,6 +13,8 @@ class SimulatedTrainArrivalsClient {
   }
   
   stopListening() {
+    console.log("Stopping SimulatedTrainArrivalsClient.");
+    
     if (this._timeout) {
       console.log("✉ Stopped simulating trains.");
       clearTimeout(this._timeout);

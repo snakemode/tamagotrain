@@ -25,7 +25,7 @@ class Game {
     this.status = "inactive";
     this.platforms = [];    
     this.queuedActions = [];
-    this.onGameOver = nothing;
+    this.onGameEnd = nothing;
     
     platformIds = platformIds || [ "platformId1" ];
         
@@ -38,7 +38,7 @@ class Game {
     this.init();
     
     const onStart = options.onGameStart || asyncNothing;
-    this.onGameOver = options.onGameOver || nothing;
+    this.onGameEnd = options.onGameEnd || nothing;
     this.status = "active";
 
     await onStart();
@@ -51,7 +51,7 @@ class Game {
   stop(showGameOver = true) {    
     clearInterval(this.tickInterval);      
     this.status = showGameOver ? "ended" : "inactive";
-    this.onGameOver(this);
+    this.onGameEnd(this);
   }
   
   tick() {
