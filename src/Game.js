@@ -17,6 +17,7 @@ const buffs = {
 
 class Game {
   constructor(platformIds) {
+    this.platformIds = platformIds || [ "platformId1" ];
     this.init(platformIds);
   }
   
@@ -25,11 +26,9 @@ class Game {
     this.status = "inactive";
     this.platforms = [];    
     this.queuedActions = [];
-    this.onGameEnd = nothing;
-    
-    platformIds = platformIds || [ "platformId1" ];
+    this.onGameEnd = nothing;    
         
-    for (let id of platformIds) {
+    for (let id of this.platformIds) {
       this.platforms.push(new Platform(id));
     }
   }

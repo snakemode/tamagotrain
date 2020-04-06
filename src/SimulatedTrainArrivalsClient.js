@@ -2,6 +2,7 @@ const ably = require('ably');
 
 class SimulatedTrainArrivalsClient {
   constructor() {
+    this.stopped = false;
     console.log("SimulatedTrainArrivalsClient created.");
   }
 
@@ -14,21 +15,26 @@ class SimulatedTrainArrivalsClient {
   
   stopListening() {
     console.log("Stopping SimulatedTrainArrivalsClient.");
+    console.log(this._timeout);
     
     if (this._timeout) {
-      console.log("✉ Stopped simulating trains.");
+      console.log("✉ Stopped simulating trains.");      
       clearTimeout(this._timeout);
     }
+    
+    this.stopped = true;
   }
   
   async simulateSingleTrain() {
     const interval = 1000 * 12;
     
     this.fakeArrival();
-    await sleep(interval);      
-    this.fakeDeparture();
+    await sleep(interval); 
     
-    this._timeout = setTimeout(async () => await this.simulateSingleTrain(), interval);
+    if (!this.stopped) {
+      this.fakeDeparture();    
+      this._timeout = setTimeout(async () => await this.simulateSingleTrain(), interval);
+    }
   }
   
   fakeArrival() {        
