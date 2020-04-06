@@ -15,7 +15,6 @@ class SimulatedTrainArrivalsClient {
   
   stopListening() {
     console.log("Stopping SimulatedTrainArrivalsClient.");
-    console.log(this._timeout);
     
     if (this._timeout) {
       console.log("✉ Stopped simulating trains.");      
