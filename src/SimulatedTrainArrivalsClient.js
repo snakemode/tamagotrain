@@ -1,7 +1,8 @@
-const ably = require('ably');
+const twelveSeconds = 1000 * 12;
 
 class SimulatedTrainArrivalsClient {
-  constructor() {
+  constructor(interval) {
+    this.interval = interval || twelveSeconds;
     this.stopped = false;
     console.log("SimulatedTrainArrivalsClient created.");
   }
@@ -23,15 +24,13 @@ class SimulatedTrainArrivalsClient {
     this.stopped = true;
   }
   
-  async simulateSingleTrain() {
-    const interval = 1000 * 12;
-    
+  async simulateSingleTrain() {    
     this.fakeArrival();
-    await sleep(interval); 
+    await sleep(this.interval); 
     
     if (!this.stopped) {
       this.fakeDeparture();    
-      this._timeout = setTimeout(async () => await this.simulateSingleTrain(), interval);
+      this._timeout = setTimeout(async () => await this.simulateSingleTrain(), this.interval);
     }
   }
   
@@ -48,6 +47,5 @@ class SimulatedTrainArrivalsClient {
 }
 
 const sleep = (timeout) => new Promise(r => setTimeout(r, timeout));
-
 
 module.exports = SimulatedTrainArrivalsClient;
