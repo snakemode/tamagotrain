@@ -15,7 +15,7 @@ class AblyTrainArrivalsClient {
     this._callback = callback || nothing;
     this.subscribeToLine(id);
     const currentClient = this;
-    setInterval(currentClient.dispatchAnyMessagesDue, this._pollingIntervalMs);
+    setInterval(function (){ currentClient.dispatchAnyMessagesDue() }, this._pollingIntervalMs);
  }  
   
   stopListening() {
@@ -31,8 +31,8 @@ class AblyTrainArrivalsClient {
         
     const resultPage = await this._channel.history({ untilAttach: true, limit: 1 });       
     this.timetableUpdated(resultPage.items[0]);
-    const current = this;
-    this._channel.subscribe(function(msg) { current.timetableUpdated(msg); }); 
+    const currentClient = this;
+    this._channel.subscribe(function(msg) { currentClient.timetableUpdated(msg); }); 
   }
   
   timetableUpdated(message) {
@@ -42,15 +42,16 @@ class AblyTrainArrivalsClient {
     };
     
     this._timetableAgeInMs = 0;
+    this.nextTrainDueInTicks = this._timetable.data[0].TimeToStation;
     
     console.log("Updated this._timetable", this._timetable);
-    console.log("Next train due in ", this._timetable.data[0].TimeToStation);
+    console.log("Next train due in ", this.nextTrainDueInTicks);    
   }
   
   
   dispatchAnyMessagesDue() {    
     this._timetableAgeInMs += this._pollingIntervalMs;    
-        
+    
     if (!this._timetable) {
       return;
     }

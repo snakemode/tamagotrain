@@ -23,7 +23,7 @@ async function startGame(useRealData = false) {
     onGameEnd: () => dataSource.stopListening()
   });
 
-  ui.startRendering(game);
+  ui.startRendering(game, dataSource);
   
   return game;
 }

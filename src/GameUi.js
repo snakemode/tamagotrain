@@ -17,15 +17,16 @@ class GameUi {
       renderTemperature,
       renderPlatform,
       renderContents,
-      renderBuffs
+      renderBuffs,
+      renderTrainEstimates
     ];
   }
 
-  startRendering(game) {
-    setInterval(() => this.draw(game), 1000 / fps);
+  startRendering(game, dataSource) {
+    setInterval(() => this.draw(game, dataSource), 1000 / fps);
   }
   
-  draw(g) {
+  draw(g, dataSource) {
     if (JSON.stringify(g) === this._lastState) {
       return; // No state has changed, do we need to re-render?
     }
@@ -36,7 +37,7 @@ class GameUi {
     
     const lastStateSnapshot = JSON.parse(this._lastState);
     for (let renderer of this._renderingFunctions) {
-      const ret = renderer(g, lastStateSnapshot)
+      const ret = renderer(g, lastStateSnapshot, dataSource)
       if (ret === -1) { // Renderer caused an early exit
         break;
       }
@@ -211,6 +212,15 @@ function renderContents(currentGameState, previousGameState) {
       }      
     }
   }    
+}
+
+function renderTrainEstimates(currentGameState, previousGameState, dataSource) {
+  // data-bind-next-train-due
+    const selector = "[data-bind-next-train-due]";
+    const elements = [...document.querySelectorAll(selector)];
+    for(let ele of elements) {
+      ele.innerHTML = dataSource.nextTrainDueInTicks;
+    }
 }
 
 module.exports = GameUi;
