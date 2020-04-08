@@ -32,12 +32,14 @@ class AblyTrainArrivalsClient {
   }
   
   timetableUpdated(message) {
-    this._timetable = message.data;
+    this._timetable = { 
+      setAt: Date.now(),
+      data: message.data
+    };
+    
     this._timetableAgeInMs = 0;
     
-    for (const entry of this._timetable) {
-      console.log(entry);
-    }
+    console.log("Updated this._timetable", this._timetable);
   }
   
   dispatchAnyMessagesDue() {    
@@ -47,19 +49,18 @@ class AblyTrainArrivalsClient {
       return;
     }
     
-    for (const [ index, item ] of this._timetable.entries()) {
+    for (const [ index, item ] of this._timetable.data.entries()) {
       const itemAgeMs = item.TimeToStation * 1000;
 
       if (itemAgeMs > this._timetableAgeInMs) {
         continue;
       }
       
-      console.log("Train from timetable reached arrival.");
-      console.log(item);
+      console.log("Train from timetable reached arrival.", this._timetable.setAt, item);
 
       // Work out when to raise a departure message
-      const departsInMs = this._timetable.length > index + 1
-                      ? (this._timetable[index + 1].TimeToStation * 1000) / 2
+      const departsInMs = this._timetable.data.length > index + 1
+                      ? (this._timetable.data[index + 1].TimeToStation * 1000) / 2
                       : 15000;
 
       console.log("Scheduling departure for " + departsInMs + " from now.");
@@ -68,7 +69,7 @@ class AblyTrainArrivalsClient {
       item.completed = true;
     }
 
-    this._timetable = this._timetable.filter(i => !i.completed);
+    this._timetable.data = this._timetable.data.filter(i => !i.completed);
   }
 
   raiseMessagesFor(item, departsInMs) {
