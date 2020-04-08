@@ -13,8 +13,8 @@ class AblyTrainArrivalsClient {
   
   async listenForEvents(id, callback) { 
     this._callback = callback || nothing;
-    await this.subscribeToLine(id);
-    setInterval(() => this.dispatchAnyMessagesDue(), this._pollingIntervalMs);    
+    this.dispatchAnyMessagesDue();
+    this.subscribeToLine(id);
   }  
   
   stopListening() {
@@ -45,12 +45,19 @@ class AblyTrainArrivalsClient {
     console.log("Updated this._timetable", this._timetable);
   }
   
+  
   dispatchAnyMessagesDue() {    
-    this._timetableAgeInMs += this._pollingIntervalMs;
-    
+    this._timetableAgeInMs += this._pollingIntervalMs;    
+        
     if (!this._timetable) {
       return;
     }
+    
+    if (this._timetable.setAt !== this._lastDispatchSetAt) {
+      console.log("Timetable updated since last dispatch");
+    }
+    
+    this._lastDispatchSetAt = this._timetable.setAt;    
     
     for (const [ index, item ] of this._timetable.data.entries()) {
       const itemAgeMs = item.TimeToStation * 1000;
@@ -73,6 +80,7 @@ class AblyTrainArrivalsClient {
     }
 
     this._timetable.data = this._timetable.data.filter(i => !i.completed);
+    setTimeout(() => this.dispatchAnyMessagesDue(), this._pollingIntervalMs);  
   }
 
   raiseMessagesFor(item, departsInMs) {
