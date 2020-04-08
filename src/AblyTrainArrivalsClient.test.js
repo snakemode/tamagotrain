@@ -50,6 +50,19 @@ describe("AblyTrainArrivalsClient", async () => {
         expect(returnedMessages[1].departed).toBe(true);
         expect(returnedMessages[1].sourceMessage.Towards).toBe("Kennington via CX");
     });
+
+    it("listenForEvents respects new timetable when timetable replaced", async () => {
+        let returnedMessages = [];
+        const updatedTimetable = pushedAblyUpdate();
+
+        sut.listenForEvents("some-line-id", message => returnedMessages.push(message));
+        await sleep(1100);
+        
+        sut.timetableUpdated(updatedTimetable.items[0]);
+        await sleep(3000);
+        
+        expect(returnedMessages[2].sourceMessage.Towards).toBe("Edgware via CX - replaced");
+    });
 });
 
 const fullAblyResponse = () => {
@@ -147,9 +160,9 @@ const pushedAblyUpdate = () => {
                     "DestinationNaptanId": "940GZZLUEGW",
                     "DestinationName": "Edgware Underground Station",
                     "Timestamp": "2020-03-31T13:24:31.0891267Z",
-                    "TimeToStation": 10,
+                    "TimeToStation": 2,
                     "CurrentLocation": "Between Embankment and Charing Cross",
-                    "Towards": "Edgware via CX",
+                    "Towards": "Edgware via CX - replaced",
                     "ExpectedArrival": "2020-03-31T13:31:22Z",
                     "TimeToLive": "2020-03-31T13:31:22Z",
                     "ModeName": "tube",
