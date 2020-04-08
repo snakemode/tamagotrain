@@ -4,7 +4,6 @@ class SimulatedTrainArrivalsClient {
   constructor(interval) {
     this.interval = interval || twelveSeconds;
     this.stopped = false;
-    this.nextTrainDueInTicks = 0;
     console.log("SimulatedTrainArrivalsClient created.");
   }
 
@@ -38,13 +37,11 @@ class SimulatedTrainArrivalsClient {
   fakeArrival() {        
     console.log("Faking train arrival.");
     this._callback({ line: "platformId1", arrived: true, source: this.constructor.name });
-    this.nextTrainDueInTicks = this.interval *2;
   }
     
   fakeDeparture() {        
     console.log("Faking train departure.");
     this._callback({ line: "platformId1", departed: true, source: this.constructor.name });    
-    this.nextTrainDueInTicks = this.interval;
   }
   
 }

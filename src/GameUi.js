@@ -17,8 +17,7 @@ class GameUi {
       renderTemperature,
       renderPlatform,
       renderContents,
-      renderBuffs,
-      renderTrainEstimates
+      renderBuffs
     ];
   }
 
@@ -212,15 +211,6 @@ function renderContents(currentGameState, previousGameState) {
       }      
     }
   }    
-}
-
-function renderTrainEstimates(currentGameState, previousGameState, dataSource) {
-  // data-bind-next-train-due
-    const selector = "[data-bind-next-train-due]";
-    const elements = [...document.querySelectorAll(selector)];
-    for(let ele of elements) {
-      ele.innerHTML = dataSource.nextTrainDueInTicks;
-    }
 }
 
 module.exports = GameUi;

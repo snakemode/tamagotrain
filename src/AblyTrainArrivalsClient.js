@@ -42,10 +42,9 @@ class AblyTrainArrivalsClient {
     };
     
     this._timetableAgeInMs = 0;
-    this.nextTrainDueInTicks = this._timetable.data[0].TimeToStation;
     
     console.log("Updated this._timetable", this._timetable);
-    console.log("Next train due in ", this.nextTrainDueInTicks);    
+    console.log("Next train due in ", this._timetable.data[0].TimeToStation);    
   }
   
   
@@ -56,6 +55,7 @@ class AblyTrainArrivalsClient {
       return;
     }
     
+
     if (this._timetable.setAt !== this._lastDispatchSetAt) {
       console.log("Timetable updated since last dispatch");
     }
@@ -82,8 +82,8 @@ class AblyTrainArrivalsClient {
       item.completed = true;
     }
 
-    this._timetable.data = this._timetable.data.filter(i => !i.completed);    
-  }
+    this._timetable.data = this._timetable.data.filter(i => !i.completed);     
+ }
 
   raiseMessagesFor(item, departsInMs) {
 
