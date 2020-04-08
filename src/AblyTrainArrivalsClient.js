@@ -8,6 +8,7 @@ class AblyTrainArrivalsClient {
     this._client = client || new Ably.Realtime({ authUrl: '/api/createTokenRequest' });
     this._callback = nothing;
     this._pollingIntervalMs = 250;
+    this._channel = null
   }
   
   async listenForEvents(id, callback) { 
@@ -17,18 +18,20 @@ class AblyTrainArrivalsClient {
   }  
   
   stopListening() {
-    // Ably unsub.
+    if (this._channel) {
+      this._channel.unsubscribe(this.timetableUpdated); 
+    }
   }
   
   async subscribeToLine(id) {
     const channelId = `[product:ably-tfl/tube]tube:${id}:arrivals`;
-    const channel = await this._client.channels.get(channelId);
-    await channel.attach();
+    this._channel = await this._client.channels.get(channelId);
+    await this._channel.attach();
         
-    const resultPage = await channel.history({ untilAttach: true, limit: 1 });       
+    const resultPage = await this._channel.history({ untilAttach: true, limit: 1 });       
     this.timetableUpdated(resultPage.items[0]);
 
-    channel.subscribe(this.timetableUpdated); 
+    this._channel.subscribe(this.timetableUpdated); 
   }
   
   timetableUpdated(message) {
