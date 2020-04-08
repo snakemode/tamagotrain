@@ -13,9 +13,10 @@ class AblyTrainArrivalsClient {
   
   async listenForEvents(id, callback) { 
     this._callback = callback || nothing;
-    this.dispatchAnyMessagesDue();
     this.subscribeToLine(id);
-  }  
+    const currentClient = this;
+    setInterval(currentClient.dispatchAnyMessagesDue, this._pollingIntervalMs);
+ }  
   
   stopListening() {
     if (this._channel) {
@@ -30,8 +31,8 @@ class AblyTrainArrivalsClient {
         
     const resultPage = await this._channel.history({ untilAttach: true, limit: 1 });       
     this.timetableUpdated(resultPage.items[0]);
-
-    this._channel.subscribe(this.timetableUpdated); 
+    const current = this;
+    this._channel.subscribe(function(msg) { current.timetableUpdated(msg); }); 
   }
   
   timetableUpdated(message) {
@@ -43,6 +44,7 @@ class AblyTrainArrivalsClient {
     this._timetableAgeInMs = 0;
     
     console.log("Updated this._timetable", this._timetable);
+    console.log("Next train due in ", this._timetable.data[0].TimeToStation);
   }
   
   
@@ -79,8 +81,7 @@ class AblyTrainArrivalsClient {
       item.completed = true;
     }
 
-    this._timetable.data = this._timetable.data.filter(i => !i.completed);
-    setTimeout(() => this.dispatchAnyMessagesDue(), this._pollingIntervalMs);  
+    this._timetable.data = this._timetable.data.filter(i => !i.completed);    
   }
 
   raiseMessagesFor(item, departsInMs) {
