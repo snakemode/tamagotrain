@@ -9,11 +9,11 @@
 
 A love letter to Tamagotchis, and Tube Trains.
 
-Live out your biggest platform controller fantasies, as you regular the temperature of your tube station,
-watch out for rabid rodents, clean up after mucky passengers and dance the night (tube) away.
+Live out your biggest platform controller fantasies, as you regulate the temperature of your tube station,
+clean up after mucky passengers, charm the music loving mice and dance the night (tube) away.
 
 You're the new Tube controller, and you've got to keep your station in fine fettle.
-Don't let your station get too hot, don't let your platform fill up, keep ever
+Don't let your station get too hot, don't let your platform fill up with passengers or trash
 
 * Trains raise the temperature of your station
 * As passengers arrive, they also raise the temperature of the station
@@ -27,9 +27,9 @@ Don't let your station get too hot, don't let your platform fill up, keep ever
 But don't worry!
 
 * You can vent cold air through the station to keep everyone cool
-* Passengers who reach the exit will cool the platforms down a little
+* Passengers departing through the exit will cool the platforms down a little
 * Departing trains cool the platforms slightly too.
-* You can charm mice with songs! They'll find their way off the platform if musically stimulated
+* You can charm mice with songs! They'll find their way off the platform if musically enticed
 * Music will wake up fainting passengers
 * Cleaning up will wash away trash
 
