@@ -498,35 +498,40 @@ div[data-ispassedout="true"] {
 .arrival .door-left {
   animation: open-left 2.5s ease-out;
   animation-delay: 1.6s;
-  animation-fill-mode: forwards
+  animation-fill-mode: forwards;
 } 
 
 .arrival .door-right {
   animation: open-right 2.5s ease-out;
   animation-delay: 1.6s;
-  animation-fill-mode: forwards
+  animation-fill-mode: forwards;
 } 
 
 .close .door-left {
-  animation: close-left 3s ease-in;
+  animation: close-left 2.5s ease-in;
 }
 
 .close .door-right {
-  animation: close-right 3s ease-in;
+  animation: close-right 2.5s ease-in;
+ 
 } 
 
 @keyframes open-left {
+  0% {	transform: translate(0, 0); }
   100% {	transform: translate(-220px, 0); }
 }
 @keyframes open-right {
+  0% { transform: translate(0, 0); }
   100% {	transform: translate(220px, 0); }
 }
 
 @keyframes close-left {
-  100% {	transform: translate(-0px, 0); }
+  0% {	transform: translate(-220px, 0); }
+  100% {	transform: translate(0, 0); }
 }
 @keyframes close-right {
-  100% {	transform: translate(-0px, 0); }
+  0% { transform: translate(220px, 0); }
+  100% {	transform: translate(0, 0); }
 }
 
 @media (min-width: 700px) {
@@ -547,5 +552,8 @@ div[data-ispassedout="true"] {
       background-color: #ebc8e2;
       transform: translate(-50%, 0);
       box-shadow: inset 0px -30px 60px 0px #b675a6;
+  }
+  #playfield {
+    min-width: 500px;
   }
 }
