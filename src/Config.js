@@ -44,7 +44,7 @@ module.exports = {
     
     train: {
       temperatureChangePerTick: 0.25,
-      doorsCloseAtTick: 10,
+      doorsCloseAtTick: 8,
       spawnPassengersFromTick: 2,
       spawnPassengersPerTick: 1
     },

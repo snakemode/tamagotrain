@@ -142,8 +142,10 @@ function renderPlatform(currentGameState, previousGameState) {
       this.track.appendChild(trainImage);
     }
     
-    console.log(currentGameState.platforms)
-    
+
+    if (platformAsOfLastTick.hasTrain) {
+        console.log(platformAsOfLastTick.train);
+    }
     
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {
       trainImage.classList.add("slideOut");
