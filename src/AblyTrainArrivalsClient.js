@@ -35,11 +35,13 @@ class AblyTrainArrivalsClient {
     this._channel.subscribe(function(msg) { currentClient.timetableUpdated(msg); }); 
   }
   
-  timetableUpdated(message) {
+  timetableUpdated(message) {    
+    const mergedTimetableData = this.mergeTrainTimetables(message);   
     
     this._timetable = { 
       setAt: Date.now(),
-      data: message.data
+      // data: message.data
+      data: mergedTimetableData
     };
     
     this._timetableAgeInMs = 0;
@@ -81,10 +83,22 @@ class AblyTrainArrivalsClient {
       this.raiseMessagesFor(item, departsInMs);
       item.completed = true;
     }
-
+    
     this._timetable.data = this._timetable.data.filter(i => !i.completed);     
- }
+  }
+  
+  mergeTrainTimetables(ablyResponse) {
+    const allLines = Object.getOwnPropertyNames(ablyResponse.data);
 
+    let allTrains = [];      
+    for (let lineName of allLines) {
+      const arrayOfTrains = ablyResponse.data[lineName];        
+      allTrains = allTrains.concat(arrayOfTrains);
+    }
+
+    return allTrains.sort((a, b) => a.TimeToStation - b.TimeToStation);
+  }
+  
   raiseMessagesFor(item, departsInMs) {
 
     this._callback({ 
