@@ -30,7 +30,7 @@ class Train {
       this.doorState = "open";
     }
 
-    if (this.ticks > this.closeDoorsAtTick) {
+    if (this.ticks >= this.closeDoorsAtTick) {
       this.doorState = "closed";
     }
 
