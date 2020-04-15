@@ -1,6 +1,9 @@
 const Ably = require('ably/promises');
 const nothing = () => { };
 
+const trainIdleTimeCap = 12000;
+const trainIdleTimeCap = 12000;
+
 class AblyTrainArrivalsClient {
   constructor(client) {
     console.log("AblyTrainArrivalsClient created.");
@@ -74,9 +77,13 @@ class AblyTrainArrivalsClient {
       console.log("Train from timetable reached arrival.", this._timetable.setAt, item);
 
       // Work out when to raise a departure message
-      const departsInMs = this._timetable.data.length > index + 1
-                      ? (this._timetable.data[index + 1].TimeToStation * 1000) / 2
-                      : 15000;
+      const thereAreMoreTrains = this._timetable.data.length > index + 1;
+      
+      const nextTrainHalflife = thereAreMoreTrains
+                      ? this.getNextTrain(index).TimeToStation * 1000 / 2
+                      : trainIdleTimeCap;
+      
+      const departsInMs = nextTrainHalflife > trainIdleTimeCap ? trainIdleTimeCap : nextTrainHalflife;
 
       console.log("Scheduling departure for " + departsInMs + " from now.");
       
@@ -85,6 +92,10 @@ class AblyTrainArrivalsClient {
     }
     
     this._timetable.data = this._timetable.data.filter(i => !i.completed);     
+  }
+  
+  getNextTrain(index) {
+    return this._timetable.data[index + 1];
   }
   
   mergeTrainTimetables(ablyResponse) {
