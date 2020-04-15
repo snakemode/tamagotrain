@@ -478,44 +478,61 @@ div[data-ispassedout="true"] {
 /* train */
 
 .st0{fill:#E8E9E8;}
-	.st1{fill:#FFFFFF;}
-	.st2{fill:#233688;}
-	.st3{fill:#676770;}
-	.st4{fill:#C4D3EC;}
-	.st5{fill:#C21109;}
-	.st6{fill:#9EB4D7;}
-	.st7{fill:#C3D4EB;}
-	.st8{fill:#8799BE;}
-	.st9{fill:#D4D4D4;}
-	.st10{fill:#9B9B9B;}
-	.st11{fill:#BABABA;}
-	.st12{fill:#DDDDDD;}
-	.st13{fill:#F3E715;}
-	.st14{fill:#333333;}
-	.st15{fill:#E1EEFB;}
-	.st16{fill:#D22724;}
-	.door-left {
-		transform:translate(-0px, 0);
-		animation: open-left 6s ease-out;
-     animation-delay: 1.6s;
+.st1{fill:#FFFFFF;}
+.st2{fill:#233688;}
+.st3{fill:#676770;}
+.st4{fill:#C4D3EC;}
+.st5{fill:#C21109;}
+.st6{fill:#9EB4D7;}
+.st7{fill:#C3D4EB;}
+.st8{fill:#8799BE;}
+.st9{fill:#D4D4D4;}
+.st10{fill:#9B9B9B;}
+.st11{fill:#BABABA;}
+.st12{fill:#DDDDDD;}
+.st13{fill:#F3E715;}
+.st14{fill:#333333;}
+.st15{fill:#E1EEFB;}
+.st16{fill:#D22724;}
+.door-left {
+  transform:translate(-0px, 0);
+}
 
-	}
-	.door-right {
-		transform:translate(0px, 0);
-		animation: open-right 6s ease-out;
-    animation-delay: 1.6s;
-	}
+.door-right {
+  transform:translate(0px, 0);
+}
 
-	@keyframes open-left {
-  	25% {	transform:translate(-220px, 0); }
-		75% {	transform:translate(-220px, 0); }
-		100% {	transform:translate(-0px, 0); }
-	}
-	@keyframes open-right {
-  	25% {	transform:translate(220px, 0); }
-		75% {	transform:translate(220px, 0); }
-		100% {	transform:translate(-0px, 0); }
-	}
+.arrival .door-left {
+  animation: open-left 3s ease-out;
+  animation-delay: 1.6s;
+} 
+
+.arrival .door-right {
+  animation: open-right 3s ease-out;
+  animation-delay: 1.6s;
+} 
+
+.slideOut .door-left {
+  animation: close-left 3s ease-out;
+}
+
+.slideOut .door-right {
+  animation: close-right 3s ease-out;
+} 
+
+@keyframes open-left {
+  100% {	transform:translate(-220px, 0); }
+}
+@keyframes open-right {
+  100% {	transform:translate(220px, 0); }
+}
+
+@keyframes close-left {
+  100% {	transform:translate(-0px, 0); }
+}
+@keyframes close-right {
+  100% {	transform:translate(-0px, 0); }
+}
 
 @media (min-width: 700px) {
   main {
