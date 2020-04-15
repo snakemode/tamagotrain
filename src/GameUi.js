@@ -134,17 +134,15 @@ function renderPlatform(currentGameState, previousGameState) {
     const trainImage = document.getElementById("trainSVG");
 
     if (!platformAsOfLastTick.hasTrain && platform.hasTrain) {      
-      trainImage.classList.remove("train");
-      trainImage.classList.remove("arrival");
-      trainImage.classList.remove("slideOut");       
-      trainImage.classList.add("train");
-      trainImage.classList.add("arrival");
+      trainImage.classList.remove("train", "close", "arrival", "slideOut");   
+      trainImage.classList.add("train", "arrival");
+##
       this.track.appendChild(trainImage);
     }
     
 
-    if (platformAsOfLastTick.hasTrain) {
-        console.log(platformAsOfLastTick.train);
+    if (platformAsOfLastTick.hasTrain && platformAsOfLastTick.train.closeDoorsAtTick === platformAsOfLastTick.train.ticks) {
+        trainImage.classList.add("close");
     }
     
     if (platformAsOfLastTick.hasTrain && !platform.hasTrain ) {

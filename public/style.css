@@ -507,11 +507,11 @@ div[data-ispassedout="true"] {
   animation-fill-mode: forwards
 } 
 
-.slideOut .door-left {
+.close .door-left {
   animation: close-left 3s ease-in;
 }
 
-.slideOut .door-right {
+.close .door-right {
   animation: close-right 3s ease-in;
 } 
 
