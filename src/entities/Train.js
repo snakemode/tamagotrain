@@ -9,9 +9,16 @@ class Train {
     this.ticks = 0;
     this.hasTicked = false;
     this.doorState = "closed";
+    this.closeDoorsAtTick = cfg.doorsCloseAtTick;
     
     console.log("🚂 Train(id=" + this.id + ")");
  }
+  
+  setDepartureTimeInMs(departureTimeInMs) {
+    const 
+    this.closeDoorsAtTick = (Math.floor((departureTimeInMs / config.game.ticksPerSecond))) - 2;
+    console.log("Train will close doors at Train Tick: ", this.closeDoorsAtTick);
+  }
   
   tick(platform) {
     
@@ -21,7 +28,7 @@ class Train {
       this.doorState = "opening";
     }
 
-    if (this.ticks > cfg.doorsCloseAtTick) {
+    if (this.ticks > this.closeDoorsAtTick) {
       this.doorState = "closing";
     }
 

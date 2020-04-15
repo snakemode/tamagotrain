@@ -40,7 +40,11 @@ class Platform {
       
       if (msg.arrived) {
         this.hasTrain = true;
-        this.train = new Train();        
+        this.train = new Train();
+        
+        if (msg.departsInMs) {
+          this.train.setDepartureTimeInMs(msg.departsInMs);
+        }
       }
             
       if (msg.departed) {

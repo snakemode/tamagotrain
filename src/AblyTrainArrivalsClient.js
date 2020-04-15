@@ -1,8 +1,8 @@
 const Ably = require('ably/promises');
 const nothing = () => { };
 
-const trainIdleTimeCap = 12000;
-const trainIdleTimeCap = 12000;
+const defaultWaitTime = 12000;
+const trainIdleTimeCap = 30000;
 
 class AblyTrainArrivalsClient {
   constructor(client) {
@@ -81,7 +81,7 @@ class AblyTrainArrivalsClient {
       
       const nextTrainHalflife = thereAreMoreTrains
                       ? this.getNextTrain(index).TimeToStation * 1000 / 2
-                      : trainIdleTimeCap;
+                      : defaultWaitTime;
       
       const departsInMs = nextTrainHalflife > trainIdleTimeCap ? trainIdleTimeCap : nextTrainHalflife;
 
