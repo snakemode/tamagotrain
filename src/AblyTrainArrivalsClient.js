@@ -42,7 +42,6 @@ class AblyTrainArrivalsClient {
     };
     
     this._timetableAgeInMs = 0;
-    
     console.log("Updated this._timetable", this._timetable);
     console.log("Next train due in ", this._timetable.data[0].TimeToStation);    
   }
