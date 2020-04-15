@@ -65,13 +65,16 @@ describe("AblyTrainArrivalsClient", async () => {
     });
   
     it("something something merge a response", () => {
-      const resp = fakeResponseCorrectShape();
+      const resp = fakeResponseCorrectShape;
       
-      const allStations = Object.getPropertyNames(resp.data);
-      
-      for (let name of allStations) {
-        console.log(name);
+      const allLines = Object.getOwnPropertyNames(resp.data);
+      const allTrains = [];
+      for (let arrayOfTrains of allLines) {
+        //console.log(arrayOfTrains);
+        allTrains.concat(arrayOfTrains);
       }
+
+      console.log(allTrains);
       
     });
   
