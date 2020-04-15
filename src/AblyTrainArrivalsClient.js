@@ -28,7 +28,7 @@ class AblyTrainArrivalsClient {
     const channelId = `[product:ably-tfl/tube]tube:${id}:arrivals`;
     this._channel = await this._client.channels.get(channelId);
     await this._channel.attach();
-        
+
     const resultPage = await this._channel.history({ untilAttach: true, limit: 1 });       
     this.timetableUpdated(resultPage.items[0]);
     const currentClient = this;
@@ -36,6 +36,7 @@ class AblyTrainArrivalsClient {
   }
   
   timetableUpdated(message) {
+    
     this._timetable = { 
       setAt: Date.now(),
       data: message.data
