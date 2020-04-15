@@ -494,44 +494,39 @@ div[data-ispassedout="true"] {
 .st14{fill:#333333;}
 .st15{fill:#E1EEFB;}
 .st16{fill:#D22724;}
-.door-left {
-  transform:translate(-0px, 0);
-}
-
-.door-right {
-  transform:translate(0px, 0);
-}
 
 .arrival .door-left {
-  animation: open-left 3s ease-out;
+  animation: open-left 2.5s ease-out;
   animation-delay: 1.6s;
+  animation-fill-mode: forwards
 } 
 
 .arrival .door-right {
-  animation: open-right 3s ease-out;
+  animation: open-right 2.5s ease-out;
   animation-delay: 1.6s;
+  animation-fill-mode: forwards
 } 
 
 .slideOut .door-left {
-  animation: close-left 3s ease-out;
+  animation: close-left 3s ease-in;
 }
 
 .slideOut .door-right {
-  animation: close-right 3s ease-out;
+  animation: close-right 3s ease-in;
 } 
 
 @keyframes open-left {
-  100% {	transform:translate(-220px, 0); }
+  100% {	transform: translate(-220px, 0); }
 }
 @keyframes open-right {
-  100% {	transform:translate(220px, 0); }
+  100% {	transform: translate(220px, 0); }
 }
 
 @keyframes close-left {
-  100% {	transform:translate(-0px, 0); }
+  100% {	transform: translate(-0px, 0); }
 }
 @keyframes close-right {
-  100% {	transform:translate(-0px, 0); }
+  100% {	transform: translate(-0px, 0); }
 }
 
 @media (min-width: 700px) {
