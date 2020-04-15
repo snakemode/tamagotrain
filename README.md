@@ -197,7 +197,7 @@ async function startGame(useRealData = false) {
   ui = new GameUi(game);
   
   game.start({
-    onGameStart: async () => await dataSource.listenForEvents("northern:940GZZLUKSX", msg => game.registerEvent(game, msg)),
+    onGameStart: async () => await dataSource.listenForEvents("940GZZLUKSX", msg => game.registerEvent(game, msg)),
     onGameEnd: () => dataSource.stopListening()
   });
 

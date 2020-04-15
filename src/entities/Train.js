@@ -15,8 +15,10 @@ class Train {
  }
   
   setDepartureTimeInMs(departureTimeInMs) {
-    const 
-    this.closeDoorsAtTick = (Math.floor((departureTimeInMs / config.game.ticksPerSecond))) - 2;
+    const departureTimeInSeconds = (departureTimeInMs / 1000);
+    const desiredTickForDoorClose = Math.floor(departureTimeInSeconds / config.game.ticksPerSecond) - 2;
+    this.closeDoorsAtTick = desiredTickForDoorClose;
+    
     console.log("Train will close doors at Train Tick: ", this.closeDoorsAtTick);
   }
   
@@ -25,11 +27,11 @@ class Train {
     platform.temperature += cfg.temperatureChangePerTick;
 
     if (this.ticks == 0) {
-      this.doorState = "opening";
+      this.doorState = "open";
     }
 
     if (this.ticks > this.closeDoorsAtTick) {
-      this.doorState = "closing";
+      this.doorState = "closed";
     }
 
     if (this.ticks >= cfg.spawnPassengersFromTick && this.ticks <= cfg.doorsCloseAtTick) {
