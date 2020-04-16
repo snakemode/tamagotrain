@@ -27,9 +27,22 @@ body {
 }
 
 .livedata {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: static;
+  top: 20px;
+  left: 20px;
+  padding: 6px 10px;
+  border: 2px solid black;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  font-family: arial, helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.livedata:hover {
+  background-color: #ebc8e2;
 }
 
 h1 {
