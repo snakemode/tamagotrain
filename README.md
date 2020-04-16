@@ -127,12 +127,12 @@ All of this logic exists in the `tick` function of each kind of entity or proble
 
 ## GameUi.js
 
-GameUi is where all our rendering happens. It loosely follows an *Observer* pattern.
+GameUi is where the rendering happens. It loosely follows an *Observer* pattern.
 This is CS jargon for "a piece of code that looks at the state of something else".
 
 30 times a second, we call our GameUI.draw function, passing it a snapshot of the game state.
 
-Internally, the GameUI instance keeps track of the last state it was called with, so it can avoid re-drawing things that haven't changed all the time.
+Internally, the GameUI instance keeps track of the last state it was called with, so it can avoid re-drawing things that haven't changed.
 
 The GameUi class has a collection called `_renderingFunctions` - a list of functions it calls in order, each being passed the current game state.
 This is a simple way for us to split out the logic for rendering different kinds of things in the game world.
