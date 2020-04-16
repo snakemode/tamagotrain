@@ -163,9 +163,8 @@ The game then updates it's state to have ended, keeping track of the reason the 
 
 # Where the train arrival and departure messages come from
 
-- We fake them
 - In fake mode, they arrive every 12 seconds, wait 12 seconds, then leave for 12 seconds
-- It's just a timer
+- (It's just a timer)
 
 ## Ably Realtime TFL data mode
 
