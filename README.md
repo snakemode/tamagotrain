@@ -9,7 +9,7 @@
 
 A love letter to Tamagotchis, and Tube Trains.
 
-Live out your biggest platform controller fantasies, as you regulate the temperature of your tube station,
+Play out your pixelated platform controller fantasies, as you regulate the temperature of your tube station,
 clean up after mucky passengers, charm the music loving mice and dance the night (tube) away.
 
 You're the new Tube controller, and you've got to keep your station in fine fettle.
