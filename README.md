@@ -48,7 +48,7 @@ The only input the user can supply is applying a `Buff` - either `Clean`, `Vent`
 
 These button presses create small messages (just javascript objects) that are pushed onto an internal array in the `Game` instance, that we use as a queue of actions.
 
-When the game ticks, any unprocessed messages in its queue are picked up, **first in, first out** (FIFO), and the game acts appropriately, either creating an *instance of the requested buff* and
+When the game ticks, any unprocessed messages in its queue are picked up, **first in, first out** (FIFO), and the game acts appropriately, creating an *instance of the requested buff* and
 applying it to the `Platform`.
 
 The `Game` instance is responsible for three core things
