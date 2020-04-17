@@ -26,8 +26,16 @@ body {
   font-size: 1.3em;
 }
 
+.ably-link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: black;
+  
+}
+
 .livedata {
-  position: static;
+  position: fixed;
   top: 20px;
   left: 20px;
   padding: 6px 10px;
