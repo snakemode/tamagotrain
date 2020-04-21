@@ -1,4 +1,4 @@
-# Trainagotchi!
+# Tamagotrain!
 
 A love letter to Tamagotchis, and Tube Trains.
 
